@@ -5,7 +5,7 @@
         <NuxtLogo />
         <VuetifyLogo />
       </v-card>
-      <v-card>
+      <v-card loading>
         <v-card-title class="headline">
           Welcome to the Vuetify + Nuxt.js template, why wont this commit??
         </v-card-title>
@@ -74,14 +74,20 @@
         <v-card-actions>
           <v-spacer />
           <v-btn color="primary" nuxt to="/inspire"> Continue </v-btn>
+          <v-btn color="primary" loading@click="changeButton"> Inspire! </v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
   </v-row>
 </template>
 
-<script>
-export default {
-  name: 'IndexPage',
+<script lang="ts">
+import Vue from "vue"
+import Component from 'vue-class-component'
+
+@Component
+export default class IndexPage extends Vue{
+  name: string = "IndexPage"
+  buttonText: string = "Inspire me!"
 }
 </script>
