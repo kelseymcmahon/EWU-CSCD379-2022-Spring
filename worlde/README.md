@@ -1,5 +1,7 @@
 # wordle_app
 
+## Web App Link: https://red-desert-0f3146210.1.azurestaticapps.net/
+
 ## Build Setup
 
 ```bash
