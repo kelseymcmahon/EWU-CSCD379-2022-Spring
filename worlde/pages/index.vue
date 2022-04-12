@@ -3,14 +3,14 @@
     <v-col cols="12" sm="8" md="6">
       <v-card>
         <v-card-title class="headline">
-          Welcome to the better version of Wordle
+          Welcome to Generic Word Game!
         </v-card-title>
         <v-card-text>
           <p>
-            Vuetify is a progressive Material Design component framework for
-            Vue.js. It was designed to empower developers to create amazing
-            applications.
+            This game is an original word game that is fun for the whole family!
+            This game will be the highlight at all your parties.
           </p>
+          
         </v-card-text>
         <v-card-actions>
           <v-spacer />

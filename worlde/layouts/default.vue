@@ -36,7 +36,9 @@
     </v-navigation-drawer>
 
     <v-footer :absolute="!fixed" app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
+      <v-spacer />
+      <span>&copy; Kelsey McMahon {{ new Date().getFullYear() }}</span>
+      <v-spacer />
     </v-footer>
   </v-app>
 </template>
@@ -69,7 +71,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Better Wordle',
+      title: 'Generic Word Game',
     }
   },
 }

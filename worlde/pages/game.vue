@@ -1,49 +1,33 @@
 <template>
   <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="6">
-      <v-card class="logo py-4 d-flex justify-center">
-        <NuxtLogo />
-        <VuetifyLogo />
-      </v-card>
-      <v-card loading>
+      <v-card>
         <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template, why wont this commit??
+          Welcome to Generic Word Game!
         </v-card-title>
         <v-card-text>
           <p>
-            Vuetify is a progressive Material Design component framework for
-            Vue.js. It was designed to empower developers to create amazing
-            applications.
+            How to play: 
           </p>
+          <ol>
+            <li>Enter in a word guess that is 5 letters long.</li>
+            <li>Click submit to see your how your guess did.</li>
+          </ol>
+          <br>
+          <v-text-field v-model="inputMessage" placeholder="Enter a guess" outlined>
+          </v-text-field>
 
-          <p>
-            Thank you for developing with Vuetify and I look forward to bringing
-            more exciting features in the future.
-          </p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3" />
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt Documentation
-          </a>
-          <br />
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt GitHub
-          </a>
+          <v-alert dense border="left" type="warning">
+            {{errorMessage}}
+          </v-alert>
+
+          <v-btn color="secondary" @click="checkLength"> Submit </v-btn>
+
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn color="primary" nuxt to="/inspire"> {{buttonText}} </v-btn>
-          <v-btn color="secondary" :loading="isLoading" @click="changeButtonText"> Change Text </v-btn>
+          <v-btn color="primary" nuxt to="/"> Return Home </v-btn>
+          <v-spacer />
         </v-card-actions>
       </v-card>
     </v-col>
@@ -54,20 +38,20 @@
 import Vue from "vue"
 import Component from "vue-class-component"
 @Component
-export default class game extends Vue{
+export default class wordService extends Vue{
     name: string = 'IndexPage';
-    buttonText: string = 'Inspire me!';
-    isLoading: boolean = false;
-    changeButtonText() {
-        this.buttonText = this.buttonText === 'Inspire me!' ? 'Inspire me again!' : 'Inspire me!';
-        this.isLoading = true;
-        setTimeout(() => {
-            this.isLoading = false;
-        }, 1000);
-    }
+    inputMessage: string = "";
+    errorMessage: string = "Please enter a word with 5 letters";
+    checkLength() {
+      if (this.inputMessage.length > 5) {
+        return false;
+      }
 
-    wordsService() {
-      
+      else {
+        return true;
+      }
+      // this.inputMessage;
+      // console.log(this.inputMessage);
     }
 }
 </script>
