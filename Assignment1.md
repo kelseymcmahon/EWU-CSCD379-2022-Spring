@@ -25,22 +25,22 @@ The purpose of this assignment is to solidify your learning of:
    - Page should have a card with a heading that with a clever name for the game ✅
    - some default placeholder body text ✅
    - and a button to take you back to the home page ✅
-   - there should be a button the home page to access this page ❌✅
+   - there should be a button the home page to access this page ✅
 
-4. Check all the code into your repo fork ❌✅
+4. Check all the code into your repo fork ✅
 
-5. Create a static web app in Azure ❌✅
+5. Create a static web app in Azure ✅
    - Create the container where your GitHub repo will deploy
    - Link the site with your GitHub repo
 
-6. Update the CI/CD pipeline ❌✅
+6. Update the CI/CD pipeline ✅
    - Pipeline runs on each check in
    - Jest tests run and pass ❌✅
-   - Nuxt app builds ❌✅
-   - Nuxt app deploys to Azure ❌✅
+   - Nuxt app builds ✅
+   - Nuxt app deploys to Azure ✅
 
-7. Azure site works ❌✅
-   - Post your Azure URL in your readme.md file. Replace the URL in the readme with your URL. ❌✅
+7. Azure site works ✅
+   - Post your Azure URL in your readme.md file. Replace the URL in the readme with your URL. ✅
 
 ## Extra Credit
 
