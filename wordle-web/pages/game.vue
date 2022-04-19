@@ -1,57 +1,51 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to Generic Word Game!
-        </v-card-title>
-        <v-card-text>
-          <p>
-            How to play: 
-          </p>
-          <ol>
-            <li>Enter in a word guess that is 5 letters long.</li>
-            <li>Click submit to see your how your guess did.</li>
-          </ol>
-          <br>
-          <v-text-field v-model="inputMessage" placeholder="Enter a guess" outlined>
-          </v-text-field>
+  <v-container fluid fill-height justify-center>
 
-          <v-alert dense border="left" type="warning">
-            {{errorMessage}}
-          </v-alert>
+    <v-alert v-if="wordleGame.gameOver" width="80%" :type="gameResult.type">
+      {{ gameResult.text }}
+      <v-btn class="ml-2" @click="resetGame"> Play Again? </v-btn>
+    </v-alert>
 
-          <v-btn color="secondary" @click="checkLength"> Submit </v-btn>
+    <game-board :wordleGame="wordleGame" />
 
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn color="primary" nuxt to="/"> Return Home </v-btn>
-          <v-spacer />
-        </v-card-actions>
-      </v-card>
-    </v-col>
-  </v-row>
+    <keyboard :wordleGame="wordleGame" />
+  </v-container>
 </template>
 
 <script lang="ts">
-import Vue from "vue"
-import Component from "vue-class-component"
-@Component
-export default class wordService extends Vue{
-    name: string = 'IndexPage';
-    inputMessage: string = "";
-    errorMessage: string = "Please enter a word with 5 letters";
-    checkLength() {
-      if (this.inputMessage.length > 5) {
-        return false;
-      }
+import { Component, Vue } from 'vue-property-decorator'
+import { WordsService } from '~/scripts/wordsService'
+import { GameState, WordleGame } from '~/scripts/wordleGame'
+import KeyBoard from '@/components/keyboard.vue'
+import GameBoard from '@/components/game-board.vue'
+import { Word } from '~/scripts/word'
 
-      else {
-        return true;
-      }
-      // this.inputMessage;
-      // console.log(this.inputMessage);
+@Component({ components: { KeyBoard, GameBoard } })
+export default class Game extends Vue {
+  word: string = WordsService.getRandomWord()
+  wordleGame = new WordleGame(this.word)
+
+  resetGame() {
+    this.word = WordsService.getRandomWord()
+    this.wordleGame = new WordleGame(this.word)
+  }
+
+  get gameResult() {
+    if (this.wordleGame.state === GameState.Won) {
+      return { type: 'success', text: 'Yay! You won!' }
     }
+    if (this.wordleGame.state === GameState.Lost) {
+      return { type: 'error', text: `You lost... :( The word was ${this.word}` }
+    }
+    return { type: '', text: '' }
+  }
+
+  getLetter(row: number, index: number) {
+    const word: Word = this.wordleGame.words[row - 1]
+    if (word !== undefined) {
+      return word.letters[index - 1]?.char ?? ''
+    }
+    return ''
+  }
 }
 </script>
