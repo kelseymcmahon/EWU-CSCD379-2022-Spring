@@ -8,15 +8,16 @@ export enum GameState {
 }
 
 export class WordleGame {
-  constructor(word: string) {
-    this.words.push(new Word())
-    this.word = word
-  }
 
   private word: string
   words: Word[] = []
   state: GameState = GameState.Active
   readonly maxGuesses = 6
+
+  constructor(word: string) {
+    this.words.push(new Word())
+    this.word = word
+  }
 
   get currentWord(): Word {
     return this.words[this.words.length - 1]
@@ -53,8 +54,21 @@ export class WordleGame {
       this.state = GameState.Won
     } else if (this.words.length === this.maxGuesses) {
       this.state = GameState.Lost
-    } else {
+    } 
+    //if this word contains a ?, push a generated word
+    else if(this.currentWord.checkForQuestionSymbol(this.word)) {
+      //get a generated word to use instead:
+      this.validWords(this.word)
+    }
+    
+    else {
       this.words.push(new Word())
     }
   }
+
+  validWords(word: string) {
+    console.log("This word has a '?' ")
+    this.words.push(new Word());
+  }
+
 }

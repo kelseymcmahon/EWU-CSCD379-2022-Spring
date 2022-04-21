@@ -70,3 +70,27 @@ describe('Word Evaluation', () => {
     expect(word.letters[4].status).toBe(LetterStatus.Correct)
   })
 })
+
+describe('Check For Question Symbol', () => {
+  test('Returns true when word with ? is sent', () => {
+    const word = new Word()
+    word.addLetter('A')
+    word.addLetter('P')
+    word.addLetter('?')
+    word.addLetter('L')
+    word.addLetter('E')
+    expect(word.checkForQuestionSymbol('AP?LE')).toBe(true)
+  })
+})
+
+describe('Check For Question Symbol', () => {
+  test('Returns false when word without ? is sent', () => {
+    const word = new Word()
+    word.addLetter('A')
+    word.addLetter('P')
+    word.addLetter('P')
+    word.addLetter('L')
+    word.addLetter('E')
+    expect(word.checkForQuestionSymbol('APPLE')).toBe(false)
+  })
+})
