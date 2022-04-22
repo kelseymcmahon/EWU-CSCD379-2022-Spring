@@ -1,37 +1,37 @@
-﻿namespace Wordle.api.Services
+﻿namespace Wordle.api.Services;
+
+public class LeaderboardServiceMemory : ILeaderboardService
 {
-    public class LeaderboardServiceMemory : ILeaderboardService
+    private static readonly List<Score> _scores = new();
+
+    public LeaderboardServiceMemory()
     {
-        private static readonly List<Scores> _scores = new();
-
-        public LeaderboardServiceMemory()
+        if (!_scores.Any())
         {
-            if (!_scores.Any())
-            {
-                List<Scores> results = new();
+            List<Score> results = new();
 
-                _scores.Add(new Scores("Kelsey", 25, 4.6));
-                _scores.Add(new Scores("Ralph", 30, 3.4));
-                _scores.Add(new Scores("Gene", 50, 4.1));
-            };
-        }
+            _scores.Add(new Score("Kelsey", 25, 4.6));
+            _scores.Add(new Score("Ralph", 30, 3.4));
+            _scores.Add(new Score("Gene", 50, 4.1));
+        };
     }
 
     public void AddScore(GameScore gameScore)
     {
-        var score = _scores.FirstOrDefault(f => f.name == gameScore.Name);
+        var score = _scores.FirstOrDefault(f => f.Name == gameScore.Name);
 
         if (score is not null)
         {
-            score.NumberGames++;
-            score.AverageGuesses = (score.NumberGames * score.AverageGuesses) + gameScore.Score);   //finish this
+            score.AverageGuesses = ((score.NumberGames * score.AverageGuesses)
+                    + gameScore.Score) / ++score.NumberGames;
         }
-        
     }
 
-    public IEnumerable<Scores> GetScores()
-        {
-            return _scores;
-        }
+    public IEnumerable<Score> GetScores()
+    {
+        return _scores;
     }
 }
+
+
+

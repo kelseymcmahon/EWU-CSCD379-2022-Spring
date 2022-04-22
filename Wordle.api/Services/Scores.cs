@@ -1,17 +1,16 @@
-﻿namespace Wordle.api.Services
+﻿namespace Wordle.api.Services;
+
+public class Score
 {
-    public class Scores
+    public string Name { get; set; }
+    public int NumberGames { get; set; }
+    public double AverageGuesses { get; set; }
+
+    public Score(string name, int numberGames, double averageGuesses)
     {
-
-        public string Name { get; set; }    
-        public int NumberGames { get; set; }
-        public double AverageGuesses { get; set; }
-
-        public Scores(string name, int numberGames, double averageGuesses)
-        {
-            Name = name;
-            NumberGames = numberGames;
-            AverageGuesses = averageGuesses;
-        }
+        Name = name;
+        NumberGames = numberGames;
+        AverageGuesses = averageGuesses;
     }
 }
+

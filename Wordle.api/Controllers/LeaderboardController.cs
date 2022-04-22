@@ -18,15 +18,15 @@ public class LeaderboardController
     }
 
     [HttpGet]
-    public IEnumerable<Scores> Get(string name)
+    public IEnumerable<Score> Get(string name)
     {
         _logger.LogInformation("LeaderboardController.Get()");
 
-        List<Scores> results = new()
+        List<Score> results = new()
         {
-            new Scores("Kelsey", 25, 2.6),
-            new Scores("Ralph", 30, 3.4),
-            new Scores("Gene", 50, 4.1),
+            new Score("Kelsey", 25, 2.6),
+            new Score("Ralph", 30, 3.4),
+            new Score("Gene", 50, 4.1),
         };
 
         return results;
@@ -35,7 +35,8 @@ public class LeaderboardController
     [HttpPost]
     public void Post([FromBody] GameScore score)
     {
-
+        _logger.LogInformation("LeaderboardController.Post()");
+        _leaderboardService.AddScore(score);
     }
 
 }

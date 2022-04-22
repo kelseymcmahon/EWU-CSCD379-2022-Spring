@@ -1,8 +1,9 @@
-﻿namespace Wordle.api.Services
+﻿namespace Wordle.api.Services;
+
+public interface ILeaderboardService
 {
-    public class ILeaderboardService
-    {
-        public IEnumerable<Scores> GetScores();
-    }
+    IEnumerable<Score> GetScores();
+    void AddScore(GameScore score);
 }
+
 
