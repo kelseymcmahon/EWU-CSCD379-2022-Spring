@@ -8,7 +8,7 @@
       <v-card>
         <v-container>
 
-              <v-btn v-for="word in validWords()" :key="word" @click="submitValidWord(word)" color="secondary" class="mx-1 my-1">
+              <v-btn v-for="word in validWords()" :key="word" @click="addValidWord(word)" color="secondary" class="mx-1 my-1">
                   {{ word }} 
               </v-btn>
 
@@ -25,13 +25,12 @@ import { Letter } from '~/scripts/letter'
 
 @Component
 export default class ValidWords extends Vue {
-    @Prop({ required: true })
+  @Prop({ required: true })
   wordleGame!: WordleGame
 
   validWordCount: number = 0;
-  validWordList: string[] = this.wordleGame.getWildcardWords();
-
   dialog = false
+
   toggleDialog() {
     this.dialog = !this.dialog
   }
@@ -40,15 +39,14 @@ export default class ValidWords extends Vue {
       var wordList = this.wordleGame.getWildcardWords()
       this.validWordCount = wordList.length
       return wordList
-
   }
-  submitValidWord(word: string) {
-      console.log(word)
-      for(let i = 0; i < 5; i++) {
-          this.wordleGame.currentWord.letters[i] = new Letter(word.charAt(i))
-      }
-      this.wordleGame.submitWord()
-      this.dialog = !this.dialog
+
+  addValidWord(word: string) {
+    for(let i = 0; i < 5; i++) {
+        this.wordleGame.currentWord.letters[i] = new Letter(word.charAt(i))
+    }
+    console.log(word)
+    this.dialog = !this.dialog
   }
 }
 </script>
