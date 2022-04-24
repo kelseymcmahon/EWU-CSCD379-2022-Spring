@@ -3,6 +3,9 @@
 ## Web App Link
 https://red-desert-0f3146210.1.azurestaticapps.net/
 
+## Wordle API Link
+https://wordle-api-scoreboard.azurewebsites.net/
+
 ## Build Setup
 
 ```bash
