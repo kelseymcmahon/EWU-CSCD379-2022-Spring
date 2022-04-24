@@ -53,7 +53,7 @@ export class Word {
     }
   }
 
-  checkForQuestionSymbol(word: string): boolean {
+  checkForWildCharacter(word: string): boolean {
     let result = false
 
     if (word.length === this.letters.length) {

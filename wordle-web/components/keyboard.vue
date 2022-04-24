@@ -16,10 +16,10 @@
     <v-btn
       :disabled="wordleGame.gameOver"
       class="float-left"
-      @click="guessWord"
-    >
+      @click="guessWord">
       Guess
     </v-btn>
+    <valid-words :wordleGame="wordleGame" />
     <v-btn
       :disabled="wordleGame.gameOver"
       icon

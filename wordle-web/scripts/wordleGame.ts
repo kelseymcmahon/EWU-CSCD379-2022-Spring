@@ -1,5 +1,6 @@
 import { LetterStatus } from './letter'
 import { Word } from './word'
+import { WordsService } from './wordsService'
 
 export enum GameState {
   Active = 0,
@@ -54,21 +55,13 @@ export class WordleGame {
       this.state = GameState.Won
     } else if (this.words.length === this.maxGuesses) {
       this.state = GameState.Lost
-    } 
-    //if this word contains a ?, push a generated word
-    else if(this.currentWord.checkForQuestionSymbol(this.word)) {
-      //get a generated word to use instead:
-      this.validWords(this.word)
-    }
-    
-    else {
+    } else {
       this.words.push(new Word())
     }
   }
 
-  validWords(word: string) {
-    console.log("This word has a '?' ")
-    this.words.push(new Word());
+  getWildcardWords() {
+    let wordList = WordsService.getWildCharacterWords(this.currentWord.text);
+    return wordList
   }
-
 }

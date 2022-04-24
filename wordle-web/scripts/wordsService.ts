@@ -3,6 +3,26 @@ export abstract class WordsService {
     return this.#words[Math.floor(Math.random() * this.#words.length)]
   }
 
+  static getWildCharacterWords(wildcardWord: string) {
+    let wordMatches : string[] = [];
+
+    for (var word of this.#words) {
+      let match : boolean = true;
+
+      for (let i = 0; i < 5; i++) {
+        if(wildcardWord.charAt(i) != '?') {
+          if(wildcardWord.charAt(i) != word.charAt(i)) {
+              match = false;
+          }
+        }
+      }
+      if(match) {
+        wordMatches.push(word);
+      }
+    }
+    return wordMatches;
+  }
+
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json
   static readonly #words: string[] = [
     'acorn',
