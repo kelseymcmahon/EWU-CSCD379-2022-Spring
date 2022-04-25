@@ -10,7 +10,22 @@
           >
             {{ char }}
           </v-btn>
+          
         </v-container>
+      </v-col >
+      <v-col v-if="i === 3">
+      <v-btn
+      :disabled="wordleGame.gameOver"
+      @click="guessWord">
+      Guess
+    </v-btn>
+    <v-btn
+      :disabled="wordleGame.gameOver"
+      icon
+      @click="removeLetter">
+      <v-icon>mdi-backspace</v-icon>
+    </v-btn>
+      
       </v-col>
     </v-row>
     <v-btn
@@ -42,9 +57,10 @@ export default class KeyBoard extends Vue {
   wordleGame!: WordleGame
 
   chars = [
-    ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
-    ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
-    ['z', 'x', 'c', 'v', 'b', 'n', 'm', '?'],
+    ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i'],
+    ['o', 'p', 'a', 's', 'd', 'f', 'g', 'h'],
+    ['j', 'k', 'l', 'z', 'x', 'c', 'v'],
+    ['b', 'n', 'm', '?'],
   ]
 
   setLetter(char: string) {

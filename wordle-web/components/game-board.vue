@@ -1,14 +1,16 @@
 <template>
 
-    <v-container>
-      <v-row v-for="row in wordleGame.maxGuesses" :key="row" dense>
+    <v-container fluid=false>
+      <v-row v-for="row in wordleGame.maxGuesses" :key="row" dense class="game-board">
+        <v-spacer />
         <v-col v-for="index in wordleGame.currentWord.maxLetters" :key="index" >
-          <v-card height="50" :color="letterColor(getLetter(row, index))">
-            <v-card-text class="text-center text-h5 font-weight-bold">
+          <v-card height="50" width="50" :color="letterColor(getLetter(row, index))">
+            <v-card-text class="letter-card text-center text-h5 font-weight-bold">
               {{ getChar(getLetter(row, index)) }}
             </v-card-text>
           </v-card>
         </v-col>
+        <v-spacer />
       </v-row>
     </v-container>
 
@@ -45,3 +47,14 @@ export default class GameBoard extends Vue {
 
 }
 </script>
+
+<style>
+  .game-board .col {
+    flex-grow: 0;
+  }
+
+  .letter-card .v-card__subtitle, .v-card__text, .v-card__title {
+    padding: 10px;
+    
+  }
+</style>

@@ -1,9 +1,15 @@
 <template>
   <v-app light>
 
-    <v-app-bar :clipped-left="clipped" fixed app color="secondary" dark>
-      <v-icon>mdi-cat</v-icon>
-      <v-toolbar-title>Generic Word Game</v-toolbar-title>
+    <v-app-bar :clipped-left="clipped" fixed app color="secondary" dark height="50">
+      <v-btn icon to="/"> 
+      <v-icon>mdi-cat</v-icon> 
+      </v-btn>
+        <router-link to="/" class="title-bar-text">
+        <v-toolbar-title>
+        Generic Word Game
+        </v-toolbar-title>
+        </router-link>
       <v-spacer />
       <settings-dialog />
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
@@ -53,9 +59,21 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import SettingsDialog from '@/components/settings-dialog.vue'
+
 @Component({ components: { SettingsDialog } })
 export default class DefaultLayout extends Vue {
 drawer = false
 dialog = false
 }
 </script>
+
+<style>
+.title-bar-text {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.title-bar-text:hover {
+  opacity: 60%;
+}
+</style>
