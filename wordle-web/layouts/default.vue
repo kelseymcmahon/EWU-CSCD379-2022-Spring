@@ -2,12 +2,11 @@
   <v-app light>
 
     <v-app-bar :clipped-left="clipped" fixed app color="secondary" dark>
+      <v-icon>mdi-cat</v-icon>
+      <v-toolbar-title>Generic Word Game</v-toolbar-title>
       <v-spacer />
-      <v-toolbar-title v-text="title" />
-      <v-spacer />
-      <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
+      <settings-dialog />
+      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
     </v-app-bar>
 
     <v-main>
@@ -16,24 +15,32 @@
       </v-container>
     </v-main>
 
-    <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
+    <v-navigation-drawer v-model="drawer" absolute temporary right>
+        <v-list nav dense>
+          <v-list-item-group v-model="group" color="secondary">
+            <v-list-item>
+              <v-list-item-icon>
+                <v-icon>mdi-home</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Home</v-list-item-title>
+            </v-list-item>
+  
+            <v-list-item>
+              <v-list-item-icon>
+                <v-icon>mdi-clippy</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Game</v-list-item-title>
+            </v-list-item>
+
+            <v-list-item>
+              <v-list-item-icon>
+                <v-icon>mdi-cat</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>Info</v-list-item-title>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
+      </v-navigation-drawer>
 
     <v-footer :absolute="!fixed" app>
       <v-spacer />
@@ -43,36 +50,12 @@
   </v-app>
 </template>
 
-<script>
-export default {
-  name: 'DefaultLayout',
-  data() {
-    return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        {
-          icon: 'mdi-chevron-right',
-          title: 'Home',
-          to: '/',
-        },
-        {
-          icon: 'mdi-chevron-right',
-          title: 'Game',
-          to: '/Game',
-        },
-        {
-          icon: 'mdi-chevron-right',
-          title: 'Info',
-          to: '/Info',
-        },
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Generic Word Game',
-    }
-  },
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator'
+import SettingsDialog from '@/components/settings-dialog.vue'
+@Component({ components: { SettingsDialog } })
+export default class DefaultLayout extends Vue {
+drawer = false
+dialog = false
 }
 </script>
