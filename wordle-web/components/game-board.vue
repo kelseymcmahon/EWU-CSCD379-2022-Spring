@@ -44,7 +44,7 @@ export default class GameBoard extends Vue {
 
   getChar(letter: Letter | null) {
     if (letter === null) return ''
-    return letter.char
+    return letter.char.toUpperCase()
   }
 
   letterColor(letter: Letter | null): string {

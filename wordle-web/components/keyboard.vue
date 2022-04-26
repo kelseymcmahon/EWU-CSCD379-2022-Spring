@@ -1,5 +1,5 @@
 <template>
-  <v-card class="my-5 pa-5">
+  <div>
     <v-row v-for="(charRow, i) in chars" :key="i" no-gutters justify="center">
       <v-col v-for="char in charRow" :key="char" cols="1">
         <v-container class="text-center">
@@ -13,28 +13,6 @@
         </v-container>
       </v-col>
     </v-row>
-    <!-- <v-row no-gutters justify="center">
-      <v-spacer />
-      <v-col>
-        <v-btn :disabled="wordleGame.gameOver" @click="guessWord">
-          Guess
-        </v-btn>
-      </v-col>
-      <v-col>
-        <valid-words :wordle-game="wordleGame" />
-      </v-col>
-      <v-col>
-        <v-btn :disabled="wordleGame.gameOver" @click="setLetter('?')">
-          ?
-        </v-btn>
-      </v-col>
-      <v-col>
-        <v-btn :disabled="wordleGame.gameOver" @click="removeLetter">
-          <v-icon>mdi-backspace</v-icon>
-        </v-btn>
-      </v-col>
-      <v-spacer />
-    </v-row> -->
 
     <v-row align="center">
       <v-spacer />
@@ -53,7 +31,8 @@
         </v-btn>
         <v-spacer />
     </v-row>
-  </v-card>
+    
+  </div>
 </template>
 
 <script lang="ts">

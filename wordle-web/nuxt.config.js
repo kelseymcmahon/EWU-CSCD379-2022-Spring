@@ -50,10 +50,20 @@ export default {
       light: true,
       themes: {
         light: {
-          primary: colors.indigo.darken2,
-          accent: colors.grey.darken3,
+          primary: colors.cyan,
+          accent: colors.cyan.accent3,
           secondary: colors.orange.darken2,
-          info: colors.teal.lighten1,
+          info: colors.blueGrey.lighten2,
+          warning: colors.amber.base,
+          error: colors.deepOrange.accent4,
+          success: colors.green.accent3,
+        },
+
+        dark: {
+          primary: colors.cyan.darken4,
+          accent: colors.cyan.accent3,
+          secondary: colors.orange.darken2,
+          info: colors.blueGrey.lighten2,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
           success: colors.green.accent3,

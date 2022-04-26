@@ -4,7 +4,7 @@
       :clipped-left="clipped"
       fixed
       app
-      color="secondary"
+      color="primary"
       dark
       height="50"
     >
@@ -75,6 +75,10 @@ export default class DefaultLayout extends Vue {
 .title-bar-text {
   text-decoration: none;
   font-weight: bold;
+}
+
+.title-bar-text a {
+  color: white;
 }
 
 .title-bar-text:hover {
