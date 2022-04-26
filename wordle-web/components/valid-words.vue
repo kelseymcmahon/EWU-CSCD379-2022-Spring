@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-btn @click="toggleDialog" class="ma-1"> Valid Words {{ validWordCount }} </v-btn>
+    <v-btn :disabled="wordleGame.gameOver" @click="toggleDialog" class="ma-1 gradient"> Valid Words {{ validWordCount }} </v-btn>
 
     <v-dialog v-model="dialog" width="450">
       <v-card>

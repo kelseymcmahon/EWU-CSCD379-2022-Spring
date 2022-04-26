@@ -7,6 +7,7 @@
             :color="letterColor(char)"
             :disabled="wordleGame.gameOver"
             @click="setLetter(char)"
+            class="gradient-2"
           >
             {{ char }}
           </v-btn>
@@ -16,17 +17,17 @@
 
     <v-row align="center">
       <v-spacer />
-          <v-btn :disabled="wordleGame.gameOver" @click="setLetter('?')" class="ma-1">
+          <v-btn :disabled="wordleGame.gameOver" @click="setLetter('?')" class="ma-1 gradient">
           ?
         </v-btn>
 
         <valid-words :wordle-game="wordleGame" />
 
-        <v-btn :disabled="wordleGame.gameOver" @click="guessWord" class="ma-1">
+        <v-btn :disabled="wordleGame.gameOver" @click="guessWord" class="ma-1 gradient">
           Guess
         </v-btn>
 
-        <v-btn :disabled="wordleGame.gameOver" @click="removeLetter" class="ma-1">
+        <v-btn :disabled="wordleGame.gameOver" @click="removeLetter" class="ma-1 gradient">
           <v-icon>mdi-backspace</v-icon>
         </v-btn>
         <v-spacer />
@@ -39,6 +40,7 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import { Letter, LetterStatus } from '~/scripts/letter'
 import { WordleGame } from '~/scripts/wordleGame'
+import { colors } from 'vuetify/lib'
 
 @Component
 export default class KeyBoard extends Vue {
@@ -83,3 +85,15 @@ export default class KeyBoard extends Vue {
   }
 }
 </script>
+
+<style>
+  .gradient {
+    background: rgb(48,219,255);
+    background: linear-gradient(302deg, rgba(48,219,255,1) 0%, rgba(27,129,210,1) 100%);
+  }
+
+  .gradient-2 {
+    background: rgb(154,156,164);
+    background: linear-gradient(302deg, rgba(154,156,164,1) 0%, rgba(199,202,212,1) 100%);
+  }
+</style>

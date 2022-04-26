@@ -4,15 +4,10 @@
       :clipped-left="clipped"
       fixed
       app
-      color="primary"
-      dark
-      height="50"
-    >
-      <v-btn icon to="/">
-        <v-icon>mdi-cat</v-icon>
-      </v-btn>
+      color="nav"
+      height="50">
       <router-link to="/" class="title-bar-text">
-        <v-toolbar-title> Generic Word Game </v-toolbar-title>
+        <v-toolbar-title> <v-icon>mdi-cat</v-icon> Generic Word Game </v-toolbar-title>
       </router-link>
       <v-spacer />
       <settings-dialog />
@@ -28,25 +23,25 @@
     <v-navigation-drawer v-model="drawer" absolute temporary right>
       <v-list nav dense>
         <v-list-item-group v-model="group" color="secondary">
-          <v-list-item>
+          <v-list-item nuxt to="/">
             <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
             </v-list-item-icon>
             <v-list-item-title>Home</v-list-item-title>
           </v-list-item>
 
-          <v-list-item>
+          <v-list-item nuxt to="/Game">
             <v-list-item-icon>
               <v-icon>mdi-clippy</v-icon>
             </v-list-item-icon>
             <v-list-item-title>Game</v-list-item-title>
           </v-list-item>
 
-          <v-list-item>
+          <v-list-item nuxt to="/About">
             <v-list-item-icon>
               <v-icon>mdi-cat</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Info</v-list-item-title>
+            <v-list-item-title>About</v-list-item-title>
           </v-list-item>
         </v-list-item-group>
       </v-list>
@@ -68,6 +63,10 @@ import SettingsDialog from '@/components/settings-dialog.vue'
 export default class DefaultLayout extends Vue {
   drawer = false
   dialog = false
+
+  goHome() {
+
+  }
 }
 </script>
 
@@ -75,9 +74,10 @@ export default class DefaultLayout extends Vue {
 .title-bar-text {
   text-decoration: none;
   font-weight: bold;
+  text-decoration-color: white;
 }
 
-.title-bar-text a {
+.title-bar-text .v-application a {
   color: white;
 }
 

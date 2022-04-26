@@ -3,19 +3,17 @@
     <v-col cols="12" sm="8" md="6">
       <v-card>
         <v-card-title class="headline">
-          Welcome to Generic Word Game!
+          About This Game
         </v-card-title>
         <v-card-text>
           <p>
-            This game is an original word game that is fun for the whole family!
-            This game will be the highlight at all your parties.
+            This game was created as a class project at Eastern Washington University. 
+            The creative concept for Generic Word Game was inspired by my great intructor Meg!
           </p>
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn color="primary" nuxt to="/Game"> 
-          Play the game!
-          </v-btn>
+          <v-btn color="primary" nuxt to="/"> Back Home </v-btn>
           <v-spacer />
         </v-card-actions>
       </v-card>
@@ -28,7 +26,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 @Component
-export default class IndexPage extends Vue {
-  name: string = 'IndexPage'
+export default class About extends Vue {
+  name: string = 'About'
 }
 </script>

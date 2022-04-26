@@ -53,6 +53,7 @@ export default {
           primary: colors.cyan,
           accent: colors.cyan.accent3,
           secondary: colors.orange.darken2,
+          nav: colors.blueGrey.lighten5,
           info: colors.blueGrey.lighten2,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
