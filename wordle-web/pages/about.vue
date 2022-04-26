@@ -2,13 +2,12 @@
   <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="6">
       <v-card>
-        <v-card-title class="headline">
-          About This Game
-        </v-card-title>
+        <v-card-title class="headline"> About This Game </v-card-title>
         <v-card-text>
           <p>
-            This game was created as a class project at Eastern Washington University. 
-            The creative concept for Generic Word Game was inspired by my great intructor Meg!
+            This game was created as a class project at Eastern Washington
+            University. The creative concept for Generic Word Game was inspired
+            by my great intructor Meg!
           </p>
         </v-card-text>
         <v-card-actions>

@@ -1,6 +1,12 @@
 <template>
   <div>
-    <v-btn :disabled="wordleGame.gameOver" @click="toggleDialog" class="ms-1 gradient font-weight-bold"> Valid Words {{ validWordCount }} </v-btn>
+    <v-btn
+      :disabled="wordleGame.gameOver"
+      class="ms-1 gradient font-weight-bold"
+      @click="toggleDialog"
+    >
+      Valid Words {{ validWordCount }}
+    </v-btn>
 
     <v-dialog v-model="dialog" width="450">
       <v-card>
@@ -9,8 +15,9 @@
             v-for="word in validWords()"
             :key="word"
             color="secondary"
-            class="mx-1 my-1 "
-            @click="addValidWord(word)">
+            class="mx-1 my-1"
+            @click="addValidWord(word)"
+          >
             {{ word }}
           </v-btn>
         </v-container>

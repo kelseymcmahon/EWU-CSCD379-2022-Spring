@@ -1,14 +1,13 @@
 <template>
   <v-container fluid fill-height justify-center>
-
     <v-alert v-if="wordleGame.gameOver" width="80%" :type="gameResult.type">
       {{ gameResult.text }}
       <v-btn class="ml-2" @click="resetGame"> Play Again? </v-btn>
     </v-alert>
 
-    <game-board :wordleGame="wordleGame" />
+    <game-board :wordle-game="wordleGame" />
 
-    <keyboard :wordleGame="wordleGame" />
+    <keyboard :wordle-game="wordleGame" />
   </v-container>
 </template>
 

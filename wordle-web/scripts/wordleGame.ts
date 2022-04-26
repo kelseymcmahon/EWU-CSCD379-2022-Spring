@@ -9,7 +9,6 @@ export enum GameState {
 }
 
 export class WordleGame {
-
   private word: string
   words: Word[] = []
   state: GameState = GameState.Active
@@ -61,7 +60,7 @@ export class WordleGame {
   }
 
   getWildcardWords() {
-    let wordList = WordsService.getWildCharacterWords(this.currentWord.text);
+    const wordList = WordsService.getWildCharacterWords(this.currentWord.text)
     return wordList
   }
 }

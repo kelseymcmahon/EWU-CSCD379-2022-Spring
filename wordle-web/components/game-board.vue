@@ -7,6 +7,7 @@
       class="game-board">
       <v-spacer />
       <v-col v-for="index in wordleGame.currentWord.maxLetters" :key="index">
+        <transition appear>
         <v-card
           height="50"
           width="50"
@@ -15,6 +16,7 @@
             {{ getChar(getLetter(row, index)) }}
           </v-card-text>
         </v-card>
+        </transition>
       </v-col>
       <v-spacer />
     </v-row>

@@ -1,13 +1,10 @@
 <template>
   <v-app light>
-    <v-app-bar
-      :clipped-left="clipped"
-      fixed
-      app
-      color="nav"
-      height="50">
+    <v-app-bar :clipped-left="clipped" fixed app color="nav" height="50">
       <router-link to="/" class="title-bar-text">
-        <v-toolbar-title> <v-icon>mdi-cat</v-icon> Generic Word Game </v-toolbar-title>
+        <v-toolbar-title>
+          <v-icon>mdi-cat</v-icon> Generic Word Game
+        </v-toolbar-title>
       </router-link>
       <v-spacer />
       <settings-dialog />
@@ -64,9 +61,7 @@ export default class DefaultLayout extends Vue {
   drawer = false
   dialog = false
 
-  goHome() {
-
-  }
+  goHome() {}
 }
 </script>
 

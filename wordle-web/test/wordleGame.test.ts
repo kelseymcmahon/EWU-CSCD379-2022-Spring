@@ -122,10 +122,8 @@ describe('getWildcardWords Test', () => {
     game.currentWord.addLetter('?')
     wordList = game.getWildcardWords()
     expect(wordList.length).toBe(29)
-    expect(wordList[0]).toBe("acorn")
-    expect(wordList[1]).toBe("acrid")
-    expect(wordList[2]).toBe("actor")
+    expect(wordList[0]).toBe('acorn')
+    expect(wordList[1]).toBe('acrid')
+    expect(wordList[2]).toBe('actor')
   })
 })
-
-
