@@ -71,30 +71,6 @@ describe('Word Evaluation', () => {
   })
 })
 
-describe('Check For Wild Character', () => {
-  test('Returns true when word with ? is sent', () => {
-    const word = new Word()
-    word.addLetter('A')
-    word.addLetter('P')
-    word.addLetter('?')
-    word.addLetter('L')
-    word.addLetter('E')
-    expect(word.checkForWildCharacter('AP?LE')).toBe(true)
-  })
-})
-
-describe('Check For Wild Character', () => {
-  test('Returns false when word without ? is sent', () => {
-    const word = new Word()
-    word.addLetter('A')
-    word.addLetter('P')
-    word.addLetter('P')
-    word.addLetter('L')
-    word.addLetter('E')
-    expect(word.checkForWildCharacter('APPLE')).toBe(false)
-  })
-})
-
 describe('Check Get Text', () => {
   test('Returns the word', () => {
     const word = new Word()
@@ -103,6 +79,6 @@ describe('Check Get Text', () => {
     word.addLetter('P')
     word.addLetter('L')
     word.addLetter('E')
-    expect(word.text).toBe("APPLE")
+    expect(word.text).toBe('APPLE')
   })
 })

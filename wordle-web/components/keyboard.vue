@@ -10,39 +10,49 @@
           >
             {{ char }}
           </v-btn>
-          
         </v-container>
-      </v-col >
-      <v-col v-if="i === 3">
-      <v-btn
-      :disabled="wordleGame.gameOver"
-      @click="guessWord">
-      Guess
-    </v-btn>
-    <v-btn
-      :disabled="wordleGame.gameOver"
-      icon
-      @click="removeLetter">
-      <v-icon>mdi-backspace</v-icon>
-    </v-btn>
-      
       </v-col>
     </v-row>
-    <v-btn
-      :disabled="wordleGame.gameOver"
-      class="float-left"
-      @click="guessWord">
-      Guess
-    </v-btn>
-    <valid-words :wordleGame="wordleGame" />
-    <v-btn
-      :disabled="wordleGame.gameOver"
-      icon
-      class="float-right"
-      @click="removeLetter"
-    >
-      <v-icon>mdi-backspace</v-icon>
-    </v-btn>
+    <!-- <v-row no-gutters justify="center">
+      <v-spacer />
+      <v-col>
+        <v-btn :disabled="wordleGame.gameOver" @click="guessWord">
+          Guess
+        </v-btn>
+      </v-col>
+      <v-col>
+        <valid-words :wordle-game="wordleGame" />
+      </v-col>
+      <v-col>
+        <v-btn :disabled="wordleGame.gameOver" @click="setLetter('?')">
+          ?
+        </v-btn>
+      </v-col>
+      <v-col>
+        <v-btn :disabled="wordleGame.gameOver" @click="removeLetter">
+          <v-icon>mdi-backspace</v-icon>
+        </v-btn>
+      </v-col>
+      <v-spacer />
+    </v-row> -->
+
+    <v-row align="center">
+      <v-spacer />
+          <v-btn :disabled="wordleGame.gameOver" @click="setLetter('?')" class="ma-1">
+          ?
+        </v-btn>
+
+        <valid-words :wordle-game="wordleGame" />
+
+        <v-btn :disabled="wordleGame.gameOver" @click="guessWord" class="ma-1">
+          Guess
+        </v-btn>
+
+        <v-btn :disabled="wordleGame.gameOver" @click="removeLetter" class="ma-1">
+          <v-icon>mdi-backspace</v-icon>
+        </v-btn>
+        <v-spacer />
+    </v-row>
   </v-card>
 </template>
 
@@ -57,10 +67,9 @@ export default class KeyBoard extends Vue {
   wordleGame!: WordleGame
 
   chars = [
-    ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i'],
-    ['o', 'p', 'a', 's', 'd', 'f', 'g', 'h'],
-    ['j', 'k', 'l', 'z', 'x', 'c', 'v'],
-    ['b', 'n', 'm', '?'],
+    ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
+    ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
+    ['z', 'x', 'c', 'v', 'b', 'n', 'm'],
   ]
 
   setLetter(char: string) {

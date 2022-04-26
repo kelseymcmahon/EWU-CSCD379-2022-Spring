@@ -53,22 +53,6 @@ export class Word {
     }
   }
 
-  checkForWildCharacter(word: string): boolean {
-    let result = false
-
-    if (word.length === this.letters.length) {
-      const wordLettersLeft = word.split('')
-      const lettersLeft = []
-
-      for (const [index, letter] of this.letters.entries()) {
-        if (word[index] === '?') {
-          result = true 
-        } 
-      }
-    }
-    return result
-  }
-
   get length() {
     return this.letters.length
   }

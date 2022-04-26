@@ -1,17 +1,18 @@
 <template>
   <div>
-    <v-btn @click="toggleDialog">
-      Valid Words {{ validWordCount }}
-    </v-btn>
+    <v-btn @click="toggleDialog" class="ma-1"> Valid Words {{ validWordCount }} </v-btn>
 
     <v-dialog v-model="dialog" width="450">
       <v-card>
         <v-container>
-
-              <v-btn v-for="word in validWords()" :key="word" @click="addValidWord(word)" color="secondary" class="mx-1 my-1">
-                  {{ word }} 
-              </v-btn>
-
+          <v-btn
+            v-for="word in validWords()"
+            :key="word"
+            color="secondary"
+            class="mx-1 my-1"
+            @click="addValidWord(word)">
+            {{ word }}
+          </v-btn>
         </v-container>
       </v-card>
     </v-dialog>
@@ -28,7 +29,7 @@ export default class ValidWords extends Vue {
   @Prop({ required: true })
   wordleGame!: WordleGame
 
-  validWordCount: number = 0;
+  validWordCount: number = 0
   dialog = false
 
   toggleDialog() {
@@ -36,16 +37,15 @@ export default class ValidWords extends Vue {
   }
 
   validWords() {
-      var wordList = this.wordleGame.getWildcardWords()
-      this.validWordCount = wordList.length
-      return wordList
+    const wordList = this.wordleGame.getWildcardWords()
+    this.validWordCount = wordList.length
+    return wordList
   }
 
   addValidWord(word: string) {
-    for(let i = 0; i < 5; i++) {
-        this.wordleGame.currentWord.letters[i] = new Letter(word.charAt(i))
+    for (let i = 0; i < 5; i++) {
+      this.wordleGame.currentWord.letters[i] = new Letter(word.charAt(i))
     }
-    console.log(word)
     this.dialog = !this.dialog
   }
 }

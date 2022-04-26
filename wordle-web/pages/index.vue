@@ -10,11 +10,10 @@
             This game is an original word game that is fun for the whole family!
             This game will be the highlight at all your parties.
           </p>
-          
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn color="primary" nuxt to="/Game"> {{buttonText}} </v-btn>
+          <v-btn color="primary" nuxt to="/Game"> {{ buttonText }} </v-btn>
           <v-spacer />
         </v-card-actions>
       </v-card>
@@ -23,16 +22,14 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue"
-import Component from "vue-class-component"
+import Vue from 'vue'
+import Component from 'vue-class-component'
 @Component
-export default class IndexPage extends Vue{
-    name: string = 'IndexPage';
-    buttonText: string = 'Play the game';
-    isLoading: boolean = false;
+export default class IndexPage extends Vue {
+  name: string = 'IndexPage'
+  buttonText: string = 'Play the game'
+  isLoading: boolean = false
 
-    wordsService() {
-      
-    }
+  wordsService() {}
 }
 </script>

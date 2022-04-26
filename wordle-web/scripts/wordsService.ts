@@ -4,23 +4,23 @@ export abstract class WordsService {
   }
 
   static getWildCharacterWords(wildcardWord: string) {
-    let wordMatches : string[] = [];
+    const wordMatches: string[] = []
 
-    for (var word of this.#words) {
-      let match : boolean = true;
+    for (const word of this.#words) {
+      let match: boolean = true
 
       for (let i = 0; i < 5; i++) {
-        if(wildcardWord.charAt(i) != '?') {
-          if(wildcardWord.charAt(i) != word.charAt(i)) {
-              match = false;
+        if (wildcardWord.charAt(i) != '?') {
+          if (wildcardWord.charAt(i) != word.charAt(i)) {
+            match = false
           }
         }
       }
-      if(match) {
-        wordMatches.push(word);
+      if (match) {
+        wordMatches.push(word)
       }
     }
-    return wordMatches;
+    return wordMatches
   }
 
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json
