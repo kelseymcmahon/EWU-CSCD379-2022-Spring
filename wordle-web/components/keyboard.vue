@@ -1,22 +1,4 @@
 <template>
-  <!-- <v-row v-for="(charRow, i) in chars" :key="i" no-gutters justify="center">
-      <v-col v-for="char in charRow" :key="char" cols="1">
-        <v-container class="text-center ">
-          <v-btn
-            min-width="50"
-            height="60"
-            
-            :color="letterColor(char)"
-            :disabled="wordleGame.gameOver"
-            @click="setLetter(char)"
-            class="gradient-2"
-          >
-            {{ char }}
-          </v-btn>
-        </v-container>
-      </v-col>
-    </v-row> -->
-
   <v-container fluid="false">
     <v-row v-for="(charRow, i) in chars" :key="i" class="keyboard">
       <v-spacer />

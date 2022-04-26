@@ -34,6 +34,13 @@ export default class GameBoard extends Vue {
   @Prop({ required: true })
   wordleGame!: WordleGame
 
+  // value: string ="";
+
+  // @Watch(this.value)
+  // onPropertyChanged(value: string, oldValue: string) {
+  //   // Do stuff with the watcher here.
+  // }
+
   getLetter(row: number, index: number): Letter | null {
     const word: Word = this.wordleGame.words[row - 1]
     if (word !== undefined) {
