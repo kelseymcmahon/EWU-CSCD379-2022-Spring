@@ -4,15 +4,13 @@
       v-for="row in wordleGame.maxGuesses"
       :key="row"
       dense
-      class="game-board"
-    >
+      class="game-board">
       <v-spacer />
       <v-col v-for="index in wordleGame.currentWord.maxLetters" :key="index">
         <v-card
           height="50"
           width="50"
-          :color="letterColor(getLetter(row, index))"
-        >
+          :color="letterColor(getLetter(row, index))">
           <v-card-text class="letter-card text-center text-h5 font-weight-bold">
             {{ getChar(getLetter(row, index)) }}
           </v-card-text>
