@@ -50,9 +50,7 @@ export default class ValidWords extends Vue {
   }
 
   addValidWord(word: string) {
-    for (let i = 0; i < 5; i++) {
-      this.wordleGame.currentWord.letters[i] = new Letter(word.charAt(i))
-    }
+    this.wordleGame.changeCurrentWord(word)
     this.dialog = !this.dialog
   }
 }

@@ -127,3 +127,17 @@ describe('getWildcardWords Test', () => {
     expect(wordList[2]).toBe('actor')
   })
 })
+
+describe('changeCurrentWord Test', () => {
+  test('change the current word with a new one', () => {
+    const game = new WordleGame('DISCO')
+    expect(game.state).toBe(GameState.Active)
+    game.currentWord.addLetter('D')
+    game.currentWord.addLetter('I')
+    game.currentWord.addLetter('N')
+    game.currentWord.addLetter('O')
+    game.currentWord.addLetter('S')
+    game.changeCurrentWord("acorn")
+    expect(game.currentWord.text).toBe("acorn")
+  })
+})
