@@ -32,13 +32,13 @@ Note: Custom CSS can only be used where specified.
 3. Add a settings dialog ✅
 - Add a settings selection to the App Bar's menu with a gear icon. This should open this dialog regardless of where you are on the site ✅
 - Option for dark and light mode ✅
-- Develop two additional color schemes (with creative names) and allow the user to change to them. Schemes should look good in both light and dark mode ❌✅
+- Develop two additional color schemes (with creative names) and allow the user to change to them. Schemes should look good in both light and dark mode ✅
 - The above two items must be implemented with built in Veutify features ✅
 
-4. Style the main game page ❌✅
-- Make it look like [wordle.com](https://wordle.com) or the Wordle mobile app ❌✅
-- Add gradient to guesses blocks and keys (with CSS) ❌✅
-- Add drop shadow to keys (No CSS) ❌✅
+4. Style the main game page ✅
+- Make it look like [wordle.com](https://wordle.com) or the Wordle mobile app ✅
+- Add gradient to guesses blocks and keys (with CSS) ✅
+- Add drop shadow to keys (No CSS) ✅
 
 ## Extra Credit
 
