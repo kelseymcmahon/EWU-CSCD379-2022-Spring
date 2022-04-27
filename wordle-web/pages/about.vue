@@ -7,7 +7,7 @@
           <p>
             This game was created as a class project at Eastern Washington
             University. The creative concept for Generic Word Game was inspired
-            by my great intructor Meg!
+            by my great instructor Meg!
           </p>
         </v-card-text>
         <v-card-actions>

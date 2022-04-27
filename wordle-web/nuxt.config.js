@@ -61,7 +61,7 @@ export default {
         },
 
         dark: {
-          primary: colors.cyan.darken4,
+          primary: colors.cyan.darken3,
           accent: colors.cyan.accent3,
           secondary: colors.orange.darken2,
           info: colors.blueGrey.lighten2,

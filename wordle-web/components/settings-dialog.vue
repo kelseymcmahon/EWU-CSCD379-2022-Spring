@@ -21,13 +21,16 @@
           <v-list>
             <v-list-item-group>
               <v-list-item color="pink" @click="pinkTheme">
-                <v-list-item-title> PINK!!! </v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon color="pink">mdi-cat</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>Pinky</v-list-item-title>
               </v-list-item>
               <v-list-item color="blue" @click="blueTheme">
-                <v-list-item-title> I'm feeling blue </v-list-item-title>
-              </v-list-item>
-              <v-list-item color="orange" @click="revertTheme">
-                <v-list-item-title>Back to normal</v-list-item-title>
+                <v-list-item-icon>
+                  <v-icon color="blue">mdi-cat</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>I'm feeling blue</v-list-item-title>
               </v-list-item>
             </v-list-item-group>
           </v-list>
@@ -58,12 +61,12 @@ export default class SettingsDialog extends Vue {
   pinkTheme() {
     const pinkTheme = {
       primary: colors.pink,
-      accent: colors.pink.accent3,
+      accent: colors.pink.accent2,
       secondary: colors.purple,
-      info: colors.purple.accent2,
-      warning: colors.pink.accent1,
-      error: colors.pink.accent3,
-      success: colors.deepPurple.lighten4,
+      info: colors.pink.accent1,
+      warning: colors.amber.base,
+      error: colors.deepOrange.accent4,
+      success: colors.green.accent3,
     }
     this.$vuetify.theme.themes.dark = pinkTheme
     this.$vuetify.theme.themes.light = pinkTheme
@@ -72,20 +75,15 @@ export default class SettingsDialog extends Vue {
   blueTheme() {
     const blueTheme = {
       primary: colors.blue,
-      accent: colors.blue.accent3,
+      accent: colors.blue.accent4,
       secondary: colors.indigo,
-      info: colors.blue.accent2,
-      warning: colors.indigo.accent1,
-      error: colors.indigo.accent3,
-      success: colors.deepPurple.lighten4,
+      info: colors.blue.lighten3,
+      warning: colors.amber.base,
+      error: colors.deepOrange.accent4,
+      success: colors.green.accent3,
     }
     this.$vuetify.theme.themes.dark = blueTheme
     this.$vuetify.theme.themes.light = blueTheme
-  }
-
-  revertTheme() {
-    this.$vuetify.theme.themes.dark = this.$vuetify.theme.themes.dark
-    this.$vuetify.theme.themes.light = this.$vuetify.theme.themes.light
   }
 }
 </script>

@@ -39,9 +39,9 @@ describe('Word Service', () => {
 
 describe('wordExists Test', () => {
   test('check if given word exists on words list', () => {
-    let word = "acorn"
+    let word = 'acorn'
     expect(WordsService.wordExists(word)).toBe(true)
-    word = "hello"
+    word = 'hello'
     expect(WordsService.wordExists(word)).toBe(false)
   })
 })

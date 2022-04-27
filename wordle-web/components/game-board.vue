@@ -4,19 +4,22 @@
       v-for="row in wordleGame.maxGuesses"
       :key="row"
       dense
-      class="game-board">
+      class="game-board"
+    >
       <v-spacer />
       <v-col v-for="index in wordleGame.currentWord.maxLetters" :key="index">
         <transition>
-        <v-card
-          height="50"
-          width="50"
-          :color="letterColor(getLetter(row, index))"
-          >
-          <v-card-text class="letter-card text-center text-h5 font-weight-bold">
-            {{ getChar(getLetter(row, index)) }}
-          </v-card-text>
-        </v-card>
+          <v-card
+            height="50"
+            width="50"
+            style="background: linear-gradient(302deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.2));"
+            :color="letterColor(getLetter(row, index))">
+            <v-card-text
+              class="letter-card text-center text-h5 font-weight-bold"
+            >
+              {{ getChar(getLetter(row, index)) }}
+            </v-card-text>
+          </v-card>
         </transition>
       </v-col>
       <v-spacer />
@@ -34,7 +37,8 @@ import { Letter } from '~/scripts/letter'
 export default class GameBoard extends Vue {
   @Prop({ required: true })
   wordleGame!: WordleGame
-  
+
+  isDefault = true
   // change = false
 
   // @Watch("change")
@@ -77,5 +81,4 @@ export default class GameBoard extends Vue {
   animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   transform: translate3d(0, 0, 0);
 }
-
 </style>

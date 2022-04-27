@@ -2,7 +2,15 @@
   <div>
     <v-btn
       :disabled="wordleGame.gameOver"
-      class="ms-1 gradient font-weight-bold"
+      style="
+        background: linear-gradient(
+          302deg,
+          rgba(0, 0, 0, 0.2),
+          rgba(255, 255, 255, 0.2)
+        );
+      "
+      color="primary"
+      class="ms-1"
       @click="toggleDialog"
     >
       Valid Words {{ validWordCount }}

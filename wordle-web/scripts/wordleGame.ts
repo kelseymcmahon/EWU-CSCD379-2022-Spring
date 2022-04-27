@@ -65,17 +65,17 @@ export class WordleGame {
   }
 
   changeCurrentWord(newWord: string) {
-    //remove old word
+    // remove old word
     for (let i = 0; i < newWord.length; i++) {
       this.currentWord.removeLetter()
     }
-    //add new word
+    // add new word
     for (let i = 0; i < newWord.length; i++) {
       this.currentWord.addLetter(newWord.charAt(i))
     }
   }
 
   checkIfWordExists(word: string) {
-    return WordsService.wordExists(word);
+    return WordsService.wordExists(word)
   }
 }
