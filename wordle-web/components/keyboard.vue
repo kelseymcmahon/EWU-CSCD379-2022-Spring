@@ -47,7 +47,23 @@
       </v-btn>
       <v-spacer />
     </v-row>
+
+    <v-dialog v-model="dialog" width="450">
+      <v-card color="error" dark>
+        <v-container>
+          <v-card-title>
+            <v-icon>mdi-chat-alert</v-icon> Ooops!
+          </v-card-title>
+          <v-card-text>
+            
+            You need to enter a valid word. Try again!
+          </v-card-text>
+        </v-container>
+      </v-card>
+    </v-dialog>
   </v-container>
+
+  
 </template>
 
 <script lang="ts">
@@ -60,6 +76,7 @@ import { WordleGame } from '~/scripts/wordleGame'
 export default class KeyBoard extends Vue {
   @Prop({ required: true })
   wordleGame!: WordleGame
+  dialog = false
 
   chars = [
     ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
@@ -76,12 +93,18 @@ export default class KeyBoard extends Vue {
   }
 
   guessWord() {
-    if (
+    if(this.wordleGame.checkIfWordExists(this.wordleGame.currentWord.text)) {
+      if (
       this.wordleGame.currentWord.length ===
-      this.wordleGame.currentWord.maxLetters
-    ) {
+      this.wordleGame.currentWord.maxLetters) 
+      {
       this.wordleGame.submitWord()
+      }
     }
+    else {
+      this.dialog = true
+    }
+    
   }
 
   letterColor(char: string): string {

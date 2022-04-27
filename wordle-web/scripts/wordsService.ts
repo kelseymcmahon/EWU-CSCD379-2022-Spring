@@ -23,6 +23,14 @@ export abstract class WordsService {
     return wordMatches
   }
 
+  static wordExists(word: string) {
+    let doesExist = false
+      if (this.#words.includes(word)) {
+        doesExist = true
+      }
+    return doesExist
+  }
+
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json
   static readonly #words: string[] = [
     'acorn',

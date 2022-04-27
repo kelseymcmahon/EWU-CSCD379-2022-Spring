@@ -74,4 +74,8 @@ export class WordleGame {
       this.currentWord.addLetter(newWord.charAt(i))
     }
   }
+
+  checkIfWordExists(word: string) {
+    return WordsService.wordExists(word);
+  }
 }
