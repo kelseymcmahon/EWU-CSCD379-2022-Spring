@@ -7,11 +7,12 @@
       class="game-board">
       <v-spacer />
       <v-col v-for="index in wordleGame.currentWord.maxLetters" :key="index">
-        <transition appear>
+        <transition>
         <v-card
           height="50"
           width="50"
-          :color="letterColor(getLetter(row, index))">
+          :color="letterColor(getLetter(row, index))"
+          >
           <v-card-text class="letter-card text-center text-h5 font-weight-bold">
             {{ getChar(getLetter(row, index)) }}
           </v-card-text>
@@ -24,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
 import { WordleGame } from '~/scripts/wordleGame'
 import { Word } from '~/scripts/word'
 import { Letter } from '~/scripts/letter'
@@ -33,12 +34,12 @@ import { Letter } from '~/scripts/letter'
 export default class GameBoard extends Vue {
   @Prop({ required: true })
   wordleGame!: WordleGame
+  
+  // change = false
 
-  // value: string ="";
-
-  // @Watch(this.value)
-  // onPropertyChanged(value: string, oldValue: string) {
-  //   // Do stuff with the watcher here.
+  // @Watch("change")
+  // doAnimation() {
+  //   console.log('Change Happened!')
   // }
 
   getLetter(row: number, index: number): Letter | null {
@@ -71,4 +72,10 @@ export default class GameBoard extends Vue {
 .v-card__title {
   padding: 10px;
 }
+
+.shake {
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+}
+
 </style>
