@@ -16,6 +16,11 @@
           <v-btn color="primary" nuxt to="/"> Play the Game</v-btn>
           <v-spacer />
         </v-card-actions>
+        <v-card-text>
+          <p>
+            This is coming from main!
+          </p>
+        </v-card-text>
       </v-card>
     </v-col>
   </v-row>
