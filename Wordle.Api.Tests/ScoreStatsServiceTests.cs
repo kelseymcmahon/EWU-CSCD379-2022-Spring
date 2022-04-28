@@ -4,7 +4,7 @@ using System.Linq;
 using Wordle.api.Data;
 using Wordle.api.Services;
 
-namespace Wordle.Api.Tests
+namespace Wordle.api.Tests
 {
     [TestClass]
     public class ScoreStatsServiceTests
@@ -20,6 +20,12 @@ namespace Wordle.Api.Tests
             ScoreStatsService sut = new ScoreStatsService(context);
 
             Assert.AreEqual(6, sut.GetScoreStats().Count());
+        }
+
+        [TestMethod]
+        public void Update()
+        {
+
         }
     }
 }
