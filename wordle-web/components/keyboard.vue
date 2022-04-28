@@ -2,10 +2,10 @@
   <v-container fluid="false">
     <v-row v-for="(charRow, i) in chars" :key="i" class="keyboard">
       <v-spacer />
-      <v-col v-for="char in charRow" :key="char" class="pa-1">
+      <v-col v-for="char in charRow" :key="char" class="pa-1" lg="auto" md="auto" xs="1">
         <v-card
           height="50"
-          width="40"
+          width="35"
           style="background: linear-gradient(302deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.2));"
           :color="letterColor(char)"
           :disabled="wordleGame.gameOver"
