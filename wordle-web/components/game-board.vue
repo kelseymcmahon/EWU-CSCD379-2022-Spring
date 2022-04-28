@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
 import { WordleGame } from '~/scripts/wordleGame'
 import { Word } from '~/scripts/word'
 import { Letter } from '~/scripts/letter'
@@ -53,6 +53,11 @@ export default class GameBoard extends Vue {
   letterColor(letter: Letter | null): string {
     if (letter === null) return ''
     return letter.letterColor
+  }
+
+  @Watch("wordleGame.currentWord.letters")
+  doSomething(){
+    console.log(this.wordleGame.currentWord.letters.length);
   }
 }
 </script>

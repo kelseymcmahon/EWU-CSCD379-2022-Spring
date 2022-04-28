@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid="false">
+  <v-container :="false">
     <v-row v-for="(charRow, i) in chars" :key="i" class="keyboard">
       <v-spacer />
       <v-col v-for="char in charRow" :key="char" class="pa-1" lg="auto" md="auto" xs="1">
