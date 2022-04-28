@@ -7,9 +7,13 @@ on:
   push:
     branches:
       - main
+      - Assignment-3
     paths:
       - 'Wordle.api/**'
-  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - Assignment-3
 
 jobs:
   build:
