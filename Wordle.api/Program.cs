@@ -22,7 +22,7 @@ builder.Services.AddScoped<ScoreStatsService>();
 //build the app
 var app = builder.Build();
 
-//Create a sccope to get the services in our app that was builts
+//Create a sccope to get the services in our app that was built
 using(var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
