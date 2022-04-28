@@ -1,29 +1,12 @@
 <template>
-  <!-- <v-row v-for="(charRow, i) in chars" :key="i" no-gutters justify="center">
-      <v-col v-for="char in charRow" :key="char" cols="1">
-        <v-container class="text-center ">
-          <v-btn
-            min-width="50"
-            height="60"
-            
-            :color="letterColor(char)"
-            :disabled="wordleGame.gameOver"
-            @click="setLetter(char)"
-            class="gradient-2"
-          >
-            {{ char }}
-          </v-btn>
-        </v-container>
-      </v-col>
-    </v-row> -->
-
   <v-container fluid="false">
     <v-row v-for="(charRow, i) in chars" :key="i" class="keyboard">
       <v-spacer />
-      <v-col v-for="char in charRow" :key="char" class="pa-1">
+      <v-col v-for="char in charRow" :key="char" class="pa-1" lg="auto" md="auto" xs="1">
         <v-card
           height="50"
-          width="40"
+          width="35"
+          style="background: linear-gradient(302deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.2));"
           :color="letterColor(char)"
           :disabled="wordleGame.gameOver"
           @click="setLetter(char)"
@@ -40,7 +23,9 @@
       <v-spacer />
       <v-btn
         :disabled="wordleGame.gameOver"
-        class="ms-1 gradient text-h6 font-weight-bold"
+        style="background: linear-gradient(302deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.2));"
+        color="primary"
+        class="ms-1 text-h6"
         @click="setLetter('?')"
       >
         ?
@@ -50,7 +35,9 @@
 
       <v-btn
         :disabled="wordleGame.gameOver"
-        class="ms-1 gradient font-weight-bold"
+        style="background: linear-gradient(302deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.2));"
+        color="primary"
+        class="ms-1"
         @click="guessWord"
       >
         Guess
@@ -58,13 +45,26 @@
 
       <v-btn
         :disabled="wordleGame.gameOver"
-        class="ms-1 gradient"
+        style="background: linear-gradient(302deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.2));"
+        color="primary"
+        class="ms-1"
         @click="removeLetter"
       >
         <v-icon>mdi-backspace</v-icon>
       </v-btn>
       <v-spacer />
     </v-row>
+
+    <v-dialog v-model="dialog" width="450">
+      <v-card color="error" dark>
+        <v-container>
+          <v-card-title> <v-icon>mdi-chat-alert</v-icon> Ooops! </v-card-title>
+          <v-card-text>
+            You need to enter a valid word. Try again!
+          </v-card-text>
+        </v-container>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -78,6 +78,8 @@ import { WordleGame } from '~/scripts/wordleGame'
 export default class KeyBoard extends Vue {
   @Prop({ required: true })
   wordleGame!: WordleGame
+
+  dialog = false
 
   chars = [
     ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
@@ -94,11 +96,15 @@ export default class KeyBoard extends Vue {
   }
 
   guessWord() {
-    if (
-      this.wordleGame.currentWord.length ===
-      this.wordleGame.currentWord.maxLetters
-    ) {
-      this.wordleGame.submitWord()
+    if (this.wordleGame.checkIfWordExists(this.wordleGame.currentWord.text)) {
+      if (
+        this.wordleGame.currentWord.length ===
+        this.wordleGame.currentWord.maxLetters
+      ) {
+        this.wordleGame.submitWord()
+      }
+    } else {
+      this.dialog = true
     }
   }
 
@@ -119,25 +125,6 @@ export default class KeyBoard extends Vue {
 </script>
 
 <style>
-.gradient {
-  background: rgb(48, 219, 255);
-  background: linear-gradient(
-    302deg,
-    rgba(48, 219, 255, 1) 0%,
-    rgba(27, 129, 210, 1) 100%
-  );
-}
-
-.gradient-2 {
-  background: rgb(154, 156, 164);
-  background: linear-gradient(
-    302deg,
-    rgba(154, 156, 164, 1) 0%,
-    rgba(199, 202, 212, 1) 100%
-  );
-  font-weight: bold;
-}
-
 .keyboard .col {
   flex-grow: 0;
 }
@@ -148,3 +135,4 @@ export default class KeyBoard extends Vue {
   padding: 10px;
 }
 </style>
+

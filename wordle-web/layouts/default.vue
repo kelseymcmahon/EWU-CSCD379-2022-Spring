@@ -3,7 +3,7 @@
     <v-app-bar :clipped-left="clipped" fixed app color="nav" height="50">
       <router-link to="/" class="title-bar-text">
         <v-toolbar-title>
-          <v-icon>mdi-cat</v-icon> Generic Word Game
+          <v-icon color="secondary">mdi-cat</v-icon> Generic Word Game
         </v-toolbar-title>
       </router-link>
       <v-spacer />
@@ -69,14 +69,5 @@ export default class DefaultLayout extends Vue {
 .title-bar-text {
   text-decoration: none;
   font-weight: bold;
-  text-decoration-color: white;
-}
-
-.title-bar-text .v-application a {
-  color: white;
-}
-
-.title-bar-text:hover {
-  opacity: 60%;
 }
 </style>

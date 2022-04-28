@@ -126,4 +126,24 @@ describe('getWildcardWords Test', () => {
     expect(wordList[1]).toBe('acrid')
     expect(wordList[2]).toBe('actor')
   })
+  test('Get list of size 0 when no word is sent', () => {
+    const game = new WordleGame('DISCO')
+    expect(game.state).toBe(GameState.Active)
+    let wordList = game.getWildcardWords()
+    expect(wordList.length).toBe(0)
+  })
+})
+
+describe('changeCurrentWord Test', () => {
+  test('change the current word with a new one', () => {
+    const game = new WordleGame('DISCO')
+    expect(game.state).toBe(GameState.Active)
+    game.currentWord.addLetter('D')
+    game.currentWord.addLetter('I')
+    game.currentWord.addLetter('N')
+    game.currentWord.addLetter('O')
+    game.currentWord.addLetter('S')
+    game.changeCurrentWord('acorn')
+    expect(game.currentWord.text).toBe('acorn')
+  })
 })

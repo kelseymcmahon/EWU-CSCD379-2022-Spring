@@ -7,12 +7,13 @@
           <p>
             This game was created as a class project at Eastern Washington
             University. The creative concept for Generic Word Game was inspired
-            by my great intructor Meg!
+            by my great instructor Meg!
           </p>
         </v-card-text>
         <v-card-actions>
           <v-spacer />
           <v-btn color="primary" nuxt to="/"> Back Home </v-btn>
+          <v-btn color="primary" nuxt to="/"> Play the Game</v-btn>
           <v-spacer />
         </v-card-actions>
       </v-card>

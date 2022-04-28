@@ -2,7 +2,15 @@
   <div>
     <v-btn
       :disabled="wordleGame.gameOver"
-      class="ms-1 gradient font-weight-bold"
+      style="
+        background: linear-gradient(
+          302deg,
+          rgba(0, 0, 0, 0.2),
+          rgba(255, 255, 255, 0.2)
+        );
+      "
+      color="primary"
+      class="ms-1"
       @click="toggleDialog"
     >
       Valid Words {{ validWordCount }}
@@ -29,7 +37,6 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import { WordleGame } from '~/scripts/wordleGame'
-import { Letter } from '~/scripts/letter'
 
 @Component
 export default class ValidWords extends Vue {
@@ -50,9 +57,7 @@ export default class ValidWords extends Vue {
   }
 
   addValidWord(word: string) {
-    for (let i = 0; i < 5; i++) {
-      this.wordleGame.currentWord.letters[i] = new Letter(word.charAt(i))
-    }
+    this.wordleGame.changeCurrentWord(word)
     this.dialog = !this.dialog
   }
 }

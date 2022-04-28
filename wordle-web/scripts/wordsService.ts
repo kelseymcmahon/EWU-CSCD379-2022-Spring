@@ -10,8 +10,8 @@ export abstract class WordsService {
       let match: boolean = true
 
       for (let i = 0; i < 5; i++) {
-        if (wildcardWord.charAt(i) != '?') {
-          if (wildcardWord.charAt(i) != word.charAt(i)) {
+        if (wildcardWord.charAt(i) !== '?') {
+          if (wildcardWord.charAt(i) !== word.charAt(i)) {
             match = false
           }
         }
@@ -21,6 +21,14 @@ export abstract class WordsService {
       }
     }
     return wordMatches
+  }
+
+  static wordExists(word: string) {
+    let doesExist = false
+    if (this.#words.includes(word)) {
+      doesExist = true
+    }
+    return doesExist
   }
 
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json

@@ -1,4 +1,4 @@
-import { LetterStatus } from './letter'
+import { LetterStatus, Letter } from './letter'
 import { Word } from './word'
 import { WordsService } from './wordsService'
 
@@ -62,5 +62,20 @@ export class WordleGame {
   getWildcardWords() {
     const wordList = WordsService.getWildCharacterWords(this.currentWord.text)
     return wordList
+  }
+
+  changeCurrentWord(newWord: string) {
+    // remove old word
+    for (let i = 0; i < newWord.length; i++) {
+      this.currentWord.removeLetter()
+    }
+    // add new word
+    for (let i = 0; i < newWord.length; i++) {
+      this.currentWord.addLetter(newWord.charAt(i))
+    }
+  }
+
+  checkIfWordExists(word: string) {
+    return WordsService.wordExists(word)
   }
 }
