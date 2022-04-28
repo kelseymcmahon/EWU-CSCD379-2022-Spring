@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
+import { Component, Vue, Prop } from 'vue-property-decorator'
 import { WordleGame } from '~/scripts/wordleGame'
 import { Word } from '~/scripts/word'
 import { Letter } from '~/scripts/letter'
@@ -36,15 +36,6 @@ import { Letter } from '~/scripts/letter'
 export default class GameBoard extends Vue {
   @Prop({ required: true })
   wordleGame!: WordleGame
-
-  isDefault = true
-  char = ""
-
-  @Watch("char")
-  doAnimation() {
-    console.log('Change Happened!')
-    console.log(this.char)
-  }
 
   getLetter(row: number, index: number): Letter | null {
     const word: Word = this.wordleGame.words[row - 1]
