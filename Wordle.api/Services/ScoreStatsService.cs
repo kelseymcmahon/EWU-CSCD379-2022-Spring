@@ -1,34 +1,39 @@
 using Wordle.api.Data;
 
-namespace Wordle.api.serviecs;
-
-public class ScoreStatsService
+namespace Wordle.api.Services
 {
-    private AppDbContext _context;
-
-    public ScoreStatsService(AppDbContext context)
+    public class ScoreStatsService
     {
-        _context = context;
-    }
-
-    public IEnumerable<ScoreStat> GetScoreStats()
-    {
-        var result = _context.ScoreStats.OrderBy(x => x.Score);
-        return result;
-    }
-
-    public static void Seed(AppDbContext context)
-    {
-        if (!context.ScoreStats.Any())
+        public ScoreStatsService(AppDbContext context)
         {
-            for (int i = 0; i < 6; i++)
+            _context = context;
+
+        }
+
+        private AppDbContext _context;
+
+        public IEnumerable<ScoreStat> GetScoreStats()
+        {
+            var result = _context.ScoreStats.OrderBy(x => x.Score);
+            return result;
+        }
+
+        public static void Seed(AppDbContext context)
+        {
+            if (!context.ScoreStats.Any())
             {
-                context.ScoreStats.Add(new ScoreStat()
+                for (int i = 1; i <= 6; i++)
                 {
-                    Score = i,
-                    AverageSeconds = 0,
-                    TotalGames = 0
-                });
+                    context.ScoreStats.Add(new ScoreStat()
+                    {
+                        Score = i,
+                        AverageSeconds = 0,
+                        TotalGames = 0
+                    });
+
+                }
+                context.SaveChanges();
             }
         }
+    }
 }
