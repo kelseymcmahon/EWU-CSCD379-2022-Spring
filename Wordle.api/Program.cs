@@ -11,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ILeaderboardService, LeaderboardServiceMemory>();
+builder.Services.AddScoped<ScoreStatsService>();
 
 //Create a connection to the DB using a scoped resource
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
