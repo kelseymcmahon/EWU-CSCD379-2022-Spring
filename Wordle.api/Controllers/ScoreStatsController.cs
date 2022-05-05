@@ -20,6 +20,7 @@ public class ScoreStatsController : ControllerBase
     public IEnumerable<ScoreStat> Get()
     {
         return _service.GetScoreStats();
+
     }
 
     //Whenever you are doing a post, it must take in an object of the items you want to post

@@ -12,6 +12,14 @@ public class ScoreStat
     public int AverageSeconds { get; set; }
     public int TotalGames { get; set; }
 
-
-
+    public ScoreStat Clone()
+    {
+        return new ScoreStat
+        {
+            ScoreStatID = ScoreStatID,
+            Score = Score,
+            AverageSeconds = AverageSeconds,
+            TotalGames = TotalGames,
+        };
+    }
 }
