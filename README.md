@@ -1,7 +1,10 @@
 # EWU-CSCD378-2022-Spring
 
 ## App link
+App:
 https://red-desert-0f3146210.1.azurestaticapps.net/
+API:
+https://wordle-api-scoreboard.azurewebsites.net/swagger/index.html
 
 ## Assignment 3
 
