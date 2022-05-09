@@ -14,8 +14,8 @@
           </thead>
           <tbody>
             <tr v-for="(stat, index) in stats" :key="index">
-              <!-- <td>{{ stat.score }}</td>
-              <td>{{ stat.averageSeconds }}</td> -->
+              <td>{{ stat.score }}</td>
+              <td>{{ stat.averageSeconds }}</td>
             </tr>
           </tbody>
         </v-simple-table>
@@ -34,11 +34,11 @@ export default class ScoreStats extends Vue {
 
   stats: any = []
 
-//   refreshStats() {
-//     this.$axios.get('/api/ScoreStats').then((response) => {
-//       this.stats = response.data
-//     })
-//   }
+  refreshStats() {
+    this.$axios.get('/api/ScoreStats').then((response) => {
+      this.stats = response.data
+    })
+  }
 
 }
 </script>
