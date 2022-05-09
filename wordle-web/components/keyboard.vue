@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid="false">
+  <v-container :="false">
     <v-row v-for="(charRow, i) in chars" :key="i" class="keyboard">
       <v-spacer />
       <v-col v-for="char in charRow" :key="char" class="pa-1" lg="auto" md="auto" xs="1">
@@ -70,7 +70,6 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
-import { colors } from 'vuetify/lib'
 import { Letter, LetterStatus } from '~/scripts/letter'
 import { WordleGame } from '~/scripts/wordleGame'
 

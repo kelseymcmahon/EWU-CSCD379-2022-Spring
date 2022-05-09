@@ -37,7 +37,6 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import { WordleGame } from '~/scripts/wordleGame'
-import { Letter } from '~/scripts/letter'
 
 @Component
 export default class ValidWords extends Vue {

@@ -7,7 +7,7 @@
           <p>
             This game was created as a class project at Eastern Washington
             University. The creative concept for Generic Word Game was inspired
-            by my great instructor Meg!
+            by my great instructor Meg! This is coming from branch!
           </p>
         </v-card-text>
         <v-card-actions>
@@ -16,11 +16,6 @@
           <v-btn color="primary" nuxt to="/"> Play the Game</v-btn>
           <v-spacer />
         </v-card-actions>
-        <v-card-text>
-          <p>
-            This is coming from main!
-          </p>
-        </v-card-text>
       </v-card>
     </v-col>
   </v-row>
