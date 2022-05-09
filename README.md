@@ -1,5 +1,8 @@
 # EWU-CSCD378-2022-Spring
 
+## App link
+https://red-desert-0f3146210.1.azurestaticapps.net/
+
 ## Assignment 3
 
 The purpose of this assignment is to solidify your learning of:
