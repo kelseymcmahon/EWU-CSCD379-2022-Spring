@@ -13,27 +13,22 @@ namespace Wordle.api.Tests
             LeaderboardServiceMemory service = new();
 
             Assert.AreEqual(3, service.GetScores().Count());
-            
         }
 
         [TestMethod]
-        public void AddNewPlayer()
+        public void AddScore_AddsNewPlayer()
         {
-            LeaderboardServiceMemory service = new();
-
-            service.AddScore(new GameScore(1, "Leona"));
-            service.AddScore(new GameScore(2, "Leona"));
-            service.AddScore(new GameScore(20, "Leona"));
+            LeaderboardServiceMemory sut = new();
+            sut.AddScore(new GameScore(1, "test"));
+            Assert.AreEqual(3, sut.GetScores().Count());
         }
 
         [TestMethod]
-        public void AddScore()
+        public void AddScore_UpdatesExistingPlayer()
         {
-            LeaderboardServiceMemory service = new();
-
-            service.AddScore(new GameScore(60, "Kelsey"));
-
-            Assert.AreEqual(26, service.GetScores().First(x => x.Name == "Kelsey").NumberGames);
+            LeaderboardServiceMemory sut = new();
+            sut.AddScore(new GameScore(5, "Ralph"));
+            Assert.AreEqual(31, sut.GetScores().First(x => x.Name == "Ralph").NumberGames);
         }
     }
 }

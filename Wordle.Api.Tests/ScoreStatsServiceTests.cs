@@ -28,7 +28,6 @@ namespace Wordle.Api.Tests
         public void GetScoreStats()
         {
             ScoreStatsService sut = new ScoreStatsService(_context);
-
             Assert.AreEqual(6, sut.GetScoreStats().Count());
         }
 
