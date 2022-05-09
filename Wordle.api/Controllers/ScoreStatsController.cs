@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Wordle.api.Services;
 using Wordle.api.Data;
 
 namespace Wordle.api.Controllers;
 
-[ApiController]
 [Route("api/[controller]")]
+[ApiController]
 public class ScoreStatsController : ControllerBase
 {
     private readonly ScoreStatsService _service;
@@ -20,7 +21,6 @@ public class ScoreStatsController : ControllerBase
     public IEnumerable<ScoreStat> Get()
     {
         return _service.GetScoreStats();
-
     }
 
     //Whenever you are doing a post, it must take in an object of the items you want to post

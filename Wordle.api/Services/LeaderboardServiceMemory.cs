@@ -10,9 +10,9 @@ public class LeaderboardServiceMemory : ILeaderboardService
         {
             List<Score> results = new();
 
-            _scores.Add(new Score("Kelsey", 25, 4.6));
             _scores.Add(new Score("Ralph", 30, 3.4));
             _scores.Add(new Score("Gene", 50, 4.1));
+            _scores.Add(new Score("Hildagaurd", 25, 2.6));
         };
     }
 

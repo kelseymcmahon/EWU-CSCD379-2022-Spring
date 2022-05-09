@@ -24,7 +24,7 @@ public class LeaderboardController
 
         List<Score> results = new()
         {
-            new Score("Kelsey", 25, 2.6),
+            new Score("Hildagaurd", 25, 2.6),
             new Score("Ralph", 30, 3.4),
             new Score("Gene", 50, 4.1),
         };
