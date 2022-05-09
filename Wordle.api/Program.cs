@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//Change CORS policy
+//Change CORS policy here
 
 string allowance = "AllowAll";
 
