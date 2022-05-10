@@ -67,7 +67,7 @@ Add leaderboard to the application
 - Save should be done with an Axios Post ❌✅
 
 **4. Create a Leaderboard Page** ❌✅
-- Create a /leaderboard page in the application that shows the top scores ❌✅
+- Create a /leaderboard page in the application that shows the top scores ✅
 - Use Axios to call the leaderboard API ❌✅
 - Make a nice display of the returned data ❌✅
 - Add a link on the front page to access the leaderboard ❌✅
