@@ -22,12 +22,14 @@ public class LeaderboardController
     {
         _logger.LogInformation("LeaderboardController.Get()");
 
-        List<Score> results = new()
-        {
-            new Score("Hildagaurd", 25, 2.6),
-            new Score("Ralph", 30, 3.4),
-            new Score("Gene", 50, 4.1),
-        };
+        //List<Score> results = new()
+        //{
+        //    new Score("Hildagaurd", 25, 2.6),
+        //    new Score("Ralph", 30, 3.4),
+        //    new Score("Gene", 50, 4.1),
+        //};
+
+        List<Score> results = _leaderboardService.GetScores().ToList();
 
         return results;
     }

@@ -25,11 +25,15 @@ public class LeaderboardServiceMemory : ILeaderboardService
             score.AverageGuesses = ((score.NumberGames * score.AverageGuesses)
                     + gameScore.Score) / ++score.NumberGames;
         }
+        else
+        {
+            //_scores.Add(new Score(gameScore.Name, gameScore.Score., ));
+        }
     }
 
     public IEnumerable<Score> GetScores()
     {
-        return _scores;
+        return _scores.OrderBy(x => x.NumberGames);
     }
 }
 

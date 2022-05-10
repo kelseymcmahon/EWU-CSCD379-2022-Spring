@@ -41,7 +41,7 @@ public class ScoreStatsService
     {
         if (!context.ScoreStats.Any())
         {
-            for (int i = 1; i <= 6; i++)
+            for (int i = 1; i <= 10; i++)
             {
                 context.ScoreStats.Add(new ScoreStat()
                 {
