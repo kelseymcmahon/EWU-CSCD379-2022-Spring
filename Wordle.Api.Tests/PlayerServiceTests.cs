@@ -28,7 +28,23 @@ public class PlayerServiceTests
     public void GetPlayers()
     {
         PlayerService service = new PlayerService(_context);
-        Assert.AreEqual(10, service.GetPlayers().Count());
+        Assert.AreEqual(3, service.GetPlayers().Count());
+    }
+
+    [TestMethod]
+    public void Update_AddsNewPlayer()
+    {
+        PlayerService service = new PlayerService(_context);
+        service.Update("Kelsey", 1, 5);
+        Assert.AreEqual("Kelsey", service.GetPlayers().First(x => x.Name == "Kelsey").Name);
+        //Assert.AreEqual(11, service.GetPlayers().First(x => x.Name == "Kelsey").GameCount);
+        Assert.AreEqual(2, service.GetPlayers().First(x => x.Name == "Kelsey").AverageAttempts);
+    }
+
+    [TestMethod]
+    public void Update_UpdatesCurrentPlayer()
+    {
+
     }
 }
 

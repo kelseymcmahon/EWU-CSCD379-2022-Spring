@@ -18,31 +18,30 @@ public class PlayerService
         return result;
     }
 
-    public void Update(string name, int gameCount, double averageAttempts)
+    public void Update(string name, int gameCount, double attemptNumber)
     {
-        if (averageAttempts < 0 || averageAttempts > 6)
+        if (attemptNumber < 0 || attemptNumber > 6)
         {
             throw new ArgumentException("Score must be between 1 and 6");
         }
 
-        //Get the score that we want to update
-        //find the row where the var scoreStat = the item in the first attribute
-        var playerID = _context.Players.First(x => x.Name == name);
+        //chcek if the payer name is in the list
+        if(_context.Players.Where(x => x.Name == name).Any())
+        {
+            var playerID = _context.Players.First(x => x.Name == name);
+            playerID.GameCount = playerID.GameCount + 1;
+            playerID.AverageAttempts = Math.Round(playerID.AverageAttempts + attemptNumber / playerID.GameCount, 2);
+        }
 
         //if a player is not found, we need to add it
-        if(playerID == null)
+        else
         {
             _context.Players.Add(new Player()
             {
                 Name = name,
                 GameCount = gameCount,
-                AverageAttempts = averageAttempts
+                AverageAttempts = attemptNumber
             });
-        }
-        else
-        {
-            playerID.GameCount++;
-            playerID.AverageAttempts = playerID.AverageAttempts + averageAttempts / playerID.GameCount;
         }
         
         //After we make our changes, we need to save the changes to the DB
@@ -53,17 +52,37 @@ public class PlayerService
     {
         if (!context.Players.Any())
         {
-            for (int i = 1; i <= 10; i++)
+            context.Players.Add(new Player()
             {
-                context.Players.Add(new Player()
-                {
-                    Name = "",
-                    GameCount = 0,
-                    AverageAttempts = 0
-                });
-            }
-            context.SaveChanges();
+                Name = "Kelsey",
+                GameCount = 10,
+                AverageAttempts = 2.3
+            });
+
+            context.Players.Add(new Player()
+            {
+                Name = "Leona",
+                GameCount = 5,
+                AverageAttempts = 3.0
+            });
+
+            context.Players.Add(new Player()
+            {
+                Name = "Gray",
+                GameCount = 3,
+                AverageAttempts = 4.0
+            });
         }
+
+        //used to clear data 
+        //var rows = from o in context.Players
+        //           select o;
+        //foreach (var row in rows)
+        //{
+        //    context.Players.Remove(row);
+        //}
+
+        context.SaveChanges();
     }
 }
 

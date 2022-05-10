@@ -22,8 +22,8 @@ namespace Wordle.Api.Tests
             _context = new AppDbContext(contextOptions.Options);
             _context.Database.Migrate();
             ScoreStatsService.Seed(_context);
-
         }
+
         [TestMethod]
         public void GetScoreStats()
         {

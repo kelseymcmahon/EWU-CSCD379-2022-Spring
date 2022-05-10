@@ -28,6 +28,9 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(conn
 //Add a scope for ScoreStatsService in ASP.net core
 builder.Services.AddScoped<ScoreStatsService>();
 
+//Add a scope for ScoreStatsService in ASP.net core
+builder.Services.AddScoped<PlayerService>();
+
 //build the app
 var app = builder.Build();
 
