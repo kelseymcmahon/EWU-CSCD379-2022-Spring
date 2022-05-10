@@ -6,7 +6,7 @@ https://red-desert-0f3146210.1.azurestaticapps.net/
 
 ## Wordle API Link
 
-https://wordle-api-scoreboard.azurewebsites.net/
+https://wordle-api-scoreboard.azurewebsites.net/swagger/index.html
 
 ## Build Setup
 
