@@ -129,7 +129,7 @@ describe('getWildcardWords Test', () => {
   test('Get list of size 0 when no word is sent', () => {
     const game = new WordleGame('DISCO')
     expect(game.state).toBe(GameState.Active)
-    let wordList = game.getWildcardWords()
+    const wordList = game.getWildcardWords()
     expect(wordList.length).toBe(0)
   })
 })

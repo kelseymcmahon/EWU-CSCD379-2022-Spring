@@ -1,4 +1,4 @@
-import { LetterStatus, Letter } from './letter'
+import { LetterStatus } from './letter'
 import { Word } from './word'
 import { WordsService } from './wordsService'
 

@@ -1,5 +1,13 @@
 <template>
   <v-container fluid fill-height justify-center>
+
+    <v-btn plain @click="leaderboard=true">
+      <v-icon primary>
+        mdi-account
+      </v-icon>
+      {{ playerName }}
+    </v-btn>
+
     <v-alert v-if="wordleGame.gameOver" width="80%" :type="gameResult.type">
       {{ gameResult.text }}
       <v-btn class="ml-2" @click="resetGame"> Play Again? </v-btn>
@@ -23,6 +31,7 @@ import { Word } from '~/scripts/word'
 export default class Game extends Vue {
   word: string = WordsService.getRandomWord()
   wordleGame = new WordleGame(this.word)
+  playerName = "Guest"
 
   resetGame() {
     this.word = WordsService.getRandomWord()
