@@ -28,7 +28,7 @@ public class PlayerController : ControllerBase
     [HttpPost]
     public IActionResult Post([FromBody] PlayerPost player)
     {
-        _service.Update(player.Name, player.GameCount, player.AverageAttempts);
+        _service.Update(player.Name, player.GameCount, player.AverageAttempts, player.AverageSeconds);
         return Ok();
     }
 
@@ -39,6 +39,7 @@ public class PlayerController : ControllerBase
         public string Name { get; set; }
         public int GameCount { get; set; }
         public double AverageAttempts { get; set; }
+        public double AverageSeconds { get; set; }
     }
 }
 

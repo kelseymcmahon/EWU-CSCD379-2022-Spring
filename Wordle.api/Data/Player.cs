@@ -8,6 +8,7 @@ public class Player
     public string Name { get; set; } = null!;
     public int GameCount { get; set; }
     public double AverageAttempts { get; set; }
+    public double AverageSeconds { get; set; }
 
     public Player Clone()
     {
@@ -17,6 +18,7 @@ public class Player
             Name = Name,
             GameCount = GameCount,
             AverageAttempts = AverageAttempts,
+            AverageSeconds = AverageSeconds
         };
     }
 }

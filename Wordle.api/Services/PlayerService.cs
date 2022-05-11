@@ -18,7 +18,7 @@ public class PlayerService
         return result;
     }
 
-    public void Update(string name, int gameCount, double attemptNumber)
+    public void Update(string name, int gameCount, double attemptNumber, double seconds)
     {
         if (attemptNumber < 0 || attemptNumber > 6)
         {
@@ -29,8 +29,10 @@ public class PlayerService
         if(_context.Players.Where(x => x.Name == name).Any())
         {
             var playerID = _context.Players.First(x => x.Name == name);
-            playerID.GameCount = playerID.GameCount + 1;
-            playerID.AverageAttempts = Math.Round(playerID.AverageAttempts + attemptNumber / playerID.GameCount, 2);
+            int currentGameCount = playerID.GameCount;
+            playerID.GameCount++;
+            playerID.AverageAttempts = Math.Round((currentGameCount * playerID.AverageAttempts + attemptNumber) / playerID.GameCount, 2);
+            playerID.AverageSeconds = (currentGameCount * playerID.AverageSeconds + seconds) / playerID.GameCount;
         }
 
         //if a player is not found, we need to add it
@@ -40,7 +42,8 @@ public class PlayerService
             {
                 Name = name,
                 GameCount = gameCount,
-                AverageAttempts = attemptNumber
+                AverageAttempts = attemptNumber,
+                AverageSeconds = seconds
             });
         }
         
