@@ -1,12 +1,28 @@
 <template>
   <v-container fluid fill-height justify-center>
 
-    <v-btn plain @click="leaderboard=true">
+    <v-btn plain @click="dialog = true">
       <v-icon primary>
         mdi-account
       </v-icon>
       {{ playerName }}
     </v-btn>
+
+    <v-dialog v-model="dialog" width="450">
+      <v-card> 
+        <v-card-title>Enter Your Name!</v-card-title>
+        <v-card-text>
+         Add you name to our score board so you can save your game scores!
+         <v-text-field v-model=playerName></v-text-field>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn> 
+            Submit
+          </v-btn>
+          <v-btn @click="dialog=false"> I prefer to remain nameless </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
     <v-alert v-if="wordleGame.gameOver" width="80%" :type="gameResult.type">
       {{ gameResult.text }}
@@ -32,6 +48,7 @@ export default class Game extends Vue {
   word: string = WordsService.getRandomWord()
   wordleGame = new WordleGame(this.word)
   playerName = "Guest"
+  dialog = false
 
   resetGame() {
     this.word = WordsService.getRandomWord()
