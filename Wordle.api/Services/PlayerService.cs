@@ -15,7 +15,7 @@ public class PlayerService
     public IEnumerable<Player> GetPlayers()
     {
         var result = _context.Players.OrderBy(x => x.Name);
-        return result;
+        return result.Take(10);
     }
 
     public void Update(string name, int gameCount, double attemptNumber)
@@ -73,14 +73,6 @@ public class PlayerService
                 AverageAttempts = 4.0
             });
         }
-
-        //used to clear data 
-        //var rows = from o in context.Players
-        //           select o;
-        //foreach (var row in rows)
-        //{
-        //    context.Players.Remove(row);
-        //}
 
         context.SaveChanges();
     }
