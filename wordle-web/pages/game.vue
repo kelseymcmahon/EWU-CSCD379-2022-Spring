@@ -16,7 +16,7 @@
          <v-text-field v-model=playerName></v-text-field>
         </v-card-text>
         <v-card-actions>
-          <v-btn> 
+          <v-btn @click="addPlayer"> 
             Submit
           </v-btn>
           <v-btn @click="dialog=false"> I prefer to remain nameless </v-btn>
@@ -27,6 +27,7 @@
     <v-alert v-if="wordleGame.gameOver" width="80%" :type="gameResult.type">
       {{ gameResult.text }}
       <v-btn class="ml-2" @click="resetGame"> Play Again? </v-btn>
+      <v-btn class="ml-2" @click="addStats" v-if="wordleGame.gameWon"> Add Score To Player Stats </v-btn>
     </v-alert>
 
     <game-board :wordle-game="wordleGame" />
@@ -71,6 +72,30 @@ export default class Game extends Vue {
       return word.letters[index - 1]?.char ?? ''
     }
     return ''
+  }
+
+  addStats() {
+    if(this.playerName === "Guest") {
+      this.dialog = true;
+    }
+    else {
+      this.$axios.post('/api/Player', {
+      name: this.playerName,
+      gameCount: 1,
+      averageAttempts: this.wordleGame.guessNumber
+      })
+    }
+    
+  }
+
+  addPlayer() {
+    this.$axios.post('/api/Player', {
+      name: this.playerName,
+      gameCount: 0,
+      averageAttempts: 0
+      })
+
+      this.dialog = false
   }
 }
 </script>

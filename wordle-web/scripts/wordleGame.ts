@@ -13,6 +13,7 @@ export class WordleGame {
   words: Word[] = []
   state: GameState = GameState.Active
   readonly maxGuesses = 6
+  guessNumber = 0
 
   constructor(word: string) {
     this.words.push(new Word())
@@ -25,6 +26,15 @@ export class WordleGame {
 
   get gameOver(): Boolean {
     return this.state === GameState.Won || this.state === GameState.Lost
+  }
+
+  get gameWon(): Boolean {
+    if(this.state === GameState.Won) {
+      return true
+    }
+    else {
+      return false
+    }
   }
 
   get correctChars() {
@@ -51,10 +61,13 @@ export class WordleGame {
 
   submitWord() {
     if (this.currentWord.evaluateWord(this.word)) {
+      this.guessNumber++
       this.state = GameState.Won
     } else if (this.words.length === this.maxGuesses) {
+      this.guessNumber++
       this.state = GameState.Lost
     } else {
+      this.guessNumber++
       this.words.push(new Word())
     }
   }
