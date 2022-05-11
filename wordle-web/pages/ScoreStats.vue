@@ -10,16 +10,18 @@
             <tr>
               <th>#</th>
               <th>Name</th>
-              <th>Score</th>
-              <th>Avg. Seconds</th>
+              <th>Games</th>
+              <th>Average Attempts</th>
+              <th>Average Seconds</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(stat, index) in stats" :key="index">
-              <td>{{ index }}</td>
+              <td>{{ index + 1 }}</td>
               <td>{{ stat.name }}</td>
               <td>{{ stat.gameCount }}</td>
               <td>{{ stat.averageAttempts }}</td>
+              <td>{{ stat.averageSeconds }}</td>
             </tr>
           </tbody>
         </v-simple-table>
@@ -37,6 +39,12 @@ import { Component, Vue } from 'vue-property-decorator'
 export default class ScoreStats extends Vue {
 
   stats: any = []
+
+  mounted() {
+    this.$axios.get('/api/Player').then((response) => {
+      this.stats = response.data
+    })
+  }
 
   refreshStats() {
     this.$axios.get('/api/Player').then((response) => {

@@ -26,10 +26,12 @@
 
     <v-alert v-if="wordleGame.gameOver" width="80%" :type="gameResult.type">
       {{ gameResult.text }}
+      {{ setGameTime() }}
       <v-btn class="ml-2" @click="resetGame"> Play Again? </v-btn>
-      <v-btn class="ml-2" @click="addStats" v-if="wordleGame.gameWon"> Add Score To Player Stats </v-btn>
+      <v-btn class="ml-2" @click="addStats" v-if="wordleGame.gameWon" :disabled=statAdded> Add Score To Player Stats </v-btn>
+      
     </v-alert>
-
+    
     <game-board :wordle-game="wordleGame" />
 
     <keyboard :wordle-game="wordleGame" />
@@ -50,10 +52,14 @@ export default class Game extends Vue {
   wordleGame = new WordleGame(this.word)
   playerName = "Guest"
   dialog = false
+  startTime = 0
+  finalTime = 0
+  statAdded = false;
 
   resetGame() {
     this.word = WordsService.getRandomWord()
     this.wordleGame = new WordleGame(this.word)
+    this.statAdded = false
   }
 
   get gameResult() {
@@ -63,6 +69,7 @@ export default class Game extends Vue {
     if (this.wordleGame.state === GameState.Lost) {
       return { type: 'error', text: `You lost... :( The word was ${this.word}` }
     }
+    this.setGameTime()
     return { type: '', text: '' }
   }
 
@@ -82,20 +89,28 @@ export default class Game extends Vue {
       this.$axios.post('/api/Player', {
       name: this.playerName,
       gameCount: 1,
-      averageAttempts: this.wordleGame.guessNumber
+      averageAttempts: this.wordleGame.guessNumber,
+      averageSeconds: this.finalTime
       })
+      this.statAdded = true
     }
-    
   }
 
   addPlayer() {
     this.$axios.post('/api/Player', {
       name: this.playerName,
       gameCount: 0,
-      averageAttempts: 0
+      averageAttempts: 0,
+      averageSeconds: 0
       })
 
       this.dialog = false
+  }
+
+  setGameTime() {
+    let now = new Date()
+    this.finalTime = now.getSeconds() 
+    console.log("End time " + this.finalTime)
   }
 }
 </script>
