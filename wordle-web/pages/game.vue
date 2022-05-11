@@ -103,7 +103,6 @@ export default class Game extends Vue {
       averageAttempts: 0,
       averageSeconds: 0
       })
-
       this.dialog = false
   }
 
