@@ -13,7 +13,7 @@
         <v-card-actions>
           <v-spacer />
           <v-btn color="primary" nuxt to="/"> Back Home </v-btn>
-          <v-btn color="primary" nuxt to="/"> Play the Game</v-btn>
+          <v-btn color="secondary" nuxt to="/"> Play the Game</v-btn>
           <v-spacer />
         </v-card-actions>
       </v-card>

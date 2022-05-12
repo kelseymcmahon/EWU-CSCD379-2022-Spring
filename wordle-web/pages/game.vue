@@ -1,37 +1,35 @@
 <template>
-  <v-container fluid fill-height justify-center>
-
-    <v-btn plain @click="dialog = true">
-      <v-icon primary>
-        mdi-account
-      </v-icon>
+  <v-container fluid fill-height>
+    <v-btn outlined absolute top right color="primary" @click="dialog = true">
+      <v-icon primary> mdi-account </v-icon>
       {{ playerName }}
     </v-btn>
 
-    <v-dialog v-model="dialog" width="450">
-      <v-card> 
+    <v-dialog v-model="dialog" width="450" persistent>
+      <v-card>
         <v-card-title>Enter Your Name!</v-card-title>
         <v-card-text>
-         Add you name to our score board so you can save your game scores!
-         <v-text-field v-model=playerName></v-text-field>
+          Add you name to our score board so you can save your game scores!
+          <v-text-field v-model="playerName"></v-text-field>
         </v-card-text>
         <v-card-actions>
-          <v-btn @click="addPlayer"> 
-            Submit
-          </v-btn>
-          <v-btn @click="dialog=false"> I prefer to remain nameless </v-btn>
+          <v-btn @click="addPlayer"> Submit </v-btn>
+          <v-btn @click="dialog = false"> I prefer to remain nameless </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
 
-    <v-alert v-if="wordleGame.gameOver" width="80%" :type="gameResult.type">
-      {{ gameResult.text }}
-      {{ setGameTime() }}
-      <v-btn class="ml-2" @click="resetGame"> Play Again? </v-btn>
-      <v-btn class="ml-2" @click="addStats" v-if="wordleGame.gameWon" :disabled=statAdded> Add Score To Player Stats </v-btn>
-      
-    </v-alert>
-    
+    <v-row>
+      <v-spacer />
+      <v-alert v-if="wordleGame.gameOver" :type="gameResult.type" width="450">
+        {{ gameResult.text }}
+        {{ setGameTime() }}
+        {{ addStats() }}
+        <v-btn class="ml-2" @click="resetGame"> Play Again? </v-btn>
+      </v-alert>
+      <v-spacer />
+    </v-row>
+
     <game-board :wordle-game="wordleGame" />
 
     <keyboard :wordle-game="wordleGame" />
@@ -50,16 +48,13 @@ import { Word } from '~/scripts/word'
 export default class Game extends Vue {
   word: string = WordsService.getRandomWord()
   wordleGame = new WordleGame(this.word)
-  playerName = "Guest"
+  playerName = 'Guest'
   dialog = false
-  startTime = 0
   finalTime = 0
-  statAdded = false;
 
   resetGame() {
     this.word = WordsService.getRandomWord()
     this.wordleGame = new WordleGame(this.word)
-    this.statAdded = false
   }
 
   get gameResult() {
@@ -82,18 +77,12 @@ export default class Game extends Vue {
   }
 
   addStats() {
-    if(this.playerName === "Guest") {
-      this.dialog = true;
-    }
-    else {
-      this.$axios.post('/api/Player', {
+    this.$axios.post('/api/Player', {
       name: this.playerName,
       gameCount: 1,
       averageAttempts: this.wordleGame.guessNumber,
-      averageSeconds: this.finalTime
-      })
-      this.statAdded = true
-    }
+      averageSeconds: this.finalTime,
+    })
   }
 
   addPlayer() {
@@ -101,15 +90,14 @@ export default class Game extends Vue {
       name: this.playerName,
       gameCount: 0,
       averageAttempts: 0,
-      averageSeconds: 0
-      })
-      this.dialog = false
+      averageSeconds: 0,
+    })
+    this.dialog = false
   }
 
   setGameTime() {
-    let now = new Date()
-    this.finalTime = now.getSeconds() 
-    console.log("End time " + this.finalTime)
+    const now = new Date()
+    this.finalTime = now.getSeconds()
   }
 }
 </script>

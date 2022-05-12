@@ -14,6 +14,9 @@
         <v-card-actions>
           <v-spacer />
           <v-btn color="primary" nuxt to="/Game"> Play the game! </v-btn>
+          <v-btn color="secondary" nuxt to="/PlayerScores">
+            Player Scores
+          </v-btn>
           <v-spacer />
         </v-card-actions>
       </v-card>

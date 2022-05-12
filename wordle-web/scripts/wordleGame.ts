@@ -29,10 +29,9 @@ export class WordleGame {
   }
 
   get gameWon(): Boolean {
-    if(this.state === GameState.Won) {
+    if (this.state === GameState.Won) {
       return true
-    }
-    else {
+    } else {
       return false
     }
   }

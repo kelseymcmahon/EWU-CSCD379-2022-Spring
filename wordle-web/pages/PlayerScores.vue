@@ -36,8 +36,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 @Component({})
-export default class ScoreStats extends Vue {
-
+export default class PlayerScores extends Vue {
   stats: any = []
 
   mounted() {
@@ -51,6 +50,5 @@ export default class ScoreStats extends Vue {
       this.stats = response.data
     })
   }
-
 }
 </script>

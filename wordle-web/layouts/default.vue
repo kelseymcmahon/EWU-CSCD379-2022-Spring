@@ -34,11 +34,11 @@
             <v-list-item-title>Game</v-list-item-title>
           </v-list-item>
 
-          <v-list-item nuxt to="/ScoreStats">
+          <v-list-item nuxt to="/PlayerScores">
             <v-list-item-icon>
               <v-icon>mdi-equalizer</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Score Stats</v-list-item-title>
+            <v-list-item-title>Player Scores</v-list-item-title>
           </v-list-item>
 
           <v-list-item nuxt to="/About">
