@@ -2,8 +2,10 @@
   <v-app light>
     <v-app-bar :clipped-left="clipped" fixed app color="nav" height="50">
       <router-link to="/" class="title-bar-text">
-        <v-toolbar-title>
-          <v-icon color="secondary">mdi-cat</v-icon> Generic Word Game
+        <v-toolbar-title class="flex text-center">
+          <!-- <v-icon color="secondary">mdi-cat</v-icon>
+          Generic Word Game -->
+          <game-logo />
         </v-toolbar-title>
       </router-link>
       <v-spacer />

@@ -1,10 +1,19 @@
 <template>
+<div>
+
+  <v-row justify="center" align="center">
+    <v-col cols="12" sm="8" md="6" justify="center" align="center">
+
+        <v-spacer />
+        <game-logo-text />
+        <v-spacer />
+
+    </v-col>
+  </v-row>
+
   <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="6">
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to Generic Word Game!
-        </v-card-title>
+      <v-card class="pa-10">
         <v-card-text>
           <p>
             This game is an original word game that is fun for the whole family!
@@ -22,6 +31,7 @@
       </v-card>
     </v-col>
   </v-row>
+</div>
 </template>
 
 <script lang="ts">

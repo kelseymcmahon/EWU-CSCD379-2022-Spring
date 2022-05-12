@@ -1,6 +1,6 @@
 <template>
   <v-container fluid fill-height justify-center>
-    <v-card>
+    <v-card class="pa-10">
       <v-card-title>
         <h1 class="display-1">Player Scores</h1>
       </v-card-title>

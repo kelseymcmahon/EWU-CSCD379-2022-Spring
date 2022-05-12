@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="6">
-      <v-card>
+      <v-card class="pa-10"> 
         <v-card-title class="headline"> About This Game </v-card-title>
         <v-card-text>
           <p>
