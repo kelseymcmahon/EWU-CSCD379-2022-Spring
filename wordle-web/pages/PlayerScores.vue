@@ -1,11 +1,11 @@
 <template>
   <v-container fluid fill-height justify-center>
-    <v-card class="pa-10">
+    <v-card class="pa-10" :loading=getData>
       <v-card-title>
         <h1 class="display-1">Player Scores</h1>
       </v-card-title>
       <v-card-text>
-        <v-simple-table>
+        <v-simple-table loading >
           <thead>
             <tr>
               <th>#</th>
@@ -17,7 +17,18 @@
           </thead>
           <tbody>
             <tr v-for="(stat, index) in stats" :key="index">
-              <td>{{ index + 1 }}</td>
+              <td>
+                {{ index + 1 }}  
+                <v-icon v-if="index === 0" color="#DAA520">
+                  mdi-crown
+                </v-icon>
+                <v-icon v-if="index === 1" color="#A9A9A9">
+                  mdi-crown
+                </v-icon>
+                <v-icon v-if="index === 2" color="#D2691E">
+                  mdi-crown
+                </v-icon>
+              </td>
               <td>{{ stat.name }}</td>
               <td>{{ stat.gameCount }}</td>
               <td>{{ stat.averageAttempts }}</td>
@@ -38,16 +49,20 @@ import { Component, Vue } from 'vue-property-decorator'
 @Component({})
 export default class PlayerScores extends Vue {
   stats: any = []
+  getData = true;
 
   mounted() {
     this.$axios.get('/api/Player').then((response) => {
       this.stats = response.data
+      this.getData = false;
     })
   }
 
   refreshStats() {
+    this.getData = true;
     this.$axios.get('/api/Player').then((response) => {
       this.stats = response.data
+      this.getData = false;
     })
   }
 }
