@@ -32,7 +32,7 @@ public class PlayerService
             int currentGameCount = playerID.GameCount;
             playerID.GameCount++;
             playerID.AverageAttempts = Math.Round((currentGameCount * playerID.AverageAttempts + attemptNumber) / playerID.GameCount, 2);
-            playerID.AverageSeconds = (currentGameCount * playerID.AverageSeconds + seconds) / playerID.GameCount;
+            playerID.AverageSeconds = Math.Round((currentGameCount * playerID.AverageSeconds + seconds) / playerID.GameCount, 2);
         }
 
         //if a player is not found, we need to add it
@@ -48,6 +48,17 @@ public class PlayerService
         }
         
         //After we make our changes, we need to save the changes to the DB
+        _context.SaveChanges();
+    }
+
+    public void RemovePlayer(string name)
+    {
+        //chcek if the payer name is in the list
+        if (_context.Players.Where(x => x.Name == name).Any())
+        {
+            _context.Remove(GetPlayers().First(x => x.Name == name));
+        }
+
         _context.SaveChanges();
     }
 
@@ -76,14 +87,6 @@ public class PlayerService
                 AverageAttempts = 4.0
             });
         }
-
-        //used to clear data 
-        //var rows = from o in context.Players
-        //           select o;
-        //foreach (var row in rows)
-        //{
-        //    context.Players.Remove(row);
-        //}
 
         context.SaveChanges();
     }

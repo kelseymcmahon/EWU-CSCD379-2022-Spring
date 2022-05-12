@@ -66,25 +66,35 @@ public class PlayerServiceTests
     [TestMethod]
     public void GetPlayers()
     {
-        Assert.AreEqual(6, service.GetPlayers().Count());
+        Assert.AreEqual(7, service.GetPlayers().Count());
     }
 
     [TestMethod]
     public void Update_AddsNewPlayer()
     {
-        Player player = service.GetPlayers().First(x => x.Name == "Paul").Clone();
+        service.Update("Hello", 1, 5, 30);
 
-        //double newAverage = Math.Round(player.AverageAttempts + 5 / player.GameCount++, 2);
-        service.Update("Paul", 1, 5, 30);
+        Assert.AreEqual(1, service.GetPlayers().First(x => x.Name == "Hello").GameCount);
+        Assert.AreEqual(5, service.GetPlayers().First(x => x.Name == "Hello").AverageAttempts);
+        Assert.AreEqual(30, service.GetPlayers().First(x => x.Name == "Hello").AverageSeconds);
 
-        Assert.AreEqual(player.GameCount + 1, service.GetPlayers().First(x => x.Name == "Paul").GameCount);
-        Assert.AreEqual(2.55, service.GetPlayers().First(x => x.Name == "Paul").AverageAttempts);
+        service.RemovePlayer("Hello");
     }
 
     [TestMethod]
     public void Update_UpdatesCurrentPlayer()
     {
+        Player player = service.GetPlayers().First(x => x.Name == "Paul").Clone();
 
+        int gameCount = player.GameCount;
+        double averageAttemps = Math.Round((player.GameCount * player.AverageAttempts + 5) / (player.GameCount + 1), 2);
+        double averageSeconds = Math.Round((player.GameCount * player.AverageSeconds + 30) / (player.GameCount + 1), 2);
+
+        service.Update("Paul", 1, 5, 30);
+
+        Assert.AreEqual(gameCount + 1, service.GetPlayers().First(x => x.Name == "Paul").GameCount);
+        Assert.AreEqual(averageAttemps, service.GetPlayers().First(x => x.Name == "Paul").AverageAttempts);
+        Assert.AreEqual(averageSeconds, service.GetPlayers().First(x => x.Name == "Paul").AverageSeconds);
     }
 }
 
