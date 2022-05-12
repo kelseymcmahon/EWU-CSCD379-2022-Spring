@@ -74,7 +74,7 @@ Add leaderboard to the application
 - Add a link to the app bar to access the leaderboard ✅
 
 **5. Unit testing** ✅
-- Tests for the service ❌✅
+- Tests for the service ✅
 - Integration tests for the controller ❌✅ (OPTIONAL)
 
 **6. Deploy site to Azure** ✅
@@ -87,5 +87,5 @@ Add leaderboard to the application
 
 - Unit testing on the client side (3) ❌✅
 - Animate the leaderboard (3) ❌✅
-- Create a logo (3) ❌✅
-- Add Average Seconds to win in score (3) ❌✅
+- Create a logo (3) ✅
+- Add Average Seconds to win in score (3) ✅
