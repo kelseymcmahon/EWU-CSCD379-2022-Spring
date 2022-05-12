@@ -14,7 +14,7 @@ public class PlayerService
 
     public IEnumerable<Player> GetPlayers()
     {
-        var result = _context.Players.OrderBy(x => x.Name);
+        var result = _context.Players.OrderBy(x => x.AverageAttempts);
         return result;
     }
 

@@ -20,7 +20,7 @@ public class PlayerController : ControllerBase
     [HttpGet]
     public IEnumerable<Player> Get()
     {
-        return _service.GetPlayers();
+        return _service.GetPlayers().Take(10);
     }
 
     //Whenever you are doing a post, it must take in an object of the items you want to post
