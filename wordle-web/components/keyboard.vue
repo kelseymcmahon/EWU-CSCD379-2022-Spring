@@ -3,58 +3,49 @@
     <v-row v-for="(charRow, i) in chars" :key="i" class="keyboard">
       <v-spacer />
       <v-col v-for="char in charRow" :key="char" class="pa-1" lg="auto" md="auto" xs="1">
-        <v-card
+        <v-btn
+          height="50"
+          min-width="35"
+          color="primary"
+          :disabled="wordleGame.gameOver"
+          class="font-weight-bold"
+          v-if="i === 2 && char == 'z'"
+          @click="guessWord">
+            Enter
+        </v-btn>
+        <v-btn
           height="50"
           width="35"
-          style="background: linear-gradient(302deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.2));"
+          min-width="35"
           :color="letterColor(char)"
           :disabled="wordleGame.gameOver"
           @click="setLetter(char)"
+          class="text-h6 font-weight-bold"
         >
-          <v-card-text class="letter-card text-center text-h6 font-weight-bold">
             {{ char }}
-          </v-card-text>
-        </v-card>
+        </v-btn>
+        <v-btn
+          height="50"
+          min-width="35"
+          color="primary"
+          :disabled="wordleGame.gameOver"
+          class="text-h6 font-weight-bold"
+          v-if="i === 2 && char == 'm'"
+          @click="setLetter('?')">
+            ?
+        </v-btn>
+        <v-btn
+          height="50"
+          min-width="35"
+          color="primary"
+          :disabled="wordleGame.gameOver"
+          v-if="i === 2 && char == 'm'"
+          @click="removeLetter">
+            <v-icon>mdi-backspace</v-icon>
+        </v-btn>
       </v-col>
       <v-spacer />
     </v-row>
-
-    <v-row align="center" class="pa-2">
-      <v-spacer />
-      <v-btn
-        :disabled="wordleGame.gameOver"
-        style="background: linear-gradient(302deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.2));"
-        color="primary"
-        class="ms-1 text-h6"
-        @click="setLetter('?')"
-      >
-        ?
-      </v-btn>
-
-      <valid-words :wordle-game="wordleGame" />
-
-      <v-btn
-        :disabled="wordleGame.gameOver"
-        style="background: linear-gradient(302deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.2));"
-        color="primary"
-        class="ms-1"
-        @click="guessWord"
-      >
-        Guess
-      </v-btn>
-
-      <v-btn
-        :disabled="wordleGame.gameOver"
-        style="background: linear-gradient(302deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.2));"
-        color="primary"
-        class="ms-1"
-        @click="removeLetter"
-      >
-        <v-icon>mdi-backspace</v-icon>
-      </v-btn>
-      <v-spacer />
-    </v-row>
-
     <v-dialog v-model="dialog" width="450">
       <v-card color="error" dark>
         <v-container>

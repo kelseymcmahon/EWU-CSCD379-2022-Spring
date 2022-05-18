@@ -1,21 +1,14 @@
 <template>
   <div>
     <v-btn
+      class="absolute-bottom-right"
       :disabled="wordleGame.gameOver"
-      style="
-        background: linear-gradient(
-          302deg,
-          rgba(0, 0, 0, 0.2),
-          rgba(255, 255, 255, 0.2)
-        );
-      "
       color="primary"
-      class="ms-1"
-      @click="toggleDialog"
-    >
-      Valid Words {{ validWordCount }}
+      @click="toggleDialog">
+        <v-icon>mdi-cat</v-icon>
+        {{ validWordCount }}
+        Valid Words
     </v-btn>
-
     <v-dialog v-model="dialog" width="450">
       <v-card>
         <v-container>
@@ -62,3 +55,11 @@ export default class ValidWords extends Vue {
   }
 }
 </script>
+
+<style>
+.absolute-bottom-right {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+</style>

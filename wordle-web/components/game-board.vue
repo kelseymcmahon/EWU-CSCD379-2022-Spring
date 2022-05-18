@@ -9,10 +9,12 @@
       <v-spacer />
       <v-col v-for="index in wordleGame.currentWord.maxLetters" :key="index">
         <v-card
+          flat
+          tile
           height="50"
           width="50"
-          style="background: linear-gradient(302deg, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.2));"
           :color="letterColor(getLetter(row, index))"
+          style="border: 2px solid lightgray"
           >
             <v-card-text
               class="letter-card text-center text-h5 font-weight-bold"
@@ -73,5 +75,4 @@ export default class GameBoard extends Vue {
 .v-card__title {
   padding: 10px;
 }
-
 </style>

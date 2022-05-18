@@ -5,6 +5,8 @@
       {{ playerName }}
     </v-btn>
 
+    <valid-words :wordle-game="wordleGame" />
+    
     <v-dialog v-model="dialog" width="450" persistent>
       <v-card>
         <v-card-title>Enter Your Name!</v-card-title>
