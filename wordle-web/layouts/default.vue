@@ -1,18 +1,17 @@
 <template>
   <v-app light>
-    <v-app-bar :clipped-left="clipped" fixed app color="nav" height="50">
-      <router-link to="/" class="title-bar-text">
-        <v-toolbar-title class="flex text-center">
-          <!-- <v-icon color="secondary">mdi-cat</v-icon>
-          Generic Word Game -->
-          <game-logo />
-        </v-toolbar-title>
-      </router-link>
-      <v-spacer />
-      <settings-dialog />
-      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-    </v-app-bar>
-
+    <v-app-bar
+        color="#F5F5F5"
+        dense
+        max-height="50"
+      >  
+        <router-link to="/">
+        <game-logo  />
+        </router-link>
+        <v-spacer />
+        <settings-dialog />
+        <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+      </v-app-bar>
     <v-main>
       <v-container>
         <Nuxt />

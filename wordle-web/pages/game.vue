@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid fill-height>
+  <v-container fluid fill-height class="pa-0">
     <v-btn outlined absolute top right color="primary" @click="dialog = true">
       <v-icon primary> mdi-account </v-icon>
       {{ playerName }}

@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid="false">
+  <v-container fluid>
     <v-row
       v-for="row in wordleGame.maxGuesses"
       :key="row"
@@ -11,8 +11,8 @@
         <v-card
           flat
           tile
-          height="50"
-          width="50"
+          height="55"
+          width="55"
           :color="letterColor(getLetter(row, index))"
           style="border: 2px solid lightgray"
           >

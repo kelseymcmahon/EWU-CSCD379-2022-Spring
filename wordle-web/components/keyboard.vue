@@ -1,10 +1,10 @@
 <template>
-  <v-container :="false">
+  <v-container>
     <v-row v-for="(charRow, i) in chars" :key="i" class="keyboard">
       <v-spacer />
-      <v-col v-for="char in charRow" :key="char" class="pa-1" lg="auto" md="auto" xs="1">
+      <v-col v-for="char in charRow" :key="char" class="pa-1" lg="auto" md="10" xs="10">
         <v-btn
-          height="50"
+          height="45"
           min-width="35"
           color="primary"
           :disabled="wordleGame.gameOver"
@@ -14,10 +14,11 @@
             Enter
         </v-btn>
         <v-btn
-          height="50"
+          height="45"
           width="35"
           min-width="35"
           :color="letterColor(char)"
+          style="background-color: lightgray"
           :disabled="wordleGame.gameOver"
           @click="setLetter(char)"
           class="text-h6 font-weight-bold"
@@ -25,7 +26,7 @@
             {{ char }}
         </v-btn>
         <v-btn
-          height="50"
+          height="45"
           min-width="35"
           color="primary"
           :disabled="wordleGame.gameOver"
@@ -35,7 +36,7 @@
             ?
         </v-btn>
         <v-btn
-          height="50"
+          height="45"
           min-width="35"
           color="primary"
           :disabled="wordleGame.gameOver"
