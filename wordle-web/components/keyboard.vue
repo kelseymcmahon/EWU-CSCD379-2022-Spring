@@ -1,5 +1,57 @@
 <template>
-  <v-container>
+  <v-container fluid>
+  <v-container fluid v-if="isMobile()">
+    <v-row v-for="(charRow, i) in chars" :key="i" class="keyboard">
+      <v-spacer />
+      <v-col v-for="char in charRow" :key="char" class="pa-1">
+        <v-btn
+          height="37"
+          width="27"
+          color="primary"
+          :disabled="wordleGame.gameOver"
+          class="font-weight-bold"
+          v-if="i === 2 && char == 'z'"
+          @click="guessWord">
+            Enter
+        </v-btn>
+        <v-btn
+          height="37"
+          width="27"
+          min-width="27"
+          :color="letterColor(char)"
+          style="background-color: lightgray"
+          :disabled="wordleGame.gameOver"
+          @click="setLetter(char)"
+          class="text-h7 font-weight-bold"
+        >
+            {{ char }}
+        </v-btn>
+        <v-btn
+          height="37"
+          width="27"
+          min-width="27"
+          color="primary"
+          :disabled="wordleGame.gameOver"
+          class="text-h7 font-weight-bold"
+          v-if="i === 2 && char == 'm'"
+          @click="setLetter('?')">
+            ?
+        </v-btn>
+        <v-btn
+          height="37"
+          width="35"
+          min-width="35"
+          color="primary"
+          :disabled="wordleGame.gameOver"
+          v-if="i === 2 && char == 'm'"
+          @click="removeLetter">
+            <v-icon>mdi-backspace</v-icon>
+        </v-btn>
+      </v-col>
+      <v-spacer />
+    </v-row>
+  </v-container>
+  <v-container v-if="!isMobile()">
     <v-row v-for="(charRow, i) in chars" :key="i" class="keyboard">
       <v-spacer />
       <v-col v-for="char in charRow" :key="char" class="pa-1" lg="auto" md="10" xs="10">
@@ -47,6 +99,7 @@
       </v-col>
       <v-spacer />
     </v-row>
+
     <v-dialog v-model="dialog" width="450">
       <v-card color="error" dark>
         <v-container>
@@ -57,6 +110,9 @@
         </v-container>
       </v-card>
     </v-dialog>
+
+  </v-container>
+
   </v-container>
 </template>
 
@@ -71,6 +127,10 @@ export default class KeyBoard extends Vue {
   wordleGame!: WordleGame
 
   dialog = false
+
+  isMobile() {
+    return this.$vuetify.breakpoint.smAndDown;
+  }
 
   chars = [
     ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
