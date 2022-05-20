@@ -1,51 +1,50 @@
 <template>
-  <v-container fluid>
-  <v-container fluid v-if="isMobile()">
-    <v-row v-for="(charRow, i) in chars" :key="i" class="keyboard">
+  <v-container fluid class="pa-0">
+  <v-container fluid v-if="isMobile()" class="pa-0">
+    <v-row v-for="(charRow, i) in chars" :key="i" class="keyboard" dense>
       <v-spacer />
-      <v-col v-for="char in charRow" :key="char" class="pa-1">
+      <v-col v-for="char in charRow" :key="char" class="pa-1" cols="1">
         <v-btn
           height="37"
-          width="27"
+          min-width="27"
           color="primary"
           :disabled="wordleGame.gameOver"
-          class="font-weight-bold"
-          v-if="i === 2 && char == 'z'"
+          class="text-h7 font-weight-bold pa-0"
+          v-if="char === 'enter'"
           @click="guessWord">
             Enter
         </v-btn>
         <v-btn
           height="37"
-          width="27"
           min-width="27"
           :color="letterColor(char)"
           style="background-color: lightgray"
           :disabled="wordleGame.gameOver"
           @click="setLetter(char)"
-          class="text-h7 font-weight-bold"
+          class="text-h7 font-weight-bold pa-0"
+          v-if="char !== '?' && char !== 'enter' && char !== 'back'"
         >
             {{ char }}
         </v-btn>
         <v-btn
           height="37"
-          width="27"
           min-width="27"
           color="primary"
           :disabled="wordleGame.gameOver"
-          class="text-h7 font-weight-bold"
-          v-if="i === 2 && char == 'm'"
+          class="text-h7 font-weight-bold pa-0"
+          v-if="char === '?'"
           @click="setLetter('?')">
             ?
         </v-btn>
         <v-btn
           height="37"
-          width="35"
-          min-width="35"
+          min-width="25"
           color="primary"
           :disabled="wordleGame.gameOver"
-          v-if="i === 2 && char == 'm'"
+          class="pa-0"
+          v-if="char === 'back'"
           @click="removeLetter">
-            <v-icon>mdi-backspace</v-icon>
+            <v-icon small>mdi-backspace</v-icon>
         </v-btn>
       </v-col>
       <v-spacer />
@@ -54,26 +53,26 @@
   <v-container v-if="!isMobile()">
     <v-row v-for="(charRow, i) in chars" :key="i" class="keyboard">
       <v-spacer />
-      <v-col v-for="char in charRow" :key="char" class="pa-1" lg="auto" md="10" xs="10">
+      <v-col v-for="char in charRow" :key="char" class="pa-1">
         <v-btn
           height="45"
           min-width="35"
           color="primary"
           :disabled="wordleGame.gameOver"
           class="font-weight-bold"
-          v-if="i === 2 && char == 'z'"
+          v-if="char === 'enter'"
           @click="guessWord">
             Enter
         </v-btn>
         <v-btn
           height="45"
-          width="35"
           min-width="35"
           :color="letterColor(char)"
           style="background-color: lightgray"
           :disabled="wordleGame.gameOver"
           @click="setLetter(char)"
           class="text-h6 font-weight-bold"
+          v-if="char !== '?' && char !== 'enter' && char !== 'back'"
         >
             {{ char }}
         </v-btn>
@@ -83,7 +82,7 @@
           color="primary"
           :disabled="wordleGame.gameOver"
           class="text-h6 font-weight-bold"
-          v-if="i === 2 && char == 'm'"
+          v-if="char === '?'"
           @click="setLetter('?')">
             ?
         </v-btn>
@@ -92,7 +91,7 @@
           min-width="35"
           color="primary"
           :disabled="wordleGame.gameOver"
-          v-if="i === 2 && char == 'm'"
+          v-if="char === 'back'"
           @click="removeLetter">
             <v-icon>mdi-backspace</v-icon>
         </v-btn>
@@ -129,13 +128,13 @@ export default class KeyBoard extends Vue {
   dialog = false
 
   isMobile() {
-    return this.$vuetify.breakpoint.smAndDown;
+    return this.$vuetify.breakpoint.xsOnly;
   }
 
   chars = [
     ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
     ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
-    ['z', 'x', 'c', 'v', 'b', 'n', 'm'],
+    ['enter','z', 'x', 'c', 'v', 'b', 'n', 'm', '?', 'back'],
   ]
 
   setLetter(char: string) {
