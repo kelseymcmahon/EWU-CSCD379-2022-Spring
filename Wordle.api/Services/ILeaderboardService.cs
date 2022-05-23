@@ -1,9 +1,12 @@
-﻿namespace Wordle.api.Services;
+﻿using Wordle.api.Dtos;
 
-public interface ILeaderboardService
+namespace Wordle.api.Services;
+
+public interface ILeaderBoardService
 {
     IEnumerable<Score> GetScores();
     void AddScore(GameScore score);
 }
+
 
 

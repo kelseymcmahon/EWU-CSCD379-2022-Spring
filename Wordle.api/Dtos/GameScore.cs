@@ -1,4 +1,4 @@
-﻿namespace Wordle.api.Services;
+﻿namespace Wordle.api.Dtos;
 
 public class GameScore
 {
@@ -10,5 +10,4 @@ public class GameScore
         Score = score;
         Name = name;
     }
-
 }

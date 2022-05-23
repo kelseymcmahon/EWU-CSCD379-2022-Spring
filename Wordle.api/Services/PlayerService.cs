@@ -2,61 +2,63 @@
 
 namespace Wordle.api.Services;
 
-public class PlayerService
+public class PlayersService
 {
-    //The database var for access
-    private AppDbContext _context;
+    private readonly AppDbContext _context;
 
-    public PlayerService(AppDbContext context)
+    public PlayersService(AppDbContext context)
     {
         _context = context;
     }
 
     public IEnumerable<Player> GetPlayers()
     {
-        var result = _context.Players.OrderBy(x => x.AverageAttempts);
+        var result = _context.Players.OrderBy(x => x.Name);
         return result;
     }
 
-    public void Update(string name, int gameCount, double attemptNumber, double seconds)
+    public IEnumerable<Player> GetTop10Players()
     {
-        if (attemptNumber < 0 || attemptNumber > 6)
+        var result = _context.Players
+            .OrderBy(x => x.AverageAttempts / x.GameCount)
+            .ThenBy(x => x.AverageSecondsPerGame / x.GameCount)
+            .ThenBy(x => x.AverageAttempts)
+            .ThenByDescending(x => x.GameCount)
+            .Take(10);
+        return result;
+    }
+
+    public void Update(string name, int attempts, int seconds)
+    {
+        if (attempts < 1 || attempts > 6)
         {
-            throw new ArgumentException("Score must be between 1 and 6");
+            throw new ArgumentException("attempts not in proper range");
+        }
+        if (seconds < 0)
+        {
+            throw new ArgumentException("seconds not in proper range");
         }
 
-        //chcek if the payer name is in the list
-        if(_context.Players.Where(x => x.Name == name).Any())
-        {
-            var playerID = _context.Players.First(x => x.Name == name);
-            int currentGameCount = playerID.GameCount;
-            playerID.GameCount++;
-            playerID.AverageAttempts = Math.Round((currentGameCount * playerID.AverageAttempts + attemptNumber) / playerID.GameCount, 2);
-            playerID.AverageSeconds = Math.Round((currentGameCount * playerID.AverageSeconds + seconds) / playerID.GameCount, 2);
-        }
+        var player2 = _context.Players;
 
-        //if a player is not found, we need to add it
-        else
+        var player = player2.FirstOrDefault(x => x.Name == name);
+
+
+        if (player == null)
         {
             _context.Players.Add(new Player()
             {
                 Name = name,
-                GameCount = gameCount,
-                AverageAttempts = attemptNumber,
-                AverageSeconds = seconds
+                GameCount = 1,
+                AverageAttempts = attempts,
+                AverageSecondsPerGame = seconds
             });
         }
-        
-        //After we make our changes, we need to save the changes to the DB
-        _context.SaveChanges();
-    }
-
-    public void RemovePlayer(string name)
-    {
-        //chcek if the payer name is in the list
-        if (_context.Players.Where(x => x.Name == name).Any())
+        else
         {
-            _context.Remove(GetPlayers().First(x => x.Name == name));
+            player.AverageSecondsPerGame = (player.AverageSecondsPerGame * player.GameCount + seconds) / (player.GameCount + 1);
+            player.AverageAttempts = (player.AverageAttempts * player.GameCount + attempts) / ++player.GameCount;
+
         }
 
         _context.SaveChanges();
@@ -68,27 +70,13 @@ public class PlayerService
         {
             context.Players.Add(new Player()
             {
-                Name = "Kelsey",
-                GameCount = 10,
-                AverageAttempts = 2.3
+                Name = "Inigo Montoya",
+                GameCount = 2,
+                AverageAttempts = 2,
+                AverageSecondsPerGame = 31
             });
-
-            context.Players.Add(new Player()
-            {
-                Name = "Leona",
-                GameCount = 5,
-                AverageAttempts = 3.0
-            });
-
-            context.Players.Add(new Player()
-            {
-                Name = "Gray",
-                GameCount = 3,
-                AverageAttempts = 4.0
-            });
+            context.SaveChanges();
         }
-
-        context.SaveChanges();
     }
 }
 

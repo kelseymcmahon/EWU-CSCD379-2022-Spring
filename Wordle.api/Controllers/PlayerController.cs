@@ -1,18 +1,16 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Wordle.api.Services;
+﻿using Microsoft.AspNetCore.Mvc;
 using Wordle.api.Data;
+using Wordle.api.Services;
 
-namespace Wordle.api.Controllers;
+namespace Wordle.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class PlayerController : ControllerBase
+public class PlayersController : ControllerBase
 {
-    private readonly PlayerService _service;
+    private readonly PlayersService _service;
 
-    //Get the ScoreStatService in the constructor
-    public PlayerController(PlayerService service)
+    public PlayersController(PlayersService service)
     {
         _service = service;
     }
@@ -20,26 +18,34 @@ public class PlayerController : ControllerBase
     [HttpGet]
     public IEnumerable<Player> Get()
     {
-        return _service.GetPlayers().Take(10);
+        return _service.GetPlayers();
     }
 
-    //Whenever you are doing a post, it must take in an object of the items you want to post
-    //You must return something to the browser (200 OK!) 
+    [Route("[action]")]
+    [HttpGet]
+    public IEnumerable<Player> GetTop10()
+    {
+        return _service.GetTop10Players();
+    }
+
     [HttpPost]
     public IActionResult Post([FromBody] PlayerPost player)
     {
-        _service.Update(player.Name, player.GameCount, player.AverageAttempts, player.AverageSeconds);
+        if (player == null || player.Attempts < 1 || player.Attempts > 6
+            || player.Seconds < 1)
+        {
+            return BadRequest();
+        }
+        //how is the PlayerPost being created and how to you validate its input?
+        _service.Update(player.Name ?? "Guest", player.Attempts, player.Seconds);
         return Ok();
     }
 
-    //Create a local nested class to use in the Post since it only takes objects
-    //This will be used to populate the properties in our ScoreStatService object
     public class PlayerPost
     {
-        public string Name { get; set; }
-        public int GameCount { get; set; }
-        public double AverageAttempts { get; set; }
-        public double AverageSeconds { get; set; }
+        public string? Name { get; set; }
+        public int Attempts { get; set; }
+        public int Seconds { get; set; }
     }
 }
 

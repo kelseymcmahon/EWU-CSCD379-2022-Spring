@@ -1,45 +1,41 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Wordle.api.Dtos;
 using Wordle.api.Services;
 
-namespace Wordle.api.Controllers;
-
-[ApiController]
-[Route("[controller]")]
-public class LeaderboardController
+namespace Wordle.Api.Controllers
 {
-    private readonly ILogger<LeaderboardController> _logger;
-    private readonly ILeaderboardService _leaderboardService;
-
-    public LeaderboardController(ILogger<LeaderboardController> logger,
-        ILeaderboardService leaderboardService)
+    [ApiController]
+    [Route("[controller]")]
+    public class LeaderBoardController
     {
-        _logger = logger;
-        _leaderboardService = leaderboardService;
+        private readonly ILogger<LeaderBoardController> _logger;
+        private readonly ILeaderBoardService _leaderBoardService;
+
+        public LeaderBoardController(ILogger<LeaderBoardController> logger,
+            ILeaderBoardService leaderBoardService)
+        {
+            _logger = logger;
+            _leaderBoardService = leaderBoardService;
+        }
+
+        [HttpGet]
+        public IEnumerable<Score> Get()
+        {
+            _logger.LogInformation("LeaderBoardController.Get()");
+            List<Score> results = new()
+            {
+                new Score("Hildagaurd", 25, 2.6),
+                new Score("Ralph", 30, 3.4),
+                new Score("Gene", 50, 4.1),
+            };
+            return results;
+        }
+
+        [HttpPost]
+        public void Post([FromBody] GameScore score)
+        {
+            _logger.LogInformation("LeaderBoardController.Post()");
+            _leaderBoardService.AddScore(score);
+        }
     }
-
-    [HttpGet]
-    public IEnumerable<Score> Get(string name)
-    {
-        _logger.LogInformation("LeaderboardController.Get()");
-
-        //List<Score> results = new()
-        //{
-        //    new Score("Hildagaurd", 25, 2.6),
-        //    new Score("Ralph", 30, 3.4),
-        //    new Score("Gene", 50, 4.1),
-        //};
-
-        List<Score> results = _leaderboardService.GetScores().ToList();
-
-        return results;
-    }
-
-    [HttpPost]
-    public void Post([FromBody] GameScore score)
-    {
-        _logger.LogInformation("LeaderboardController.Post()");
-        _leaderboardService.AddScore(score);
-    }
-
 }
-

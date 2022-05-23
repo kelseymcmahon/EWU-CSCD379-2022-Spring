@@ -4,21 +4,23 @@ namespace Wordle.api.Data;
 public class Player
 {
     [Key]
-    public int PlayerID { get; set; }
-    public string Name { get; set; } = null!;
+    public int PlayerId { get; set; }
+    public string? Name { get; set; }
     public int GameCount { get; set; }
     public double AverageAttempts { get; set; }
-    public double AverageSeconds { get; set; }
+    public int AverageSecondsPerGame { get; set; }
+    public IList<Game> Games { get; set; } = null!;
+    public Guid Guid { get; set; }
 
     public Player Clone()
     {
         return new Player
         {
-            PlayerID = PlayerID,
+            PlayerId = PlayerId,
             Name = Name,
             GameCount = GameCount,
             AverageAttempts = AverageAttempts,
-            AverageSeconds = AverageSeconds
+            AverageSecondsPerGame = AverageSecondsPerGame,
         };
     }
 }

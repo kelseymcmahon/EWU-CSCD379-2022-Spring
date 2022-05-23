@@ -1,4 +1,4 @@
-﻿namespace Wordle.api.Services;
+﻿namespace Wordle.api.Dtos;
 
 public class Score
 {
