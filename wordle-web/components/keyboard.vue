@@ -105,6 +105,7 @@
       </v-col>
       <v-spacer />
     </v-row>
+  </v-container>
 
     <v-dialog v-model="dialog" width="450">
       <v-card color="error" dark>
@@ -116,9 +117,7 @@
         </v-container>
       </v-card>
     </v-dialog>
-
-  </v-container>
-
+    
   </v-container>
 </template>
 
