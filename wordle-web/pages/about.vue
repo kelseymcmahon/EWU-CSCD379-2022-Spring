@@ -1,7 +1,8 @@
 <template>
+<div>
   <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="6">
-      <v-card class="pa-10"> 
+      <v-card class="pa-5"> 
         <v-card-title class="headline"> About This Game </v-card-title>
         <v-card-text>
           <p>
@@ -10,15 +11,26 @@
             by my great instructor Meg! This is coming from branch!
           </p>
         </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn color="primary" nuxt to="/"> Back Home </v-btn>
-          <v-btn color="secondary" nuxt to="/"> Play the Game</v-btn>
-          <v-spacer />
-        </v-card-actions>
       </v-card>
     </v-col>
   </v-row>
+  <v-row>
+    <v-spacer />
+    <v-col cols="12" sm="12" md="4">
+      <v-btn block color="primary" nuxt to="/Game">
+        <v-icon> mdi-home </v-icon>
+        Back Home 
+      </v-btn>
+    </v-col>
+    <v-col cols="12" sm="12" md="4">
+      <v-btn block color="secondary" nuxt to="/PlayerScores">
+        <v-icon> mdi-cat </v-icon>
+        Play the Game
+      </v-btn>
+    </v-col>
+    <v-spacer />
+  </v-row>
+</div>
 </template>
 
 <script lang="ts">

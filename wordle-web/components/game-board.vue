@@ -1,5 +1,7 @@
 <template>
   <v-container fluid>
+
+  <v-container fluid v-if="isMobile()" class="pa-0 ma-0">
     <v-row
       v-for="row in wordleGame.maxGuesses"
       :key="row"
@@ -11,8 +13,8 @@
         <v-card
           flat
           tile
-          height="55"
-          width="55"
+          height="50"
+          min-width="50"
           :color="letterColor(getLetter(row, index))"
           style="border: 2px solid lightgray"
           >
@@ -26,6 +28,36 @@
       <v-spacer />
     </v-row>
   </v-container>
+
+  <v-container fluid v-if="!isMobile()" class="pa-0">
+    <v-row
+      v-for="row in wordleGame.maxGuesses"
+      :key="row"
+      dense
+      class="game-board"
+    >
+      <v-spacer />
+      <v-col v-for="index in wordleGame.currentWord.maxLetters" :key="index">
+        <v-card
+          flat
+          tile
+          height="60"
+          width="60"
+          :color="letterColor(getLetter(row, index))"
+          style="border: 2px solid lightgray"
+          >
+            <v-card-text
+              class="letter-card text-center text-h4 font-weight-bold"
+            >
+              {{ char = getChar(getLetter(row, index)) }}
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-spacer />
+    </v-row>
+  </v-container>
+
+</v-container>
 </template>
 
 <script lang="ts">
@@ -38,6 +70,10 @@ import { Letter } from '~/scripts/letter'
 export default class GameBoard extends Vue {
   @Prop({ required: true })
   wordleGame!: WordleGame
+
+  isMobile() {
+    return this.$vuetify.breakpoint.smAndDown;
+  }
 
   getLetter(row: number, index: number): Letter | null {
     const word: Word = this.wordleGame.words[row - 1]

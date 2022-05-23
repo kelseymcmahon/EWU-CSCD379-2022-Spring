@@ -13,23 +13,33 @@
 
   <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="6">
-      <v-card class="pa-10">
+      <v-card class="pa-5">
         <v-card-text>
           <p>
             This game is an original word game that is fun for the whole family!
             This game will be the highlight at all your parties.
           </p>
         </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn color="primary" nuxt to="/Game"> Play the game! </v-btn>
-          <v-btn color="secondary" nuxt to="/PlayerScores">
-            Player Scores
-          </v-btn>
-          <v-spacer />
-        </v-card-actions>
+
       </v-card>
     </v-col>
+    
+  </v-row>
+  <v-row>
+    <v-spacer />
+    <v-col cols="12" sm="12" md="4">
+      <v-btn block color="primary" nuxt to="/Game">
+            <v-icon> mdi-cat </v-icon>
+            Play the Game 
+          </v-btn>
+    </v-col>
+    <v-col cols="12" sm="12" md="4">
+      <v-btn block color="secondary" nuxt to="/PlayerScores">
+            <v-icon> mdi-equalizer </v-icon>
+            Player Scores
+          </v-btn>
+    </v-col>
+    <v-spacer />
   </v-row>
 </div>
 </template>

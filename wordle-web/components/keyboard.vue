@@ -1,47 +1,55 @@
 <template>
   <v-container fluid class="pa-0">
   <v-container fluid v-if="isMobile()" class="pa-0">
-    <v-row v-for="(charRow, i) in chars" :key="i" class="keyboard" dense>
+    <v-row v-for="(charRow, i) in chars" :key="i" dense flex>
       <v-spacer />
-      <v-col v-for="char in charRow" :key="char" class="pa-1" cols="1">
+      <v-col v-for="char in charRow" :key="char" 
+        cols="1"
+        height="37"
+
+        >
         <v-btn
-          height="37"
-          min-width="27"
+          flex
+          width="100%"
+          min-width="0"
           color="primary"
           :disabled="wordleGame.gameOver"
-          class="text-h7 font-weight-bold pa-0"
+          class="text-h7 font-weight-bold"
           v-if="char === 'enter'"
           @click="guessWord">
             Enter
         </v-btn>
         <v-btn
-          height="37"
-          min-width="27"
+          flex
+          width="100%"
+          min-width="0"
           :color="letterColor(char)"
           style="background-color: lightgray"
           :disabled="wordleGame.gameOver"
           @click="setLetter(char)"
-          class="text-h7 font-weight-bold pa-0"
+          class="text-h7 font-weight-bold"
           v-if="char !== '?' && char !== 'enter' && char !== 'back'"
         >
             {{ char }}
         </v-btn>
         <v-btn
-          height="37"
-          min-width="27"
+          flex
+          width="100%"
+          min-width="0"
           color="primary"
           :disabled="wordleGame.gameOver"
-          class="text-h7 font-weight-bold pa-0"
+          class="text-h7 font-weight-bold"
           v-if="char === '?'"
           @click="setLetter('?')">
             ?
         </v-btn>
         <v-btn
-          height="37"
-          min-width="25"
+          flex
+          width="100%"
+          min-width="0"
           color="primary"
           :disabled="wordleGame.gameOver"
-          class="pa-0"
+
           v-if="char === 'back'"
           @click="removeLetter">
             <v-icon small>mdi-backspace</v-icon>
@@ -128,7 +136,7 @@ export default class KeyBoard extends Vue {
   dialog = false
 
   isMobile() {
-    return this.$vuetify.breakpoint.xsOnly;
+    return this.$vuetify.breakpoint.smAndDown;
   }
 
   chars = [
