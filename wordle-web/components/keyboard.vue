@@ -6,7 +6,6 @@
       <v-col v-for="char in charRow" :key="char" 
         cols="1"
         height="37"
-
         >
         <v-btn
           flex
@@ -17,7 +16,7 @@
           class="text-h7 font-weight-bold"
           v-if="char === 'enter'"
           @click="guessWord">
-            Enter
+            <v-icon small>mdi-arrow-down</v-icon>
         </v-btn>
         <v-btn
           flex
