@@ -36,4 +36,24 @@ public class PlayerServiceTests
         Assert.AreEqual(playerCount, sut.GetTop10Players().Count());
     }
 
+    [TestMethod]
+    public void Update_AddsNewPlayer()
+    {
+        PlayersService sut = new(_context);
+        sut.Update("Kelsey", 1, 20);
+        Player player = sut.GetPlayers().First(p => p.Name == "Kelsey");
+        Assert.AreEqual(2, sut.GetPlayers().Count());
+        Assert.AreEqual("Kelsey", player.Name);
+    }
+
+    [TestMethod]
+    public void Update_UpdatesExistingPlayer()
+    {
+        PlayersService sut = new(_context);
+        sut.Update("Kelsey", 1, 20);
+        Player player = sut.GetPlayers().First(p => p.Name == "Kelsey");
+        Assert.AreEqual(2, sut.GetPlayers().Count());
+        Assert.AreEqual("Kelsey", player.Name);
+    }
+
 }
