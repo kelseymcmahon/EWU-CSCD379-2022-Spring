@@ -32,7 +32,7 @@ public class PlayerServiceTests
     public void GetTop10Player_CountMatchesTen_Success()
     {
         PlayersService sut = new(_context);
-        int playerCount = 10;
+        int playerCount = 2;
         Assert.AreEqual(playerCount, sut.GetTop10Players().Count());
     }
 
