@@ -1,60 +1,55 @@
 <template>
   <v-container fluid class="pa-0">
   <v-container fluid v-if="isMobile()" class="pa-0">
-    <v-row v-for="(charRow, i) in chars" :key="i" dense flex>
+    <v-row v-for="(charRow, i) in chars" :key="i" dense>
       <v-spacer />
       <v-col v-for="char in charRow" :key="char" 
         cols="1"
-        height="37"
         >
-        <v-btn
-          flex
-          width="100%"
-          min-width="0"
+        <v-card
           color="primary"
           :disabled="wordleGame.gameOver"
-          class="text-h7 font-weight-bold"
+          min-width="80px"
           v-if="char === 'enter'"
           @click="guessWord">
-            <v-icon small>mdi-arrow-down</v-icon>
-        </v-btn>
-        <v-btn
-          flex
-          width="100%"
-          min-width="0"
+            <v-card-text class="letter-text" style="color: white">
+              enter
+            </v-card-text>
+        </v-card>
+        <v-card
           :color="letterColor(char)"
           style="background-color: lightgray"
           :disabled="wordleGame.gameOver"
           @click="setLetter(char)"
-          class="text-h7 font-weight-bold"
+          
           v-if="char !== '?' && char !== 'enter' && char !== 'back'"
         >
+          <v-card-text class="letter-text" style="color: black">
             {{ char }}
-        </v-btn>
-        <v-btn
-          flex
-          width="100%"
-          min-width="0"
+          </v-card-text>
+        </v-card>
+        <v-card
           color="primary"
           :disabled="wordleGame.gameOver"
-          class="text-h7 font-weight-bold"
+          class="letter-text"
           v-if="char === '?'"
           @click="setLetter('?')">
-            ?
-        </v-btn>
-        <v-btn
-          flex
-          width="100%"
-          min-width="0"
+            <v-card-text class="letter-text" style="color: white">
+              ?
+            </v-card-text>
+        </v-card>
+        <v-card
           color="primary"
           :disabled="wordleGame.gameOver"
 
           v-if="char === 'back'"
           @click="removeLetter">
-            <v-icon small>mdi-backspace</v-icon>
-        </v-btn>
+            <v-card-text class="letter-text">
+              <v-icon small color="white">mdi-backspace</v-icon>
+            </v-card-text>
+        </v-card>
       </v-col>
-      <v-spacer />
+    <v-spacer />
     </v-row>
   </v-container>
   <v-container v-if="!isMobile()">
@@ -189,5 +184,10 @@ export default class KeyBoard extends Vue {
 .v-card__text,
 .v-card__title {
   padding: 10px;
+}
+
+.letter-text {
+  font-weight: bold;
+  font-size: 20px;
 }
 </style>

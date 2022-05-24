@@ -9,6 +9,7 @@
         <game-logo  />
         </router-link>
         <v-spacer />
+        <help />
         <settings-dialog />
         <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
       </v-app-bar>
@@ -35,6 +36,13 @@
             <v-list-item-title>Game</v-list-item-title>
           </v-list-item>
 
+          <v-list-item nuxt to="/DailyWord">
+            <v-list-item-icon>
+              <v-icon>mdi-clippy</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Daily Word Game</v-list-item-title>
+          </v-list-item>
+
           <v-list-item nuxt to="/PlayerScores">
             <v-list-item-icon>
               <v-icon>mdi-equalizer</v-icon>
@@ -48,6 +56,7 @@
             </v-list-item-icon>
             <v-list-item-title>About</v-list-item-title>
           </v-list-item>
+
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
@@ -63,19 +72,12 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import SettingsDialog from '@/components/settings-dialog.vue'
+import HelpDialog from '@/components/help.vue'
 
-@Component({ components: { SettingsDialog } })
+@Component({ components: { SettingsDialog, HelpDialog } })
 export default class DefaultLayout extends Vue {
   drawer = false
   dialog = false
-
-  goHome() {}
 }
 </script>
 
-<style>
-.title-bar-text {
-  text-decoration: none;
-  font-weight: bold;
-}
-</style>

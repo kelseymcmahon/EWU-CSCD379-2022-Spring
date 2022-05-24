@@ -11,8 +11,8 @@
               <th>#</th>
               <th>Name</th>
               <th>Games</th>
-              <th>Average Attempts</th>
-              <th>Average Seconds</th>
+              <th>Avg Attempts</th>
+              <th>Avg Seconds</th>
             </tr>
           </thead>
           <tbody>
@@ -52,7 +52,7 @@ export default class PlayerScores extends Vue {
   getData = true;
 
   mounted() {
-    this.$axios.get('/api/Player').then((response) => {
+    this.$axios.get('/api/Players/GetTop10').then((response) => {
       this.stats = response.data
       this.getData = false;
     })
@@ -60,7 +60,7 @@ export default class PlayerScores extends Vue {
 
   refreshStats() {
     this.getData = true;
-    this.$axios.get('/api/Player').then((response) => {
+    this.$axios.get('/api/Players/GetTop10').then((response) => {
       this.stats = response.data
       this.getData = false;
     })

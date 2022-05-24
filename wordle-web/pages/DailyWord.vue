@@ -4,7 +4,7 @@
       <v-icon primary> mdi-account </v-icon>
       {{ playerName }}
     </v-btn>
-
+    
     <valid-words :wordle-game="wordleGame" />
     
     <v-dialog v-model="dialog" width="450" persistent>
@@ -47,13 +47,23 @@ import GameBoard from '@/components/game-board.vue'
 import { Word } from '~/scripts/word'
 
 @Component({ components: { KeyBoard, GameBoard } })
-export default class Game extends Vue {
-  word: string = WordsService.getRandomWord()
+export default class DailyWordGame extends Vue {
+  word: string = ""
   wordleGame = new WordleGame(this.word)
   playerName = 'Guest'
   dialog = false
   finalTime = 0
   playerSet = false
+
+  mounted() {
+    var currentDate = new Date()
+    var stringDate = currentDate.getMonth().toString() + "/" + currentDate.getDate().toString() + "/" + currentDate.getFullYear().toString()
+    console.log("Passing this date " + stringDate)
+    this.$axios.get('/api/DateWord', { params: { stringDate } }).then((response) => {
+      this.word = response.data     
+    })
+    console.log("The daily word is" + this.word)
+  }
 
   resetGame() {
     this.word = WordsService.getRandomWord()
