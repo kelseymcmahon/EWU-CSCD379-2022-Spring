@@ -39,7 +39,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Prop } from 'vue-property-decorator'
 import { WordsService } from '~/scripts/wordsService'
 import { GameState, WordleGame } from '~/scripts/wordleGame'
 import KeyBoard from '@/components/keyboard.vue'
@@ -49,20 +49,25 @@ import { Word } from '~/scripts/word'
 @Component({ components: { KeyBoard, GameBoard } })
 export default class DailyWordGame extends Vue {
   word: string = ""
+
+  //add a loading pop up stop here
+
   wordleGame = new WordleGame(this.word)
   playerName = 'Guest'
   dialog = false
   finalTime = 0
   playerSet = false
 
+//Use a busy pop up window when the word has not been set yet.
+//Take the window down once it is set so the user can interact with the UI
   mounted() {
     var currentDate = new Date()
-    var stringDate = currentDate.getMonth().toString() + "/" + currentDate.getDate().toString() + "/" + currentDate.getFullYear().toString()
-    console.log("Passing this date " + stringDate)
-    this.$axios.get('/api/DateWord', { params: { stringDate } }).then((response) => {
-      this.word = response.data     
+    var date = currentDate.getMonth().toString() + "/" + currentDate.getDate().toString() + "/" + currentDate.getFullYear().toString()
+    console.log("Passing this date " + date)
+    this.$axios.get('/DateWord', { params: { date } }).then((response) => {
+      console.log(response)
+      this.word = response.data   
     })
-    console.log("The daily word is" + this.word)
   }
 
   resetGame() {

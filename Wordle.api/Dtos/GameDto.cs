@@ -1,14 +1,18 @@
-﻿namespace Wordle.api.Dtos;
+﻿using Wordle.api.Data;
 
+namespace Wordle.api.Dtos;
 public class GameDto
 {
     public string Word { get; set; }
     public int GameId { get; set; }
+    public bool WasPlayed { get; set; }
 
-    public GameDto(string word, int gameId)
+    public GameDto(Game game)
     {
-        Word = word;
-        GameId = gameId;
+        Word = game.Word.Value;
+        GameId = game.GameId;
+        WasPlayed = game.DateEnded.HasValue;
     }
 }
+
 
