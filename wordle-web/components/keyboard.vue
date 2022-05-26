@@ -102,7 +102,7 @@
       <v-spacer />
     </v-row>
   </v-container>
-
+<!-- 
     <v-dialog v-model="dialog" width="450">
       <v-card color="error" dark>
         <v-container>
@@ -112,7 +112,7 @@
           </v-card-text>
         </v-container>
       </v-card>
-    </v-dialog>
+    </v-dialog> -->
     
   </v-container>
 </template>
@@ -148,15 +148,11 @@ export default class KeyBoard extends Vue {
   }
 
   guessWord() {
-    if (this.wordleGame.checkIfWordExists(this.wordleGame.currentWord.text)) {
-      if (
-        this.wordleGame.currentWord.length ===
-        this.wordleGame.currentWord.maxLetters
-      ) {
-        this.wordleGame.submitWord()
-      }
-    } else {
-      this.dialog = true
+    if (
+      this.wordleGame.currentWord.length ===
+      this.wordleGame.currentWord.maxLetters) 
+    {
+      this.wordleGame.submitWord()
     }
   }
 

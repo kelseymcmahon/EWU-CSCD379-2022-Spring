@@ -29,7 +29,6 @@
       <v-spacer />
       <v-alert v-if="wordleGame.gameOver" :type="gameResult.type" width="450">
         {{ gameResult.text }}
-        <v-btn class="ml-2" @click="resetGame"> Play Again? </v-btn>
       </v-alert>
       <v-spacer />
     </v-row>
@@ -37,12 +36,24 @@
     <game-board :wordle-game="wordleGame" />
 
     <keyboard :wordle-game="wordleGame" />
+
+    <v-overlay v-if="this.overlay">
+
+        <v-progress-circular
+          indeterminate
+          absolute
+          size="64">
+        </v-progress-circular>
+        <br>
+        <v-chip class="ma-2" outlined>
+          Getting Daily Word ...
+        </v-chip>
+    </v-overlay>
   </v-container>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
-import { WordsService } from '~/scripts/wordsService'
+import { Component, Vue } from 'vue-property-decorator'
 import { GameState, WordleGame } from '~/scripts/wordleGame'
 import KeyBoard from '@/components/keyboard.vue'
 import GameBoard from '@/components/game-board.vue'
@@ -50,10 +61,8 @@ import { Word } from '~/scripts/word'
 
 @Component({ components: { KeyBoard, GameBoard } })
 export default class DailyWordGame extends Vue {
+  pageName = "Daily Words"
   word: string = ""
-
-  //add a loading pop up stop here
-
   wordleGame = new WordleGame(this.word)
   playerName = ''
   dialog = false
@@ -62,29 +71,24 @@ export default class DailyWordGame extends Vue {
   startTime: number = 0
   endTime: number = 0
   intervalID: any
-
-//Use a busy pop up window when the word has not been set yet.
-//Take the window down once it is set so the user can interact with the UI
-  // mounted() {
-  //   var currentDate = new Date()
-  //   var date = currentDate.getMonth().toString() + "/" + currentDate.getDate().toString() + "/" + currentDate.getFullYear().toString()
-  //   console.log("Passing this date " + date)
-  //   this.$axios.get('/DateWord', { params: { date } }).then((response) => {
-  //     console.log(response)
-  //     this.word = response.data   
-  //   })
-  // }
+  overlay = true;
 
   mounted() {
     setTimeout(() => this.startTimer(), 5000)
     this.retrieveUserName()
+    this.getDailyWord()
   }
 
-  resetGame() {
-    this.word = WordsService.getRandomWord()
-    this.wordleGame = new WordleGame(this.word)
-    this.timeInSeconds = 0
-    this.startTimer()
+  getDailyWord() {
+    var currentDate = new Date()
+    var date = (currentDate.getMonth() + 1).toString() + "/" + currentDate.getDate().toString() + "/" + currentDate.getFullYear().toString()
+    this.overlay = true;
+    this.$axios.get('/DateWord', { params: { date } }).then((response) => {
+      this.word = response.data  
+    }).finally(() => {
+      this.overlay = false
+      this.wordleGame = new WordleGame(this.word)
+    });
   }
 
   get gameResult() {

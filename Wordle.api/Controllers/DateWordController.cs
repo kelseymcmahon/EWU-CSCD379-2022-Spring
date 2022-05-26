@@ -26,6 +26,14 @@ public class DateWordController : Controller
         return word?.Value;
     }
 
+    [Route("[action]")]
+    [HttpGet]
+    public string? GetRandomWord()
+    {
+        Word? word = _gameService.GetWord();
+        return word?.Value;
+    }
+
     [HttpPost]
     public GameDto CreateGame([FromBody] CreateGameDto newGame)
     {

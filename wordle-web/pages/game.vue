@@ -37,6 +37,19 @@
     <game-board :wordle-game="wordleGame" />
 
     <keyboard :wordle-game="wordleGame" />
+
+    <v-overlay v-if="this.overlay">
+
+        <v-progress-circular
+          indeterminate
+          absolute
+          size="64">
+        </v-progress-circular>
+        <br>
+        <v-chip class="ma-2" outlined>
+          Getting Daily Word ...
+        </v-chip>
+    </v-overlay>
   </v-container>
 </template>
 
@@ -49,24 +62,36 @@ import GameBoard from '@/components/game-board.vue'
 import { Word } from '~/scripts/word'
 
 @Component({ components: { KeyBoard, GameBoard } })
-export default class Game extends Vue {
-  word: string = WordsService.getRandomWord()
+export default class DailyWordGame extends Vue {
+  word: string = ""
   wordleGame = new WordleGame(this.word)
   playerName = ''
   dialog = false
+  isLoaded: boolean = false
   timeInSeconds: number = 0
   startTime: number = 0
   endTime: number = 0
   intervalID: any
+  overlay = true;
 
   mounted() {
     setTimeout(() => this.startTimer(), 5000)
     this.retrieveUserName()
+    this.getRandomWord()
+  }
+
+  getRandomWord() {
+    this.overlay = true;
+    this.$axios.get('/DateWord/GetRandomWord').then((response) => {
+      this.word = response.data  
+    }).finally(() => {
+      this.overlay = false
+      this.wordleGame = new WordleGame(this.word)
+    });
   }
 
   resetGame() {
-    this.word = WordsService.getRandomWord()
-    this.wordleGame = new WordleGame(this.word)
+    this.getRandomWord()
     this.timeInSeconds = 0
     this.startTimer()
   }
@@ -139,6 +164,5 @@ export default class Game extends Vue {
       seconds: this.timeInSeconds,
     })
   }
-
 }
 </script>
