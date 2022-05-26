@@ -11,7 +11,7 @@ public class Word
 
     public static void SeedWords(AppDbContext context, string filename = "Words.csv")
     {
-        const string wordListVersion = "1"; // Increment this to force the file to read again on startup
+        const string wordListVersion = "2"; // Increment this to force the file to read again on startup
 
         var currentVersion = Setting.GetSetting("WordListVersion", context);
         if (wordListVersion != currentVersion)

@@ -69,12 +69,35 @@ public class PlayersService
         if (!context.Players.Any())
         {
             context.Players.Add(new Player()
-            {
-                Name = "Inigo Montoya",
-                GameCount = 2,
-                AverageAttempts = 2,
-                AverageSecondsPerGame = 31
-            });
+            { Name = "Inigo Montoya", GameCount = 2, AverageAttempts = 2, AverageSecondsPerGame = 31 });
+
+            context.Players.Add(new Player()
+            { Name = "Chase", GameCount = 12, AverageAttempts = 2, AverageSecondsPerGame = 90 });
+
+            context.Players.Add(new Player()
+            { Name = "Georgie", GameCount = 20, AverageAttempts = 4, AverageSecondsPerGame = 18 });
+
+            context.Players.Add(new Player()
+            { Name = "Gunther", GameCount = 15, AverageAttempts = 3, AverageSecondsPerGame = 155 });
+
+            context.Players.Add(new Player()
+            { Name = "Leona", GameCount = 8, AverageAttempts = 4, AverageSecondsPerGame = 111 });
+
+            context.Players.Add(new Player()
+            { Name = "Orange", GameCount = 20, AverageAttempts = 1, AverageSecondsPerGame = 222 });
+
+            context.Players.Add(new Player()
+            { Name = "Saria", GameCount = 5, AverageAttempts = 2, AverageSecondsPerGame = 105 });
+
+            context.Players.Add(new Player()
+            { Name = "Zelda", GameCount = 3, AverageAttempts = 5, AverageSecondsPerGame = 18 });
+
+            context.Players.Add(new Player()
+            { Name = "Midori", GameCount = 102, AverageAttempts = 6, AverageSecondsPerGame = 20 });
+
+            context.Players.Add(new Player()
+            { Name = "Agnis", GameCount = 4, AverageAttempts = 2, AverageSecondsPerGame = 31 });
+          
             context.SaveChanges();
         }
     }

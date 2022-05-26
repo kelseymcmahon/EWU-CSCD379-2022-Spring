@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Wordle.api.Migrations
 {
-    public partial class ScoreStat : Migration
+    public partial class GameData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,12 +42,27 @@ namespace Wordle.api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Settings",
+                columns: table => new
+                {
+                    SettingId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Settings", x => x.SettingId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Words",
                 columns: table => new
                 {
                     WordId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Common = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -83,7 +98,9 @@ namespace Wordle.api.Migrations
                     PlayerId = table.Column<int>(type: "int", nullable: false),
                     WordId = table.Column<int>(type: "int", nullable: false),
                     DateStarted = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateEnded = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    DateEnded = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    GameType = table.Column<int>(type: "int", nullable: false),
+                    WordDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -136,19 +153,6 @@ namespace Wordle.api.Migrations
                     { 6, 0, 6, 0 }
                 });
 
-            migrationBuilder.InsertData(
-                table: "Words",
-                columns: new[] { "WordId", "Value" },
-                values: new object[,]
-                {
-                    { 1, "thing" },
-                    { 2, "think" },
-                    { 3, "thong" },
-                    { 4, "throb" },
-                    { 5, "thunk" },
-                    { 6, "wrong" }
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_DateWords_WordId",
                 table: "DateWords",
@@ -180,6 +184,9 @@ namespace Wordle.api.Migrations
 
             migrationBuilder.DropTable(
                 name: "ScoreStats");
+
+            migrationBuilder.DropTable(
+                name: "Settings");
 
             migrationBuilder.DropTable(
                 name: "Games");

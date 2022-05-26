@@ -32,7 +32,7 @@ public class PlayerServiceTests
     public void GetTop10Player_CountMatchesTen_Success()
     {
         PlayersService sut = new(_context);
-        int playerCount = 2;
+        int playerCount = 10;
         Assert.AreEqual(playerCount, sut.GetTop10Players().Count());
     }
 
@@ -42,7 +42,7 @@ public class PlayerServiceTests
         PlayersService sut = new(_context);
         sut.Update("Kelsey", 1, 20);
         Player player = sut.GetPlayers().First(p => p.Name == "Kelsey");
-        Assert.AreEqual(2, sut.GetPlayers().Count());
+        Assert.AreEqual(11, sut.GetPlayers().Count());
         Assert.AreEqual("Kelsey", player.Name);
     }
 
@@ -52,7 +52,7 @@ public class PlayerServiceTests
         PlayersService sut = new(_context);
         sut.Update("Kelsey", 1, 20);
         Player player = sut.GetPlayers().First(p => p.Name == "Kelsey");
-        Assert.AreEqual(2, sut.GetPlayers().Count());
+        Assert.AreEqual(11, sut.GetPlayers().Count());
         Assert.AreEqual("Kelsey", player.Name);
     }
 

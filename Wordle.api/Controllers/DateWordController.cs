@@ -14,10 +14,16 @@ public class DateWordController : Controller
 {
     private readonly GameService _gameService;
 
-
     public DateWordController(GameService gameService)
     {
         _gameService = gameService;
+    }
+
+    [HttpGet]
+    public string? GetDailyWord(DateTime date)
+    {
+        Word? word = _gameService.GetDailyWord(date);
+        return word?.Value;
     }
 
     [HttpPost]

@@ -57,8 +57,14 @@ namespace Wordle.api.Migrations
                     b.Property<DateTime>("DateStarted")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("GameType")
+                        .HasColumnType("int");
+
                     b.Property<int>("PlayerId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("WordDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("WordId")
                         .HasColumnType("int");
@@ -191,6 +197,27 @@ namespace Wordle.api.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Wordle.api.Data.Setting", b =>
+                {
+                    b.Property<int>("SettingId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SettingId"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SettingId");
+
+                    b.ToTable("Settings");
+                });
+
             modelBuilder.Entity("Wordle.api.Data.Word", b =>
                 {
                     b.Property<int>("WordId")
@@ -199,6 +226,9 @@ namespace Wordle.api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WordId"), 1L, 1);
 
+                    b.Property<bool>("Common")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Value")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -206,38 +236,6 @@ namespace Wordle.api.Migrations
                     b.HasKey("WordId");
 
                     b.ToTable("Words");
-
-                    b.HasData(
-                        new
-                        {
-                            WordId = 1,
-                            Value = "thing"
-                        },
-                        new
-                        {
-                            WordId = 2,
-                            Value = "think"
-                        },
-                        new
-                        {
-                            WordId = 3,
-                            Value = "thong"
-                        },
-                        new
-                        {
-                            WordId = 4,
-                            Value = "throb"
-                        },
-                        new
-                        {
-                            WordId = 5,
-                            Value = "thunk"
-                        },
-                        new
-                        {
-                            WordId = 6,
-                            Value = "wrong"
-                        });
                 });
 
             modelBuilder.Entity("Wordle.api.Data.DateWord", b =>

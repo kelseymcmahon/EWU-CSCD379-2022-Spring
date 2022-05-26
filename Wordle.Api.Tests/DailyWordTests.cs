@@ -18,7 +18,7 @@ public class DailyWordTests : DatabaseBaseTests
         using var context = new TestAppDbContext(Options);
         Word.SeedWords(context);
         var sut = new GameService(context);
-        DateTime wordDate = new(2020, 1, 1);
+        DateTime wordDate = new(2022, 5, 25);
 
         Word? word1 = sut.GetDailyWord(wordDate);
         Assert.IsNotNull(word1);
