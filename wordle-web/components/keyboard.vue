@@ -21,7 +21,7 @@
           style="background-color: lightgray"
           :disabled="wordleGame.gameOver"
           @click="setLetter(char)"
-          
+          light
           v-if="char !== '?' && char !== 'enter' && char !== 'back'"
         >
           <v-card-text class="letter-text" style="color: black">
@@ -69,6 +69,7 @@
         <v-btn
           height="45"
           min-width="35"
+          light
           :color="letterColor(char)"
           style="background-color: lightgray"
           :disabled="wordleGame.gameOver"

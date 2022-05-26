@@ -105,6 +105,6 @@
 
 <style>
 .word-logo {
-  height: 25px;
+  height: 22px;
 }
 </style>

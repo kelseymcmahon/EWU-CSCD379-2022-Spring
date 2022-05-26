@@ -32,7 +32,7 @@
               <td>{{ stat.name }}</td>
               <td>{{ stat.gameCount }}</td>
               <td>{{ stat.averageAttempts }}</td>
-              <td>{{ stat.averageSeconds }}</td>
+              <td>{{ stat.averageSecondsPerGame }}</td>
             </tr>
           </tbody>
         </v-simple-table>

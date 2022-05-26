@@ -1,7 +1,6 @@
 <template>
   <v-app light>
     <v-app-bar
-        color="#F5F5F5"
         dense
         max-height="50"
       >  
