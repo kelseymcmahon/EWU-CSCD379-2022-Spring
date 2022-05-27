@@ -5,8 +5,6 @@
       {{ playerName }}
     </v-btn>
     
-    <valid-words :wordle-game="wordleGame" />
-    
     <v-dialog v-model="dialog" width="450" persistent>
       <v-card>
         <v-card-title>Enter Your Name!</v-card-title>
@@ -55,7 +53,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { WordsService } from '~/scripts/wordsService'
 import { GameState, WordleGame } from '~/scripts/wordleGame'
 import KeyBoard from '@/components/keyboard.vue'
 import GameBoard from '@/components/game-board.vue'

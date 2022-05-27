@@ -1,58 +1,60 @@
 <template>
   <v-container fluid class="pa-0">
   <v-container fluid v-if="isMobile()" class="pa-0">
-    <v-row v-for="(charRow, i) in chars" :key="i" dense>
+    <v-row v-for="(charRow, i) in chars" :key="i" dense width="100%">
       <v-spacer />
-      <v-col v-for="char in charRow" :key="char" 
-        cols="1"
-        >
-        <v-card
-          color="primary"
-          :disabled="wordleGame.gameOver"
-          min-width="80px"
-          v-if="char === 'enter'"
-          @click="guessWord">
-            <v-card-text class="letter-text" style="color: white">
-              enter
-            </v-card-text>
-        </v-card>
-        <v-card
+      <v-col v-for="char in charRow" :key="char" cols="1" style="box-sizing: unset; flex-basis: 0; padding: 3px;">
+        <v-btn
+          height="25"
+          min-width="13"
+          light
           :color="letterColor(char)"
           style="background-color: lightgray"
           :disabled="wordleGame.gameOver"
           @click="setLetter(char)"
-          light
+          class="text-h7 font-weight-bold pa-2 ma-0"
           v-if="char !== '?' && char !== 'enter' && char !== 'back'"
         >
-          <v-card-text class="letter-text" style="color: black">
             {{ char }}
-          </v-card-text>
-        </v-card>
-        <v-card
+        </v-btn>
+        <v-btn
+          height="25"
+          min-width="13"
           color="primary"
           :disabled="wordleGame.gameOver"
-          class="letter-text"
+          class="text-h7 font-weight-bold pa-2 ma-0"
           v-if="char === '?'"
           @click="setLetter('?')">
-            <v-card-text class="letter-text" style="color: white">
-              ?
-            </v-card-text>
-        </v-card>
-        <v-card
-          color="primary"
-          :disabled="wordleGame.gameOver"
-
-          v-if="char === 'back'"
-          @click="removeLetter">
-            <v-card-text class="letter-text">
-              <v-icon small color="white">mdi-backspace</v-icon>
-            </v-card-text>
-        </v-card>
+            ?
+        </v-btn>
       </v-col>
     <v-spacer />
     </v-row>
+    <v-row class="ma-1">
+    <v-col align="center">
+      <valid-words :wordle-game="wordleGame" />
+    </v-col>
+    <v-col align="center">
+      <v-btn
+        color="primary"
+        :disabled="wordleGame.gameOver"
+        min-width="80px"
+        @click="guessWord">
+          enter
+      </v-btn>
+    </v-col>
+    <v-col align="center">
+        <v-btn
+          color="primary"
+          :disabled="wordleGame.gameOver"
+          @click="removeLetter">
+            <v-icon small color="white">mdi-backspace</v-icon>
+        </v-btn>
+    </v-col>
+    </v-row>
   </v-container>
   <v-container v-if="!isMobile()">
+    <valid-words :wordle-game="wordleGame" />
     <v-row v-for="(charRow, i) in chars" :key="i" class="keyboard">
       <v-spacer />
       <v-col v-for="char in charRow" :key="char" class="pa-1">
@@ -130,7 +132,7 @@ export default class KeyBoard extends Vue {
   dialog = false
 
   isMobile() {
-    return this.$vuetify.breakpoint.smAndDown;
+    return this.$vuetify.breakpoint.xsOnly;
   }
 
   chars = [

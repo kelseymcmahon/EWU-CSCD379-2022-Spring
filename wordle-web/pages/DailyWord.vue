@@ -5,8 +5,6 @@
       {{ playerName }}
     </v-btn>
     
-    <valid-words :wordle-game="wordleGame" />
-    
     <v-dialog v-model="dialog" width="450" persistent>
       <v-card>
         <v-card-title>Enter Your Name!</v-card-title>
@@ -77,6 +75,8 @@ export default class DailyWordGame extends Vue {
     setTimeout(() => this.startTimer(), 5000)
     this.retrieveUserName()
     this.getDailyWord()
+    var currentDate = new Date()
+    console.log(currentDate)
   }
 
   getDailyWord() {
@@ -153,10 +153,22 @@ export default class DailyWordGame extends Vue {
   }
 
   endGameSave() {
+    var currentDate = new Date()
+    var month = currentDate.getMonth() + 1
+    var year = currentDate.getFullYear()
+    var day = currentDate.getDay()
     this.$axios.post('/api/Players', {
       name: this.playerName,
       attempts: this.wordleGame.words.length,
       seconds: this.timeInSeconds,
+    })
+    this.$axios.post('/api/DateWord/AddGame', {
+      month: month,
+      day: day,
+      year: year,
+      attempts: this.wordleGame.words.length,
+      seconds: this.timeInSeconds,
+      playerName: this.playerName
     })
   }
 }

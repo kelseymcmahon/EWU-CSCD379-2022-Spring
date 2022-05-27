@@ -72,7 +72,7 @@ export default class GameBoard extends Vue {
   wordleGame!: WordleGame
 
   isMobile() {
-    return this.$vuetify.breakpoint.smAndDown;
+    return this.$vuetify.breakpoint.xsOnly;
   }
 
   getLetter(row: number, index: number): Letter | null {
