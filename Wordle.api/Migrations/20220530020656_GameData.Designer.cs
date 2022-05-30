@@ -12,7 +12,7 @@ using Wordle.api.Data;
 namespace Wordle.api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220526034235_GameData")]
+    [Migration("20220530020656_GameData")]
     partial class GameData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,8 +32,17 @@ namespace Wordle.api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DateWordId"), 1L, 1);
 
+                    b.Property<double>("AverageAttempts")
+                        .HasColumnType("float");
+
+                    b.Property<double>("AverageSeconds")
+                        .HasColumnType("float");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("GameCount")
+                        .HasColumnType("int");
 
                     b.Property<int>("WordId")
                         .HasColumnType("int");

@@ -67,7 +67,92 @@ public class GameService
         _context.SaveChanges();
 
         return game;
+    }
 
+    public DateWord CreateDateWord(string playerName, int month, int day, 
+                                   int year, double seconds, int numberOfAttempts)
+    {
+        DateTime wordDate = new(year, month, day);
+
+        //get the player that is playing this game
+        var player = _context.Players
+            .FirstOrDefault(x => x.Name == playerName);
+
+        //If the player doesnt exist, add them
+        if (player is null)
+        {
+            player = new Player { Name = playerName, Guid = Guid.NewGuid() };
+            _context.Players.Add(player);
+            _context.SaveChanges();
+        }
+
+        // get the word of the day.
+        Word word = GetDailyWord(wordDate) ?? throw new ArgumentException("Date is too far in the future");
+
+        //Add this game to the games table for the given player above
+        var existingGame = _context.Games
+                .Include(x => x.Guesses)
+                .Include(x => x.Word)
+                .FirstOrDefault(x => x.PlayerId == player.PlayerId &&
+                                     x.GameType == GameTypeEnum.WordOfTheDay &&
+                                     x.DateEnded.HasValue &&
+                                    x.WordDate == wordDate);
+
+        //if the game does not exist, then add it:
+        if (existingGame is null)
+        {
+            var game = new Game()
+            {
+                WordId = word.WordId,
+                PlayerId = player.PlayerId,
+                DateStarted = DateTime.UtcNow,
+                GameType = GameTypeEnum.WordOfTheDay,
+                WordDate = wordDate
+            };
+
+            _context.Games.Add(game);
+        }
+
+        var existingDateWord = _context.DateWords
+                .Include(x => x.Word)
+                .FirstOrDefault(x => x.Date == wordDate &&
+                                     x.Word == word &&
+                                     x.WordId == word.WordId);
+
+        //if the date word already exists, then update the averages and add to the game count
+        if (existingDateWord is not null)
+        {
+            existingDateWord.AverageAttempts = (existingDateWord.AverageAttempts * existingDateWord.GameCount + numberOfAttempts) / (existingDateWord.GameCount + 1);
+            existingDateWord.AverageSeconds = (existingDateWord.AverageSeconds * existingDateWord.GameCount + seconds) / (existingDateWord.GameCount + 1);
+            existingDateWord.GameCount++;
+
+            _context.SaveChanges();
+            return existingDateWord;
+        }
+
+        //if there is no DateWord data for this date, add it 
+        else
+        {
+            var dateWord = new DateWord()
+            {
+                Date = wordDate,
+                Word = word,
+                WordId = word.WordId,
+                AverageSeconds = seconds,
+                AverageAttempts = numberOfAttempts,
+                GameCount = 1
+            };
+
+            _context.DateWords.Add(dateWord);
+            _context.SaveChanges();
+            return dateWord;
+        }
+    }
+
+    public IEnumerable<DateWord> GetLast10DateWords()
+    {
+        var result = _context.DateWords.OrderByDescending(x => x.Date).Take(10);
+        return result;
     }
 
     public void FinishGame(int gameId)

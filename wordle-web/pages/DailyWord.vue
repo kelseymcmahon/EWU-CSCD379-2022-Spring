@@ -70,18 +70,23 @@ export default class DailyWordGame extends Vue {
   endTime: number = 0
   intervalID: any
   overlay = true;
+  month = 0
+  day = 0
+  year = 0
 
   mounted() {
     setTimeout(() => this.startTimer(), 5000)
     this.retrieveUserName()
-    this.getDailyWord()
     var currentDate = new Date()
-    console.log(currentDate)
+    this.month = currentDate.getMonth() + 1
+    this.year = currentDate.getFullYear()
+    this.day = currentDate.getDate()
+    this.getDailyWord()
   }
 
   getDailyWord() {
     var currentDate = new Date()
-    var date = (currentDate.getMonth() + 1).toString() + "/" + currentDate.getDate().toString() + "/" + currentDate.getFullYear().toString()
+    var date = (this.month).toString() + "/" + this.day.toString() + "/" + this.year.toString()
     this.overlay = true;
     this.$axios.get('/DateWord', { params: { date } }).then((response) => {
       this.word = response.data  
@@ -153,19 +158,15 @@ export default class DailyWordGame extends Vue {
   }
 
   endGameSave() {
-    var currentDate = new Date()
-    var month = currentDate.getMonth() + 1
-    var year = currentDate.getFullYear()
-    var day = currentDate.getDay()
     this.$axios.post('/api/Players', {
       name: this.playerName,
       attempts: this.wordleGame.words.length,
       seconds: this.timeInSeconds,
     })
-    this.$axios.post('/api/DateWord/AddGame', {
-      month: month,
-      day: day,
-      year: year,
+    this.$axios.post('/DateWord/CreateDateWord', {
+      month: this.month,
+      day: this.day,
+      year: this.year,
       attempts: this.wordleGame.words.length,
       seconds: this.timeInSeconds,
       playerName: this.playerName

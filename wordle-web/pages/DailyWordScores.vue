@@ -2,37 +2,24 @@
   <v-container fluid fill-height justify-center>
     <v-card class="pa-5" :loading=getData>
       <v-card-title>
-        <h1 class="display-1">Player Scores</h1>
+        <h1 class="display-1">Daily Word Game Scores</h1>
       </v-card-title>
       <v-card-text>
         <v-simple-table loading >
           <thead>
             <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Games</th>
-              <th>Avg Attempts</th>
+              <th>Date</th>
               <th>Avg Seconds</th>
+              <th>Avg Attempts</th>
+              <th>Number of Games</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(stat, index) in stats" :key="index">
-              <td>
-                {{ index + 1 }}  
-                <v-icon v-if="index === 0" color="#DAA520">
-                  mdi-crown
-                </v-icon>
-                <v-icon v-if="index === 1" color="#A9A9A9">
-                  mdi-crown
-                </v-icon>
-                <v-icon v-if="index === 2" color="#D2691E">
-                  mdi-crown
-                </v-icon>
-              </td>
-              <td>{{ stat.name }}</td>
-              <td>{{ stat.gameCount }}</td>
+              <td>{{ stat.date }}</td>
+              <td>{{ stat.averageSeconds }}</td>
               <td>{{ stat.averageAttempts }}</td>
-              <td>{{ stat.averageSecondsPerGame }}</td>
+              <td>{{ stat.gameCount }}</td>
             </tr>
           </tbody>
         </v-simple-table>
@@ -52,7 +39,7 @@ export default class DailyWordScores extends Vue {
   getData = true;
 
   mounted() {
-    this.$axios.get('/api/Players/GetTop10').then((response) => {
+    this.$axios.get('/DateWord/GetLast10DateWords').then((response) => {
       this.stats = response.data
       this.getData = false;
     })
@@ -60,7 +47,7 @@ export default class DailyWordScores extends Vue {
 
   refreshStats() {
     this.getData = true;
-    this.$axios.get('/api/Players/GetTop10').then((response) => {
+    this.$axios.get('/DateWord/GetLast10DateWords').then((response) => {
       this.stats = response.data
       this.getData = false;
     })

@@ -27,6 +27,20 @@ namespace Wordle.api.Tests
             Assert.AreEqual(5, game.Word.Value.Length);
         }
 
+        [TestMethod]
+        public void CreateDateWord()
+        {
+            using var context = new TestAppDbContext(Options);
+            var service = new GameService(context);
+            Word.SeedWords(context);
+
+            var dateWord = service.CreateDateWord("Kelsey", 5, 29, 2022, 30, 5);
+
+            Assert.IsNotNull(dateWord);
+            //Assert.AreEqual("grubs", dateWord.Word.Value);
+            Assert.AreEqual(5, dateWord.Word.Value.Length);
+        }
+
     }
 }
 

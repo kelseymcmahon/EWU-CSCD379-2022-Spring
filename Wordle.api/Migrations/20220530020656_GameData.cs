@@ -76,7 +76,10 @@ namespace Wordle.api.Migrations
                     DateWordId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    WordId = table.Column<int>(type: "int", nullable: false)
+                    WordId = table.Column<int>(type: "int", nullable: false),
+                    AverageSeconds = table.Column<double>(type: "float", nullable: false),
+                    AverageAttempts = table.Column<double>(type: "float", nullable: false),
+                    GameCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

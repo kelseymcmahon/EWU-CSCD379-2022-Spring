@@ -49,6 +49,13 @@
             <v-list-item-title>Player Scores</v-list-item-title>
           </v-list-item>
 
+          <v-list-item nuxt to="/DailyWordScores">
+            <v-list-item-icon>
+              <v-icon>mdi-equalizer</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Daily Word Scores</v-list-item-title>
+          </v-list-item>
+
           <v-list-item nuxt to="/About">
             <v-list-item-icon>
               <v-icon>mdi-cat</v-icon>

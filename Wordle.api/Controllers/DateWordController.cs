@@ -34,6 +34,13 @@ public class DateWordController : Controller
         return word?.Value;
     }
 
+    [Route("[action]")]
+    [HttpGet]
+    public IEnumerable<DateWord> GetLast10DateWords()
+    {
+        return _gameService.GetLast10DateWords();
+    }
+
     [HttpPost]
     public GameDto CreateGame([FromBody] CreateGameDto newGame)
     {
@@ -45,6 +52,29 @@ public class DateWordController : Controller
     {
         public DateTime? Date { get; set; }
         public string PlayerGuid { get; set; } = null!;
+    }
+
+    [Route("[action]")]
+    [HttpPost]
+    public DateWordDto CreateDateWord([FromBody] CreateDateWordDto newGame)
+    {
+        var dateWord = _gameService.CreateDateWord(newGame.PlayerName, 
+                                               newGame.Month, 
+                                               newGame.Day,
+                                               newGame.Year,
+                                               newGame.Seconds,
+                                               newGame.Number0fAttempts);
+        return new DateWordDto(dateWord);
+    }
+
+    public class CreateDateWordDto
+    {
+        public int Month { get; set; } 
+        public int Day { get; set; }    
+        public int Year { get; set; }
+        public double Seconds { get; set; }  
+        public int Number0fAttempts { get; set; }
+        public string PlayerName { get; set; } = null!;
     }
 }
 

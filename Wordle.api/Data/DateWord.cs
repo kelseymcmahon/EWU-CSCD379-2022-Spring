@@ -8,4 +8,8 @@ public class DateWord
 
     public Word Word { get; set; } = null!;
     public int WordId { get; set; }
+    public double AverageSeconds { get; set; }  
+    public double AverageAttempts { get; set; }
+    public int GameCount { get; set; }
+
 }
