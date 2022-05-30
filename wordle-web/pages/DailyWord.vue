@@ -167,7 +167,7 @@ export default class DailyWordGame extends Vue {
       month: this.month,
       day: this.day,
       year: this.year,
-      attempts: this.wordleGame.words.length,
+      averageAttempts: this.wordleGame.words.length,
       seconds: this.timeInSeconds,
       playerName: this.playerName
     })
