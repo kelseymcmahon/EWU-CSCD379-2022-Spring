@@ -64,9 +64,9 @@ export default {
           secondary: colors.orange.darken2,
           nav: colors.blueGrey.lighten5,
           info: colors.blueGrey.lighten2,
-          warning: colors.amber.base,
+          warning: '#fa8b34',
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3,
+          success: '#17cee6',
         },
 
         dark: {
@@ -74,9 +74,9 @@ export default {
           accent: colors.cyan.accent3,
           secondary: colors.orange.darken2,
           info: colors.blueGrey.lighten2,
-          warning: colors.amber.base,
+          warning: '#fa8b34',
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3,
+          success: '#17cee6',
         },
       },
     },

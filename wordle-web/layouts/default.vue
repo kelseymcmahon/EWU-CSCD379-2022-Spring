@@ -1,4 +1,4 @@
-<template>
+<template >
   <v-app light>
     <v-app-bar
         dense
@@ -12,7 +12,7 @@
         <settings-dialog />
         <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
       </v-app-bar>
-    <v-main>
+    <v-main class="main-page">
       <v-container>
         <Nuxt />
       </v-container>
@@ -86,4 +86,16 @@ export default class DefaultLayout extends Vue {
   dialog = false
 }
 </script>
+
+<style>
+.main-page {
+  background: url(static\wordle-bg.svg) bottom center no-repeat;
+}
+
+@media (max-width: 500px) {
+    .main-page {
+        background: url(static\wordle-bg-mobile.svg) bottom center no-repeat;
+    }
+}
+</style>
 

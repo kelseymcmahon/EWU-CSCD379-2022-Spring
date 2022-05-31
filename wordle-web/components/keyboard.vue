@@ -6,23 +6,23 @@
       <v-col v-for="char in charRow" :key="char" cols="1" style="box-sizing: unset; flex-basis: 0; padding: 3px;">
         <v-btn
           height="25"
-          min-width="13"
+          min-width="18"
           light
           :color="letterColor(char)"
           style="background-color: lightgray"
           :disabled="wordleGame.gameOver"
           @click="setLetter(char)"
-          class="text-h7 font-weight-bold pa-2 ma-0"
+          class="text-h6 font-weight-bold pa-1 ma-0"
           v-if="char !== '?' && char !== 'enter' && char !== 'back'"
         >
             {{ char }}
         </v-btn>
         <v-btn
           height="25"
-          min-width="13"
+          min-width="18"
           color="primary"
           :disabled="wordleGame.gameOver"
-          class="text-h7 font-weight-bold pa-2 ma-0"
+          class="text-h6 font-weight-bold pa-1 ma-0"
           v-if="char === '?'"
           @click="setLetter('?')">
             ?
@@ -31,19 +31,18 @@
     <v-spacer />
     </v-row>
     <v-row class="ma-1">
-    <v-col align="center">
+    <v-col align="center" class="pa-2">
       <valid-words :wordle-game="wordleGame" />
     </v-col>
-    <v-col align="center">
+    <v-col align="center" class="pa-2">
       <v-btn
         color="primary"
         :disabled="wordleGame.gameOver"
-        min-width="80px"
         @click="guessWord">
           enter
       </v-btn>
     </v-col>
-    <v-col align="center">
+    <v-col align="center" class="pa-2">
         <v-btn
           color="primary"
           :disabled="wordleGame.gameOver"
@@ -185,8 +184,4 @@ export default class KeyBoard extends Vue {
   padding: 10px;
 }
 
-.letter-text {
-  font-weight: bold;
-  font-size: 20px;
-}
 </style>

@@ -1,6 +1,7 @@
 <template>
   <v-container fluid fill-height class="pa-0">
-    <v-btn outlined absolute top right color="primary" @click="dialog = true">
+
+    <v-btn v-if="!isMobile()" outlined absolute top right color="primary" @click="dialog = true">
       <v-icon primary> mdi-account </v-icon>
       {{ playerName }}
     </v-btn>
@@ -22,6 +23,13 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+
+    <v-row v-if="isMobile()">
+      <v-btn block small tile color="primary" @click="dialog = true" class="mt-2 mb-2">
+      <v-icon primary> mdi-account </v-icon>
+      {{ playerName }}
+    </v-btn>
+    </v-row>
 
     <v-row>
       <v-spacer />
@@ -70,6 +78,10 @@ export default class DailyWordGame extends Vue {
   endTime: number = 0
   intervalID: any
   overlay = true;
+
+  isMobile() {
+    return this.$vuetify.breakpoint.xsOnly;
+  }
 
   mounted() {
     setTimeout(() => this.startTimer(), 5000)

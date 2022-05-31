@@ -105,6 +105,12 @@
 
 <style>
 .word-logo {
-  height: 20px;
+  height: 28px;
+}
+
+@media (max-width: 455px) {
+    .word-logo {
+        height: 18px;
+    }
 }
 </style>
