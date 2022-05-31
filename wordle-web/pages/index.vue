@@ -34,7 +34,13 @@
           </v-btn>
     </v-col>
     <v-col cols="12" sm="12" md="4">
-      <v-btn block color="secondary" nuxt to="/PlayerScores">
+      <v-btn block color="secondary" nuxt to="/DailyWord">
+            <v-icon> mdi-file-word-box </v-icon>
+            Play the Daily Word
+          </v-btn>
+    </v-col>
+    <v-col cols="12" sm="12" md="4">
+      <v-btn block color="info" nuxt to="/PlayerScores">
             <v-icon> mdi-equalizer </v-icon>
             Player Scores
           </v-btn>

@@ -30,14 +30,14 @@
 
           <v-list-item nuxt to="/Game">
             <v-list-item-icon>
-              <v-icon>mdi-clippy</v-icon>
+              <v-icon>mdi-file-word-box</v-icon>
             </v-list-item-icon>
             <v-list-item-title>Game</v-list-item-title>
           </v-list-item>
 
           <v-list-item nuxt to="/DailyWord">
             <v-list-item-icon>
-              <v-icon>mdi-clippy</v-icon>
+              <v-icon>mdi-file-word-box </v-icon>
             </v-list-item-icon>
             <v-list-item-title>Daily Word Game</v-list-item-title>
           </v-list-item>

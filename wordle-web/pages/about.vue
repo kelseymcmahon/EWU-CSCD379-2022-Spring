@@ -18,15 +18,21 @@
     <v-spacer />
     <v-col cols="12" sm="12" md="4">
       <v-btn block color="primary" nuxt to="/Game">
-        <v-icon> mdi-home </v-icon>
-        Back Home 
-      </v-btn>
+            <v-icon> mdi-cat </v-icon>
+            Play the Game 
+          </v-btn>
     </v-col>
     <v-col cols="12" sm="12" md="4">
-      <v-btn block color="secondary" nuxt to="/PlayerScores">
-        <v-icon> mdi-cat </v-icon>
-        Play the Game
-      </v-btn>
+      <v-btn block color="secondary" nuxt to="/DailyWord">
+            <v-icon> mdi-file-word-box </v-icon>
+            Play the Daily Word
+          </v-btn>
+    </v-col>
+    <v-col cols="12" sm="12" md="4">
+      <v-btn block color="info" nuxt to="/PlayerScores">
+            <v-icon> mdi-equalizer </v-icon>
+            Player Scores
+          </v-btn>
     </v-col>
     <v-spacer />
   </v-row>
