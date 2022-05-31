@@ -1,11 +1,11 @@
 <template>
   <v-container fluid fill-height justify-center>
-    <v-card class="pa-5" :loading=getData>
+    <v-card class="pa-5" :loading="getData">
       <v-card-title>
         <h1 class="display-1">Daily Word Game Scores</h1>
       </v-card-title>
       <v-card-text>
-        <v-simple-table loading >
+        <v-simple-table loading>
           <thead>
             <tr>
               <th>Date</th>
@@ -36,20 +36,20 @@ import { Component, Vue } from 'vue-property-decorator'
 @Component({})
 export default class DailyWordScores extends Vue {
   stats: any = []
-  getData = true;
+  getData = true
 
   mounted() {
     this.$axios.get('/DateWord/GetLast10DateWords').then((response) => {
       this.stats = response.data
-      this.getData = false;
+      this.getData = false
     })
   }
 
   refreshStats() {
-    this.getData = true;
+    this.getData = true
     this.$axios.get('/DateWord/GetLast10DateWords').then((response) => {
       this.stats = response.data
-      this.getData = false;
+      this.getData = false
     })
   }
 }

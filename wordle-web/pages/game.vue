@@ -1,34 +1,58 @@
 <template>
   <v-container fluid fill-height class="pa-0">
-
-    <v-btn v-if="!isMobile()" outlined absolute top right color="primary" @click="dialog = true">
+    <v-btn
+      v-if="!isMobile()"
+      outlined
+      absolute
+      top
+      right
+      color="primary"
+      @click="dialog = true"
+    >
       <v-icon primary> mdi-account </v-icon>
       {{ playerName }}
     </v-btn>
-    
+
     <v-dialog v-model="dialog" width="450" persistent>
       <v-card>
         <v-card-title>Enter Your Name!</v-card-title>
         <v-card-text>
           Add you name to our score board so you can save your game scores!
-          <v-text-field 
-            v-model="playerName"
-            type="text"
-            placeholder="Guest">
+          <v-text-field v-model="playerName" type="text" placeholder="Guest">
           </v-text-field>
         </v-card-text>
         <v-card-actions>
-          <v-btn @click=";(dialog = false), setUserName(playerName)"> Save </v-btn>
+          <v-btn @click=";(dialog = false), setUserName(playerName)">
+            Save
+          </v-btn>
           <v-btn @click="dialog = false"> I prefer to remain nameless </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
 
+    <v-row>
+      <v-spacer />
+      <v-col cols="12" sm="8" md="6" 
+        justify="center" 
+        align="center" 
+        class="text-h6 font-weight-bold">
+        Endless Word Game
+      </v-col>
+      <v-spacer />
+    </v-row>
+
     <v-row v-if="isMobile()">
-      <v-btn block small tile color="primary" @click="dialog = true" class="mt-2 mb-2">
-      <v-icon primary> mdi-account </v-icon>
-      {{ playerName }}
-    </v-btn>
+      <v-btn
+        block
+        small
+        tile
+        color="primary"
+        class="mt-2 mb-2"
+        @click="dialog = true"
+      >
+        <v-icon primary> mdi-account </v-icon>
+        {{ playerName }}
+      </v-btn>
     </v-row>
 
     <v-row>
@@ -44,17 +68,11 @@
 
     <keyboard :wordle-game="wordleGame" />
 
-    <v-overlay v-if="this.overlay">
-
-        <v-progress-circular
-          indeterminate
-          absolute
-          size="64">
-        </v-progress-circular>
-        <br>
-        <v-chip class="ma-2" outlined>
-          Getting Daily Word ...
-        </v-chip>
+    <v-overlay v-if="overlay">
+      <v-progress-circular indeterminate absolute size="64">
+      </v-progress-circular>
+      <br />
+      <v-chip class="ma-2" outlined> Getting Game Word ... </v-chip>
     </v-overlay>
   </v-container>
 </template>
@@ -68,7 +86,7 @@ import { Word } from '~/scripts/word'
 
 @Component({ components: { KeyBoard, GameBoard } })
 export default class DailyWordGame extends Vue {
-  word: string = ""
+  word: string = ''
   wordleGame = new WordleGame(this.word)
   playerName = ''
   dialog = false
@@ -77,10 +95,10 @@ export default class DailyWordGame extends Vue {
   startTime: number = 0
   endTime: number = 0
   intervalID: any
-  overlay = true;
+  overlay = true
 
   isMobile() {
-    return this.$vuetify.breakpoint.xsOnly;
+    return this.$vuetify.breakpoint.xsOnly
   }
 
   mounted() {
@@ -90,13 +108,16 @@ export default class DailyWordGame extends Vue {
   }
 
   getRandomWord() {
-    this.overlay = true;
-    this.$axios.get('/DateWord/GetRandomWord').then((response) => {
-      this.word = response.data  
-    }).finally(() => {
-      this.overlay = false
-      this.wordleGame = new WordleGame(this.word)
-    });
+    this.overlay = true
+    this.$axios
+      .get('/DateWord/GetRandomWord')
+      .then((response) => {
+        this.word = response.data
+      })
+      .finally(() => {
+        this.overlay = false
+        this.wordleGame = new WordleGame(this.word)
+      })
   }
 
   resetGame() {

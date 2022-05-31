@@ -1,17 +1,14 @@
-<template >
+<template>
   <v-app light>
-    <v-app-bar
-        dense
-        max-height="50"
-      >  
-        <router-link to="/">
-        <game-logo  />
-        </router-link>
-        <v-spacer />
-        <help />
-        <settings-dialog />
-        <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-      </v-app-bar>
+    <v-app-bar dense max-height="50">
+      <router-link to="/">
+        <game-logo />
+      </router-link>
+      <v-spacer />
+      <help />
+      <settings-dialog />
+      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+    </v-app-bar>
     <v-main class="main-page">
       <v-container>
         <Nuxt />
@@ -62,7 +59,6 @@
             </v-list-item-icon>
             <v-list-item-title>About</v-list-item-title>
           </v-list-item>
-
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
@@ -93,9 +89,8 @@ export default class DefaultLayout extends Vue {
 }
 
 @media (max-width: 500px) {
-    .main-page {
-        background: url(static\wordle-bg-mobile.svg) bottom center no-repeat;
-    }
+  .main-page {
+    background: url(static\wordle-bg-mobile.svg) bottom center no-repeat;
+  }
 }
 </style>
-
