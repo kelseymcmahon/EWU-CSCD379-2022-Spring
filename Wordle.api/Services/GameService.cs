@@ -182,7 +182,7 @@ public class GameService
     {
         //Sanitize the date by dropping time data
         date = date.Date;
-        if (date.ToUniversalTime() >= System.DateTime.Today.ToUniversalTime().AddDays(0.5))
+        if (date.ToUniversalTime() >= DateTime.Today.ToUniversalTime().AddDays(0.5))
         {
             return null;
         }

@@ -7,7 +7,7 @@
       <v-spacer />
       <help />
       <settings-dialog />
-      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="drawer = true" />
     </v-app-bar>
     <v-main class="main-page">
       <v-container>
@@ -15,9 +15,9 @@
       </v-container>
     </v-main>
 
-    <v-navigation-drawer v-model="drawer" absolute temporary right>
+    <v-navigation-drawer v-model="drawer" app temporary right>
       <v-list nav dense>
-        <v-list-item-group v-model="group" color="secondary">
+        <v-list-item-group color="secondary">
           <v-list-item nuxt to="/">
             <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
@@ -63,7 +63,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-footer :absolute="!fixed" app>
+    <v-footer app>
       <v-spacer />
       <span>&copy; Kelsey McMahon {{ new Date().getFullYear() }}</span>
       <v-spacer />

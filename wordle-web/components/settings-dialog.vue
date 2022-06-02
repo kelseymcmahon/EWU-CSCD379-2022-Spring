@@ -10,7 +10,6 @@
         <v-card-text>
           Choose a theme:
           <v-switch
-            v-model="switch1"
             inset
             :label="message"
             @click="toggleDarkMode"
