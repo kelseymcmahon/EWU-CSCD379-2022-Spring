@@ -3,6 +3,7 @@ using System.Linq;
 using static Wordle.api.Data.Game;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Concurrent;
+using Wordle.api.Dtos;
 
 namespace Wordle.api.Services;
 
@@ -149,10 +150,19 @@ public class GameService
         }
     }
 
-    public IEnumerable<DateWord> GetLast10DateWords()
+    public IEnumerable<DateWordDto> GetLast10DateWords(string playerName = "guest")
     {
+        var player = _context.Players
+            .FirstOrDefault(x => (x.Name ?? "").ToLower() == playerName.ToLower());
+        var playerId = player?.PlayerId ?? -1;
+
         var result = _context.DateWords.OrderByDescending(x => x.Date).Take(10);
-        return result;
+        var dateWords = result.Select(word => new DateWordDto(word)
+        {
+            PlayedByPlayer = _context.Games.Where(g => g.PlayerId == playerId && g.WordId == word.WordId).Any()
+        });
+
+        return dateWords;
     }
 
     public void FinishGame(int gameId)

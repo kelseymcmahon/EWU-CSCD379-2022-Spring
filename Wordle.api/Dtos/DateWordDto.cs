@@ -8,6 +8,7 @@ public class DateWordDto
     public double AverageSeconds { get; set; }
     public double AverageAttempts { get; set; }
     public int GameCount { get; set; }
+    public bool PlayedByPlayer { get; set; }
 
     public DateWordDto(DateWord dateWord)
     {

@@ -36,9 +36,9 @@ public class DateWordController : Controller
 
     [Route("[action]")]
     [HttpGet]
-    public IEnumerable<DateWord> GetLast10DateWords()
+    public IEnumerable<DateWordDto> GetLast10DateWords(string playerName)
     {
-        return _gameService.GetLast10DateWords();
+        return _gameService.GetLast10DateWords(playerName);
     }
 
     [HttpPost]

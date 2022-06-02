@@ -20,6 +20,9 @@
               <td>{{ stat.averageSeconds }}</td>
               <td>{{ stat.averageAttempts }}</td>
               <td>{{ stat.gameCount }}</td>
+              <td style="text-align: center">
+                <v-checkbox v-model="stat.playedByPlayer" disabled />
+              </td>
             </tr>
           </tbody>
         </v-simple-table>
@@ -39,18 +42,27 @@ export default class DailyWordScores extends Vue {
   getData = true
 
   mounted() {
-    this.$axios.get('/DateWord/GetLast10DateWords').then((response) => {
+this.getStats();
+  }
+
+  refreshStats() {
+    this.getData = true
+this.getStats();
+  }
+
+  getStats(){
+    this.$axios.get(`/DateWord/GetLast10DateWords`, { params: {playerName: this.userName}}).then((response) => {
       this.stats = response.data
       this.getData = false
     })
   }
 
-  refreshStats() {
-    this.getData = true
-    this.$axios.get('/DateWord/GetLast10DateWords').then((response) => {
-      this.stats = response.data
-      this.getData = false
-    })
-  }
+    get userName() {
+      const userName = localStorage.getItem('userName')
+      if (userName == null || userName === '') {
+        return 'Guest'
+      }
+        return userName
+    }
 }
 </script>

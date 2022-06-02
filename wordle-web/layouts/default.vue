@@ -59,6 +59,13 @@
             </v-list-item-icon>
             <v-list-item-title>About</v-list-item-title>
           </v-list-item>
+
+          <v-list-item nuxt to="/Instructions">
+            <v-list-item-icon>
+              <v-icon>mdi-cat</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Instructions</v-list-item-title>
+          </v-list-item>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
