@@ -4,6 +4,7 @@ namespace Wordle.Api.Identity;
 public static class Policies
 {
     public const string RandomAdmin = "RandomAdmin";
+    public const string MotuWordAccess = "MotuWordAccess";
 
     public static void RandomAdminPolicy(AuthorizationPolicyBuilder policy)
     {
@@ -16,6 +17,23 @@ public static class Policies
                 return result > 0.5;
             }
             return false;
+        });
+    }
+
+    public static void MotuWordAccessPolicy(AuthorizationPolicyBuilder policy)
+    {
+        policy.RequireRole(Roles.MasterOfTheUniverse);
+
+        policy.RequireAssertion(context =>
+        {
+            var dob = context.User.Claims.FirstOrDefault(x => x.Type == Claims.Dob);
+            if (DateTime.TryParse(dob?.Value, out DateTime birthDate))
+            {
+                DateTime maturity = birthDate.AddYears(21);
+                return (maturity < DateTime.UtcNow);
+            }
+            return false;
+
         });
     }
 }

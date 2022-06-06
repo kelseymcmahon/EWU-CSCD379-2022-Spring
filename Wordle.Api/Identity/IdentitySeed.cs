@@ -12,6 +12,8 @@ namespace Wordle.Api.Identity
 
             // Seed Admin User
             await SeedAdminUserAsync(userManager);
+
+            await SeedUsersAsync(userManager);
         }
 
         private static async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
@@ -24,6 +26,10 @@ namespace Wordle.Api.Identity
             if (!await roleManager.RoleExistsAsync(Roles.Grant))
             {
                 await roleManager.CreateAsync(new IdentityRole(Roles.Grant));
+            }
+            if (!await roleManager.RoleExistsAsync(Roles.MasterOfTheUniverse))
+            {
+                await roleManager.CreateAsync(new IdentityRole(Roles.MasterOfTheUniverse));
             }
         }
 
@@ -45,6 +51,64 @@ namespace Wordle.Api.Identity
                     await userManager.AddToRoleAsync(user, Roles.Admin);
                     await userManager.AddToRoleAsync(user, Roles.Grant);
                 }
+            }
+        }
+
+        private static async Task SeedUsersAsync(UserManager<AppUser> userManager) //Have to figure out how to set Dob for these to be meaningful
+        {
+            // Seed Admin User
+            if (await userManager.FindByNameAsync("Motu@intellitect.com") == null)
+            {
+                AppUser user = new AppUser
+                {
+                    UserName = "Motu@intellitect.com",
+                    Email = "Motu@intellitect.com",
+                    Dob = DateTime.Today.AddYears(-50)
+                };
+
+                IdentityResult result = userManager.CreateAsync(user, "P@ssw0rd123").Result;
+
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(user, Roles.MasterOfTheUniverse);
+                }
+            }
+
+            if (await userManager.FindByNameAsync("MotuUnderage@intellitect.com") == null) 
+            {
+                AppUser user = new AppUser
+                {
+                    UserName = "MotuUnderage@intellitect.com",
+                    Email = "MotuUnderage@intellitect.com",
+                    Dob = DateTime.Today.AddYears(-5)
+                };
+
+                IdentityResult result = userManager.CreateAsync(user, "P@ssw0rd123").Result;
+
+            }
+
+            if (await userManager.FindByNameAsync("Ms20@intellitect.com") == null) 
+            {
+                AppUser user = new AppUser
+                {
+                    UserName = "Ms20@intellitect.com",
+                    Email = "Ms20@intellitect.com",
+                    Dob = DateTime.Today.AddYears(-20)
+                };
+
+                IdentityResult result = userManager.CreateAsync(user, "P@ssw0rd123").Result;
+            }
+
+            if (await userManager.FindByNameAsync("Mr26@intellitect.com") == null)
+            {
+                AppUser user = new AppUser
+                {
+                    UserName = "Mr26@intellitect.com",
+                    Email = "Mr26@intellitect.com",
+                    Dob = DateTime.Today.AddYears(-26)
+                };
+
+                IdentityResult result = userManager.CreateAsync(user, "P@ssw0rd123").Result;
             }
         }
     }

@@ -51,6 +51,7 @@ public class TokenController : Controller
                 new Claim("UserId", user.Id.ToString()),
                 new Claim(Claims.Random, (new Random()).NextDouble().ToString()),
                 new Claim(Claims.UserName, user.UserName.ToString().Substring(0,user.UserName.ToString().IndexOf("@"))),
+                new Claim(Claims.Dob, user.Dob.ToString())
             };
             var roles = await _userManager.GetRolesAsync(user);
             foreach (var role in roles)
@@ -85,11 +86,11 @@ public class TokenController : Controller
         return "Authorized as Admin";
     }
 
-    [HttpGet("testruleroftheuniverse")]
-    [Authorize(Roles="RulerOfTheUniverse,Meg")]
+    [HttpGet("testmasteroftheuniverse")]
+    [Authorize(Roles="Motu,Meg")]
     public string TestRulerOfTheUniverseOrMeg()
     {
-        return "Authorized as Ruler of the Universe or Meg";
+        return "Authorized as Master of the Universe or Meg";
     }
 
     [HttpGet("testrandomadmin")]
@@ -98,6 +99,7 @@ public class TokenController : Controller
     {
         return $"Authorized randomly as Random Admin with {User.Identities.First().Claims.First(c => c.Type == Claims.Random).Value}";
     }
+
 
 }
 
