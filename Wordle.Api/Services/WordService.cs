@@ -3,6 +3,7 @@ using System.Linq;
 using static Wordle.Api.Data.Game;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Concurrent;
+using Wordle.Api.Dtos;
 
 namespace Wordle.Api.Services;
 
@@ -15,12 +16,12 @@ public class WordService
         _context = context;
     }
 
-    public IEnumerable<Word> GetWordList(int wordsPerPage, int pageNum, string wordFilter)
+    public IEnumerable<Word> GetWordList(WordPackage searchRequest)
     {
         var result = _context.Words
-            .Where(x => x.Value.StartsWith(wordFilter))
-            .Skip(pageNum * wordsPerPage - wordsPerPage)
-            .Take(wordsPerPage)
+            .Where(x => x.Value.StartsWith(searchRequest.WordFilter))
+            .Skip( (searchRequest.PageNum - 1)* searchRequest.WordsPerPage)
+            .Take(searchRequest.WordsPerPage)
             .OrderBy(x => x.Value);
         return result;
     }

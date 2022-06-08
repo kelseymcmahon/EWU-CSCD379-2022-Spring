@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Wordle.Api.Data;
+using Wordle.Api.Dtos;
 using Wordle.Api.Services;
 
 namespace Wordle.Api.Controllers;
@@ -16,13 +17,13 @@ public class WordController : ControllerBase
     }
 
     [HttpGet("GetWordsPerPage")]
-    public IEnumerable<Word> Get(int wordsPerPage, int pageNum, string wordFilter)
+    public IEnumerable<Word> Get([FromBody]WordPackage searchRequest)
     {
-        return _service.GetWordList(wordsPerPage, pageNum, wordFilter);
+        return _service.GetWordList(searchRequest);
     }
 
     [HttpGet("GetTotalWordCount")] 
-    public int Get(string wordFilter)
+    public int Get([FromBody]string wordFilter)
     {
         return _service.GetTotalWordCount(wordFilter);
     }
