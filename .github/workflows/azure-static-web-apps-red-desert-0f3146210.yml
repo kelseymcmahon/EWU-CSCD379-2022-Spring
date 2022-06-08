@@ -5,13 +5,10 @@ env:
 on:
   push:
     branches:
-      - Assignment4
+      - Assignment5
     paths:
       - 'wordle-web/**'
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - Assignment4
+  workflow_dispatch:
 
 jobs:
   build_and_deploy_job:
