@@ -17,7 +17,7 @@ public class WordController : ControllerBase
     }
 
     [HttpGet("GetWordsPerPage")]
-    public IEnumerable<Word> Get([FromBody]WordPackage searchRequest)
+    public IEnumerable<Word> Get([FromBody]WordRequest searchRequest)
     {
         return _service.GetWordList(searchRequest);
     }

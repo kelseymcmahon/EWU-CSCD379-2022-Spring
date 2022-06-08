@@ -16,7 +16,7 @@ public class WordService
         _context = context;
     }
 
-    public IEnumerable<Word> GetWordList(WordPackage searchRequest)
+    public IEnumerable<Word> GetWordList(WordRequest searchRequest)
     {
         var result = _context.Words
             .Where(x => x.Value.StartsWith(searchRequest.WordFilter))
