@@ -45,6 +45,12 @@
         </v-list-item>
 
         <v-list-item>
+          <v-btn text block nuxt to="/wordEditor">
+            Word Editor <v-icon>mdi-word</v-icon>
+          </v-btn>
+        </v-list-item>
+
+        <v-list-item>
           <v-btn text block>
             <SettingsDialog />
           </v-btn>
