@@ -22,10 +22,22 @@ public class WordController : ControllerBase
         return _service.GetWordList(wordsPerPage, pageNum, wordFilter);
     }
 
-    [HttpGet("GetTotalWordCount")] 
-    public int Get([FromBody]string wordFilter)
+    [HttpGet("GetTotalWordCount")]
+    public int Get(string wordFilter)
     {
         return _service.GetTotalWordCount(wordFilter);
+    }
+
+    [HttpPost("AddWord")]
+    public void AddWord(string newWord)
+    {
+        _service.AddWord(newWord);
+    }
+
+    [HttpPost("ChangeWordCommon")]
+    public void ChangeWordCommon(string givenWord, bool common)
+    {
+        _service.ChangeWordCommon(givenWord, common);
     }
 }
 
