@@ -20,13 +20,13 @@ The purpose of this assignment is to solidify your learning of:
 ### Create an editor for the available words ❌✅
   - Create a page named "WordEditor" that allows words to be edited ❌✅
     - Support deleting a word ❌✅
-    - Support adding a new word ❌✅
-    - Editing words is not supported ❌✅
-    - Duplicate words should not be allowed ❌✅
-    - Support changing the common word boolean flag ❌✅
-    - Words should be sorted alphabetically ❌✅
-  - Provide a text box for searching words AS YOU TYPE which supports searching for words starting with letters specified ❌✅
-  - Provide a menu item for navigating to the WordEditor page ❌✅
+    - Support adding a new word ✅
+    - Editing words is not supported ✅
+    - Duplicate words should not be allowed ✅ - add a UX for this on front
+    - Support changing the common word boolean flag ✅
+    - Words should be sorted alphabetically ✅
+  - Provide a text box for searching words AS YOU TYPE which supports searching for words starting with letters specified ✅
+  - Provide a menu item for navigating to the WordEditor page ✅
     - Anyone can look at the word list ❌✅
     - Word list is paginated (10-100 per page) ❌✅
   - Any logged in user can change the common word flag ❌✅
