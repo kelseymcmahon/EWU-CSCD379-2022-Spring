@@ -41,9 +41,9 @@
       </v-card-text>
       <v-card-actions>
           <v-pagination
-        v-model="currentPage"
-        :length="totalPages"
-        @input="nextPage"
+        v-model="this.currentPage"
+        :length="this.totalPages"
+        @input="this.nextPage"
       ></v-pagination>
       </v-card-actions>
     </v-card>    
@@ -55,17 +55,17 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
 @Component({})
 export default class WordEditor extends Vue {
   stats: any = []
-  getData = true
-  pageNum = 1;
-  wordsPerPage = 20;
-  totalPages = 10;
-  wordFilter = "a"
+  getData: boolean = true
+  pageNum: number = 1;
+  wordsPerPage: number = 20;
+  totalPages: number = 10;
+  wordFilter: string = "a"
 
   mounted() {
     var wordsPerPage = this.wordsPerPage
     var pageNum = this.pageNum
     var wordFilter = this.wordFilter
-    this.$axios.get('/api/Word/GetWordsPerPage', { params: { wordsPerPage, pageNum, wordFilter } }).then((response) => {
+    this.$axios.get('/api/Word/GetWordsPerPage', { params: { wordsPerPage : wordsPerPage, pageNum : pageNum, wordFilter : wordFilter } }).then((response) => {
       this.stats = response.data
     })
     this.$axios.get('/api/Word/GetTotalWordCount', { params: { wordFilter } }).then((response) => {
@@ -82,10 +82,6 @@ export default class WordEditor extends Vue {
             this.stats = response.data
         })
     }
-
-//   nextPage(value) {
-//     this.currentPage = value;
-//   }
 
 }
 </script>

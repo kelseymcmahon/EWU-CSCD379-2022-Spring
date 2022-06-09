@@ -16,12 +16,12 @@ public class WordService
         _context = context;
     }
 
-    public IEnumerable<Word> GetWordList(WordRequest searchRequest)
+    public IEnumerable<Word> GetWordList(int wordsPerPage, int pageNum, string wordFilter)
     {
         var result = _context.Words
-            .Where(x => x.Value.StartsWith(searchRequest.WordFilter))
-            .Skip( (searchRequest.PageNum - 1)* searchRequest.WordsPerPage)
-            .Take(searchRequest.WordsPerPage)
+            .Where(x => x.Value.StartsWith(wordFilter))
+            .Skip( (pageNum - 1)* wordsPerPage)
+            .Take(wordsPerPage)
             .OrderBy(x => x.Value);
         return result;
     }
