@@ -63,6 +63,12 @@ public class WordService
                 });
 
                 _context.SaveChanges();
+            } else {
+                if (!word.Active)
+                {
+                    word.Active = true;
+                    _context.SaveChanges();
+                }
             }
         }
     }
