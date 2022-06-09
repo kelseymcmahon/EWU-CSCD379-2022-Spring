@@ -51,9 +51,9 @@
       </v-card-text>
       <v-card-actions>
           <v-pagination
-        v-model="this.currentPage"
-        :length="this.totalPages"
-        @input="this.nextPage"
+        v-model="currentPage"
+        :length="totalPages"
+        @input="accessPage"
       ></v-pagination>
       </v-card-actions>
     </v-card>    
@@ -64,11 +64,14 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
 @Component({})
 export default class WordEditor extends Vue {
+  
+  currentPage: number= 1
+
   stats: any = []
   getData: boolean = true
-  pageNum: number = 1;
-  wordsPerPage: number = 20;
-  totalPages: number = 10;
+  pageNum: number = 1
+  wordsPerPage: number = 20
+  totalPages: number = 10
   wordFilter: string = "a"
   newWord = ""
 
@@ -112,6 +115,12 @@ export default class WordEditor extends Vue {
         console.log(response)
         console.log("Changed word " + word + " with added common: " + common)
       })
+  }
+
+  accessPage(newPage : number){
+    console.log(newPage);
+    this.pageNum = newPage
+    this.doSomething();
   }
 
 }

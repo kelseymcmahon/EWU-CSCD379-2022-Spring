@@ -19,7 +19,7 @@ public class WordService
     public IEnumerable<Word> GetWordList(int wordsPerPage, int pageNum, string wordFilter)
     {
 
-        if (String.IsNullOrEmpty(wordFilter))
+        if (String.IsNullOrWhiteSpace(wordFilter))
         {
             var result = _context.Words
                 .Skip((pageNum - 1) * wordsPerPage)
