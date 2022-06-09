@@ -41,7 +41,7 @@
                 @click="changeCommon(stat.value, stat.common)"
               ></v-checkbox></td>
               <td> 
-                <v-btn icon> 
+                <v-btn icon @click="deleteWord(stat.value)"> 
                     <v-icon small> mdi-delete </v-icon>
                 </v-btn>
               </td>
@@ -102,7 +102,9 @@ export default class WordEditor extends Vue {
         console.log(response)
         console.log("Added word " + this.newWord)
         this.newWord = ""
+        this.doSomething()
       })
+      
   }
 
   changeCommon(word : string, common : boolean) {
@@ -112,6 +114,17 @@ export default class WordEditor extends Vue {
         console.log(response)
         console.log("Changed word " + word + " with added common: " + common)
       })
+  }
+
+  deleteWord(word : string) {
+    this.$axios.post('/api/Word/DeleteWord', null, {
+        params: { givenWord: word }
+      }).then((response) => {
+        console.log(response)
+        console.log("Deleted word " + word)
+        this.doSomething()
+      })
+    
   }
 
 }
