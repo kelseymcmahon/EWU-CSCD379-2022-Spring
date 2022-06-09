@@ -41,7 +41,7 @@ public class WordController : ControllerBase
     }
 
     [HttpPut("DeleteWord")]
-    public void DeleteWord(string givenWord)
+    public void DeleteWord([FromBody]string givenWord)
     {
         _service.DeleteWord(givenWord);
     }
