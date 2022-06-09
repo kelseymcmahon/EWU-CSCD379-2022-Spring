@@ -30,7 +30,7 @@ public class WordService
         else
         {
             var result = _context.Words
-                .Where(x => x.Value.StartsWith(wordFilter))
+                .Where(x => x.Value.StartsWith(wordFilter) && x.Active)
                 .Skip((pageNum - 1) * wordsPerPage)
                 .Take(wordsPerPage)
                 .OrderBy(x => x.Value);
