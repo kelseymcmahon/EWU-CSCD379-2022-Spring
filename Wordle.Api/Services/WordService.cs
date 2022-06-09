@@ -18,12 +18,24 @@ public class WordService
 
     public IEnumerable<Word> GetWordList(int wordsPerPage, int pageNum, string wordFilter)
     {
-        var result = _context.Words
-            .Where(x => x.Value.StartsWith(wordFilter))
-            .Skip((pageNum - 1) * wordsPerPage)
-            .Take(wordsPerPage)
-            .OrderBy(x => x.Value);
-        return result;
+
+        if (String.IsNullOrEmpty(wordFilter))
+        {
+            var result = _context.Words
+                .Skip((pageNum - 1) * wordsPerPage)
+                .Take(wordsPerPage)
+                .OrderBy(x => x.Value);
+            return result;
+        }
+        else
+        {
+            var result = _context.Words
+                .Where(x => x.Value.StartsWith(wordFilter))
+                .Skip((pageNum - 1) * wordsPerPage)
+                .Take(wordsPerPage)
+                .OrderBy(x => x.Value);
+            return result;
+        }
     }
 
     public int GetTotalWordCount(string wordFilter)
@@ -62,6 +74,17 @@ public class WordService
         if (word != null)
         {
             word.Common = common;
+            _context.SaveChanges();
+        }
+    }
+
+    public void DeleteWord(string givenWord)
+    {
+        Word? word = _context.Words.FirstOrDefault(x => x.Value == givenWord);
+
+        if (word!= null)
+        {
+            word.Active = false;
             _context.SaveChanges();
         }
     }
