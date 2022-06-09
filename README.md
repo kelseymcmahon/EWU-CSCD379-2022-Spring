@@ -18,8 +18,8 @@ The purpose of this assignment is to solidify your learning of:
 ## Features
 
 ### Create an editor for the available words ❌✅
-  - Create a page named "WordEditor" that allows words to be edited ❌✅
-    - Support deleting a word ❌✅
+  - Create a page named "WordEditor" that allows words to be edited ✅
+    - Support deleting a word ✅
     - Support adding a new word ✅
     - Editing words is not supported ✅
     - Duplicate words should not be allowed ✅ - add a UX for this on front
