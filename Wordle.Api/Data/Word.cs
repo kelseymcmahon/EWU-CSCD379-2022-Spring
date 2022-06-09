@@ -8,6 +8,7 @@ public class Word
     public int WordId { get; set; }
     public string Value { get; set; } = null!;
     public bool Common { get; set; }
+    public bool Active { get; set; } = true;
     public ICollection<Game> Games { get; set; } = null!;
     public static void SeedWords(AppDbContext context, string filename = "Words.csv")
     {
