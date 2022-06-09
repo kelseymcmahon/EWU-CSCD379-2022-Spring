@@ -31,7 +31,7 @@ The purpose of this assignment is to solidify your learning of:
     - Word list is paginated (10-100 per page) ❌✅
   - Any logged in user can change the common word flag ❌✅
     - There is a login page for users to sign up/log in ❌✅
-  - Only users over 21 years of age (based on birthday) with a claim of MasterOfTheUniverse can add and remove words ❌✅ - *Pull JWT Token handeling from main!!
+  - Only users over 21 years of age (based on birthday) with a claim of MasterOfTheUniverse can add and remove words ❌✅ - *Pull JWT Token handeling from main!!*
   - Users can be set up at start up (apriori), there does not need to be a sign up mechanism ❌✅
 
 ## Turn in Process
