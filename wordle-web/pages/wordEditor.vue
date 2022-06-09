@@ -76,25 +76,23 @@ export default class WordEditor extends Vue {
   newWord = ""
 
   mounted() {
-    var wordsPerPage = this.wordsPerPage
-    var pageNum = this.pageNum
-    var wordFilter = this.wordFilter
-    this.$axios.get('/api/Word/GetWordsPerPage', { params: { wordsPerPage : wordsPerPage, pageNum : pageNum, wordFilter : wordFilter } }).then((response) => {
-      this.stats = response.data
-    })
-    this.$axios.get('/api/Word/GetTotalWordCount', { params: { wordFilter } }).then((response) => {
-      this.totalPages = Math.round(response.data / this.wordsPerPage)
-    })
+    this.getWords();
   }
 
   @Watch("wordFilter")
-    doSomething(){
-        var wordsPerPage = this.wordsPerPage
-        var pageNum = this.pageNum
-        var wordFilter = this.wordFilter
-        this.$axios.get('/api/Word/GetWordsPerPage', { params: { wordsPerPage, pageNum, wordFilter } }).then((response) => {
-            this.stats = response.data
-        })
+    getWords(){
+         var wordsPerPage = this.wordsPerPage
+    var pageNum = this.pageNum
+    var wordFilter = this.wordFilter
+    this.getData = true;
+    this.$axios.get('/api/Word/GetWordsPerPage', { params: { wordsPerPage : wordsPerPage, pageNum : pageNum, wordFilter : wordFilter } }).then((response) => {
+      this.stats = response.data
+
+    })
+    this.$axios.get('/api/Word/GetTotalWordCount', { params: { wordFilter } }).then((response) => {
+      this.totalPages = Math.round(response.data / this.wordsPerPage)
+      this.getData = false;
+    })
     }
 
     addWord() {
@@ -118,9 +116,8 @@ export default class WordEditor extends Vue {
   }
 
   accessPage(newPage : number){
-    console.log(newPage);
     this.pageNum = newPage
-    this.doSomething();
+    this.getWords();
   }
 
 }
