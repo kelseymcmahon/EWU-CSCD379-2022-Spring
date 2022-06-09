@@ -5,31 +5,41 @@
         <h1 class="display-1">Game Words</h1>
       </v-card-title>
       <v-card-text>
-          <v-text-field
+        <v-row>
+          <v-col>
+            <v-text-field
           v-model="wordFilter"
           append-icon="mdi-magnify"
           label="Search"
           single-line
           hide-details
         ></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field label="Add a new word" v-model="newWord"></v-text-field>
+          </v-col>
+          <v-col>
+            <v-btn @click="addWord()">Add Word</v-btn>
+          </v-col>
+        </v-row>
+          
         <v-simple-table loading>
           <thead>
             <tr>
               <th>Word</th>
               <th>Playable</th>
-              <th>Edit</th>
               <th>Delete</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(stat, index) in stats" :key="index">
               <td>{{ stat.value }}</td>
-              <td>{{ stat.common }}</td>
-              <td> 
-                <v-btn icon> 
-                    <v-icon small> mdi-pencil </v-icon>
-                </v-btn>
-              </td>
+              <td>
+                <v-checkbox
+                v-model="stat.common"
+                color="red"
+                @click="changeCommon(stat.value, stat.common)"
+              ></v-checkbox></td>
               <td> 
                 <v-btn icon> 
                     <v-icon small> mdi-delete </v-icon>
@@ -60,6 +70,7 @@ export default class WordEditor extends Vue {
   wordsPerPage: number = 20;
   totalPages: number = 10;
   wordFilter: string = "a"
+  newWord = ""
 
   mounted() {
     var wordsPerPage = this.wordsPerPage
@@ -82,6 +93,26 @@ export default class WordEditor extends Vue {
             this.stats = response.data
         })
     }
+
+    addWord() {
+      var newWord = this.newWord
+      this.$axios.post('/api/Word/AddWord', null, {
+        params: { newWord: newWord}
+      }).then((response) => {
+        console.log(response)
+        console.log("Added word " + this.newWord)
+        this.newWord = ""
+      })
+  }
+
+  changeCommon(word : string, common : boolean) {
+    this.$axios.post('/api/Word/ChangeWordCommon', null, {
+        params: { givenWord: word, common: common }
+      }).then((response) => {
+        console.log(response)
+        console.log("Changed word " + word + " with added common: " + common)
+      })
+  }
 
 }
 </script>
