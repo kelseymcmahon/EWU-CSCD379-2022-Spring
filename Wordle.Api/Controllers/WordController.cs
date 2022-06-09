@@ -40,8 +40,8 @@ public class WordController : ControllerBase
         _service.ChangeWordCommon(givenWord, common);
     }
 
-    [HttpPut("DeleteWord")]
-    public void DeleteWord([FromBody]string givenWord)
+    [HttpPost("DeleteWord")]
+    public void DeleteWord(string givenWord)
     {
         _service.DeleteWord(givenWord);
     }
