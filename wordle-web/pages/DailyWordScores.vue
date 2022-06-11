@@ -1,6 +1,6 @@
 <template>
   <v-container fluid fill-height justify-center>
-    <v-card class="pa-5" :loading=getData width="80%">
+    <v-card class="pa-5" :loading="getData" width="80%">
       <v-card-title>
         <h1 class="display-1">Daily Word Stats</h1>
       </v-card-title>
@@ -42,27 +42,31 @@ export default class DailyWordScores extends Vue {
   getData = true
 
   mounted() {
-this.getStats();
+    this.getStats()
   }
 
   refreshStats() {
     this.getData = true
-this.getStats();
+    this.getStats()
   }
 
-  getStats(){
-    this.$axios.get(`/DateWord/GetLast10DateWords`, { params: {playerName: this.userName}}).then((response) => {
-      this.stats = response.data
-      this.getData = false
-    })
+  getStats() {
+    this.$axios
+      .get(`/DateWord/GetLast10DateWords`, {
+        params: { playerName: this.userName },
+      })
+      .then((response) => {
+        this.stats = response.data
+        this.getData = false
+      })
   }
 
-    get userName() {
-      const userName = localStorage.getItem('userName')
-      if (userName == null || userName === '') {
-        return 'Guest'
-      }
-        return userName
+  get userName() {
+    const userName = localStorage.getItem('userName')
+    if (userName == null || userName === '') {
+      return 'Guest'
     }
+    return userName
+  }
 }
 </script>

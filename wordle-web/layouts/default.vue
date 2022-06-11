@@ -73,14 +73,16 @@
             </v-list-item-icon>
             <v-list-item-title>Word Editor</v-list-item-title>
           </v-list-item>
-
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
 
     <v-footer app>
       <v-spacer />
-      <span>&copy; Kelsey McMahon &#38; Ray Tanner {{ new Date().getFullYear() }}</span>
+      <span
+        >&copy; Kelsey McMahon &#38; Ray Tanner
+        {{ new Date().getFullYear() }}</span
+      >
       <v-spacer />
     </v-footer>
   </v-app>

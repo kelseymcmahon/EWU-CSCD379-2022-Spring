@@ -9,12 +9,7 @@
         <v-card-title>Settings</v-card-title>
         <v-card-text>
           Choose a theme:
-          <v-switch
-            inset
-            :label="message"
-            @click="toggleDarkMode"
-          >
-          </v-switch>
+          <v-switch inset :label="message" @click="toggleDarkMode"> </v-switch>
 
           Choose a color:
           <v-list>

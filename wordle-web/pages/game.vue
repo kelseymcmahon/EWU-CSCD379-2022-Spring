@@ -32,10 +32,14 @@
 
     <v-row>
       <v-spacer />
-      <v-col cols="12" sm="8" md="6" 
-        justify="center" 
-        align="center" 
-        class="text-h6 font-weight-bold">
+      <v-col
+        cols="12"
+        sm="8"
+        md="6"
+        justify="center"
+        align="center"
+        class="text-h6 font-weight-bold"
+      >
         Endless Word Game
       </v-col>
       <v-spacer />
@@ -98,11 +102,13 @@ export default class DailyWordGame extends Vue {
   isMobile() {
     return this.$vuetify.breakpoint.xsOnly
   }
+
   mounted() {
     setTimeout(() => this.startTimer(), 5000)
     this.retrieveUserName()
     this.getRandomWord()
   }
+
   getRandomWord() {
     this.overlay = true
     this.$axios
@@ -115,11 +121,13 @@ export default class DailyWordGame extends Vue {
         this.wordleGame = new WordleGame(this.word)
       })
   }
+
   resetGame() {
     this.getRandomWord()
     this.timeInSeconds = 0
     this.startTimer()
   }
+
   get gameResult() {
     this.stopTimer()
     this.timeInSeconds = Math.floor(this.endTime - this.startTime)
@@ -142,6 +150,7 @@ export default class DailyWordGame extends Vue {
     }
     return { type: '', text: '' }
   }
+
   getLetter(row: number, index: number) {
     const word: Word = this.wordleGame.words[row - 1]
     if (word !== undefined) {
@@ -149,6 +158,7 @@ export default class DailyWordGame extends Vue {
     }
     return ''
   }
+
   retrieveUserName() {
     const userName = localStorage.getItem('userName')
     if (userName == null) {
@@ -157,23 +167,28 @@ export default class DailyWordGame extends Vue {
       this.playerName = userName
     }
   }
+
   setUserName(userName: string) {
     localStorage.setItem('userName', userName)
     if (this.wordleGame.state === GameState.Won) {
       this.endGameSave()
     }
   }
+
   startTimer() {
     this.startTime = Date.now() / 1000
     this.intervalID = setInterval(this.updateTimer, 1000)
   }
+
   updateTimer() {
     this.timeInSeconds = Math.floor(Date.now() / 1000 - this.startTime)
   }
+
   stopTimer() {
     this.endTime = Date.now() / 1000
     clearInterval(this.intervalID)
   }
+
   endGameSave() {
     this.$axios.post('/api/Players', {
       name: this.playerName,

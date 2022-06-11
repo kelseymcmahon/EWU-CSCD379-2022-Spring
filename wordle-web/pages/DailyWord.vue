@@ -29,13 +29,17 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    
+
     <v-row>
       <v-spacer />
-      <v-col cols="12" sm="8" md="6" 
-        justify="center" 
-        align="center" 
-        class="text-h6 font-weight-bold">
+      <v-col
+        cols="12"
+        sm="8"
+        md="6"
+        justify="center"
+        align="center"
+        class="text-h6 font-weight-bold"
+      >
         Daily Word Game
       </v-col>
       <v-spacer />
