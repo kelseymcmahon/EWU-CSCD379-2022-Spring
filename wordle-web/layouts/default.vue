@@ -62,7 +62,6 @@
 
           <v-list-item nuxt to="/Instructions">
             <v-list-item-icon>
-<<<<<<< HEAD
               <v-icon>mdi-help-circle</v-icon>
             </v-list-item-icon>
             <v-list-item-title>How To Play</v-list-item-title>
@@ -75,12 +74,6 @@
             <v-list-item-title>Word Editor</v-list-item-title>
           </v-list-item>
 
-=======
-              <v-icon>mdi-cat</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Instructions</v-list-item-title>
-          </v-list-item>
->>>>>>> f97a5a1a30f8e142b94295d0f8a45642156b296c
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>

@@ -72,11 +72,7 @@
       <v-progress-circular indeterminate absolute size="64">
       </v-progress-circular>
       <br />
-<<<<<<< HEAD
       Getting Game Word ...
-=======
-      <v-chip class="ma-2" outlined> Getting Game Word ... </v-chip>
->>>>>>> f97a5a1a30f8e142b94295d0f8a45642156b296c
     </v-overlay>
   </v-container>
 </template>
@@ -99,10 +95,6 @@ export default class DailyWordGame extends Vue {
   endTime: number = 0
   intervalID: any
   overlay = true
-<<<<<<< HEAD
-=======
-
->>>>>>> f97a5a1a30f8e142b94295d0f8a45642156b296c
   isMobile() {
     return this.$vuetify.breakpoint.xsOnly
   }
