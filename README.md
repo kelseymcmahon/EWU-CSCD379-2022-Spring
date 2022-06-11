@@ -17,7 +17,7 @@ The purpose of this assignment is to solidify your learning of:
 
 ## Features
 
-### Create an editor for the available words ❌✅
+### Create an editor for the available words ✅
   - Create a page named "WordEditor" that allows words to be edited ✅
     - Support deleting a word ✅
     - Support adding a new word ✅
@@ -29,7 +29,7 @@ The purpose of this assignment is to solidify your learning of:
   - Provide a menu item for navigating to the WordEditor page ✅
     - Anyone can look at the word list ✅
     - Word list is paginated (10-100 per page) ✅
-  - Any logged in user can change the common word flag ❌✅
+  - Any logged in user can change the common word flag ✅
     - There is a login page for users to sign up/log in ✅
   - Only users over 21 years of age (based on birthday) with a claim of MasterOfTheUniverse can add and remove words ✅ - **Pull JWT Token handeling from main!!**
   - Users can be set up at start up (apriori), there does not need to be a sign up mechanism ✅
