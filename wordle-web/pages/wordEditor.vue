@@ -23,7 +23,7 @@
             
           </v-col>
           <v-col>
-            <LoginPopUp />
+            <LoginPopUp @loginSuccess="loginSuccess" />
           </v-col>
           <v-col>
             <v-select
@@ -48,6 +48,7 @@
               <td>{{ word.value }}</td>
               <td>
                 <v-checkbox
+                :disabled="!isUser"
                 v-model="word.common"
                 color="red"
                 @click="changeCommon(word.value, word.common)"
@@ -64,7 +65,7 @@
       </v-card-text>
       <v-card-actions>
           <v-pagination
-        v-model="currentPage"
+        v-model="pageNum"
         :length="totalPages"
         @input="accessPage"
       ></v-pagination>
@@ -83,13 +84,13 @@ import { JWT } from '~/scripts/jwt';
 export default class WordEditor extends Vue {
 
   pageNum: number = 1
-  currentPage: number= 1
   words: any = []
   getData: boolean = true
   hasAuth: boolean = false;
+  isUser: boolean = false;
   totalPages: number = 10
   wordsPerPage: number = 20
-  wordFilter: string = "a"
+  wordFilter: string | null = "a"
   newWord = ""
   items = [5, 10, 15, 20]
 
@@ -97,63 +98,34 @@ export default class WordEditor extends Vue {
     this.getWords();
   }
 
-  // mounted() {
-  //   if (!this.stopwatch.isRunning) {
-  //     this.stopwatch.Start()
-  //   }
-  //   this.retrieveUserName()
-  //   setTimeout(() => {
-  //     this.isLoaded = true
-  //   }, 2500)
-  //   this.$axios
-  //     .post('Token/GetToken', {
-  //       username: 'Admin@intellitect.com',
-  //       password: 'P@ssw0rd123',
-  //     })
-  //     .then((result) => {
-  //       JWT.setToken(result.data.token, this.$axios)
-  //       // console.log(result)
-  //       console.log(JWT.tokenData)
-  //       console.log(JWT.tokenData.roles)
-  //       // this.$axios.defaults.headers.common.Authorization =
-  //       //   'Bearer ' + result.data.token
-  //       this.$axios.get('Token/TestAdmin').then((result) => {
-  //         console.log(result)
-  //       })
-  //     })
-  // }
-
   @Watch("wordFilter")
+  updateSearch(){
+    this.pageNum = 1
+    this.getWords();
+  }
+
+
     getWords(){
-      var wordsPerPage = this.wordsPerPage
-      var pageNum = this.pageNum
-      var wordFilter = this.wordFilter
+      if (this.wordFilter === "")
+        this.wordFilter = "?????";
       this.getData = true
-      this.$axios.get('/api/Word/GetWordsPerPage', { params: { wordsPerPage : wordsPerPage, pageNum : pageNum, wordFilter : wordFilter } }).then((response) => {
+      this.$axios.get('/api/Word/GetWordsPerPage', { params: { wordsPerPage : this.wordsPerPage, 
+      pageNum : this.pageNum, 
+      wordFilter : this.wordFilter } }).then((response) => {
       this.words = response.data
-      this.pageNum = 1
-      console.log("Current Page: " + pageNum)
+      console.log("Current Page: " + this.pageNum)
     })
-    this.$axios.get('/api/Word/GetTotalWordCount', { params: { wordFilter } }).then((response) => {
+    this.$axios.get('/api/Word/GetTotalWordCount', { params: { wordFilter: this.wordFilter } }).then((response) => {
       this.totalPages = Math.round(response.data / this.wordsPerPage)
       this.getData = false;
     })
+
+    if(this.wordFilter === "?????")
+      this.wordFilter ="";
     }
 
 
-//  if(response.data as boolean){
-//       var newWord = this.newWord
-//       this.$axios.post('/api/Word/AddWord', null, {
-//         params: { newWord: newWord}
-//       }).then((response) => {
-//         this.getWords()
-//         console.log(response)
-//         console.log("Added word " + this.newWord)
-//         this.newWord = ""
-//       })
     addWord() {
-
-      
       this.$axios.get('/Token/testmasteroftheuniverse').then((response) => {
         if(response.data as boolean){
           var newWord = this.newWord
@@ -196,10 +168,7 @@ export default class WordEditor extends Vue {
     }
 
   changeCommon(word : string, common : boolean) {
-    
-     this.$axios.get('/Token/testmasteroftheuniverse').then((response) => {
-      
-      if(response.data as boolean){
+      if(this.isUser){
     this.$axios.post('/api/Word/ChangeWordCommon', null, {
         params: { givenWord: word, common: common }
       }).then((response) => {
@@ -207,13 +176,18 @@ export default class WordEditor extends Vue {
         console.log("Changed word " + word + " with added common: " + common)
       })
       }
-     })
   }
 
   accessPage(newPage : number){
     this.pageNum = newPage
     this.getWords();
   }
+
+  loginSuccess(success: boolean){
+    this.isUser = success;
+    console.log(this.isUser);
+  }
+
 
 }
 </script>

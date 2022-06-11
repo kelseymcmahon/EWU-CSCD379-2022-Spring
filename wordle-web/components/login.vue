@@ -55,6 +55,7 @@ export default class LoginPopUp extends Vue {
     }
 
     getToken(){
+
       this.$axios
       .post('Token/GetToken', {
         username: this.username,
@@ -64,10 +65,12 @@ export default class LoginPopUp extends Vue {
 
         if (result.status == 200){
         JWT.setToken(result.data.token, this.$axios)
-        // console.log(JWT.tokenData)
-        // console.log(JWT.tokenData.roles)
         localStorage.setItem("editorName" , this.username);
-        }
+        this.$emit("loginSuccess", true)
+        this.dialog = false;
+        } 
+      }).catch((error) =>{
+        this.$emit("loginSuccess", false);
       })
     }
 
