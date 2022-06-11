@@ -21,6 +21,14 @@
           <v-col>
             <v-btn @click="addWord()">Add Word</v-btn>
           </v-col>
+          <v-col>
+            <v-select
+            :items="items"
+            outlined
+            v-model="wordsPerPage"
+            @input="getWords"
+          ></v-select>
+          </v-col>
         </v-row>
           
         <v-simple-table loading>
@@ -41,12 +49,13 @@
                 @click="changeCommon(stat.value, stat.common)"
               ></v-checkbox></td>
               <td> 
-                <v-btn icon> 
+                <v-btn icon @click="deleteWord(stat.value)"> 
                     <v-icon small> mdi-delete </v-icon>
                 </v-btn>
               </td>
             </tr>
           </tbody>
+          
         </v-simple-table>
       </v-card-text>
       <v-card-actions>
@@ -56,24 +65,25 @@
         @input="accessPage"
       ></v-pagination>
       </v-card-actions>
+
     </v-card>    
   </v-container>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator'
+import { Component, Vue, Watch, Prop } from 'vue-property-decorator'
 @Component({})
 export default class WordEditor extends Vue {
-  
-  currentPage: number= 1
 
+  pageNum: number = 1
+  currentPage: number= 1
   stats: any = []
   getData: boolean = true
-  pageNum: number = 1
-  wordsPerPage: number = 20
   totalPages: number = 10
+  wordsPerPage: number = 20
   wordFilter: string = "a"
   newWord = ""
+  items = [5, 10, 15, 20]
 
   mounted() {
     this.getWords();
@@ -81,13 +91,14 @@ export default class WordEditor extends Vue {
 
   @Watch("wordFilter")
     getWords(){
-         var wordsPerPage = this.wordsPerPage
-    var pageNum = this.pageNum
-    var wordFilter = this.wordFilter
-    this.getData = true;
-    this.$axios.get('/api/Word/GetWordsPerPage', { params: { wordsPerPage : wordsPerPage, pageNum : pageNum, wordFilter : wordFilter } }).then((response) => {
+      var wordsPerPage = this.wordsPerPage
+      var pageNum = this.pageNum
+      var wordFilter = this.wordFilter
+      this.getData = true
+      this.$axios.get('/api/Word/GetWordsPerPage', { params: { wordsPerPage : wordsPerPage, pageNum : pageNum, wordFilter : wordFilter } }).then((response) => {
       this.stats = response.data
-
+      this.pageNum = 1
+      console.log("Current Page: " + pageNum)
     })
     this.$axios.get('/api/Word/GetTotalWordCount', { params: { wordFilter } }).then((response) => {
       this.totalPages = Math.round(response.data / this.wordsPerPage)
@@ -100,11 +111,28 @@ export default class WordEditor extends Vue {
       this.$axios.post('/api/Word/AddWord', null, {
         params: { newWord: newWord}
       }).then((response) => {
+        this.getWords()
         console.log(response)
         console.log("Added word " + this.newWord)
         this.newWord = ""
       })
-  }
+    }
+
+    addPageNum() {
+      this.pageNum++
+      this.getWords()
+    }
+
+    deleteWord(word : string) {
+      this.$axios.post('/api/Word/DeleteWord', null, {
+        params: { givenWord: word}
+      }).then((response) => {
+        this.getWords()
+        console.log(response)
+        console.log("Deleted word " + this.newWord)
+        this.newWord = ""
+      })
+    }
 
   changeCommon(word : string, common : boolean) {
     this.$axios.post('/api/Word/ChangeWordCommon', null, {
