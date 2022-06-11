@@ -19,7 +19,7 @@ public class WordService
     public IEnumerable<Word> GetWordList(int wordsPerPage, int pageNum, string wordFilter)
     {
 
-        if (String.IsNullOrWhiteSpace(wordFilter))
+        if (wordFilter.Equals("?????"))
         {
             var result = _context.Words
                 .Skip((pageNum - 1) * wordsPerPage)
@@ -40,8 +40,16 @@ public class WordService
 
     public int GetTotalWordCount(string wordFilter)
     {
-        var result = _context.Words.Where(x => x.Value.StartsWith(wordFilter)).Count();
-        return result;
+        if (wordFilter.Equals("?????"))
+        {
+            var result = _context.Words.Count();
+            return result;
+        }
+        else
+        {
+            var result = _context.Words.Where(x => x.Value.StartsWith(wordFilter)).Count();
+            return result;
+        }
     }
 
     public void AddWord(string newWord)
