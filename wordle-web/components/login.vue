@@ -1,9 +1,9 @@
 <template>
   <div class>
 
-    <v-container @click="toggleDialog">
-        <v-btn>
-            <v-icon>mdi-cog</v-icon>Settings
+    <v-container>
+        <v-btn @click="toggleDialog">
+            Login
         </v-btn>
     </v-container>
 
@@ -13,45 +13,26 @@
           <v-card-title>Login</v-card-title>
 
           <v-row>
-          <v-col
-            cols="12"
-            md="4"
-          >
+          <v-col>
             <v-text-field
-              v-model="firstname"
-              :rules="nameRules"
-              :counter="10"
-              label="First name"
+              v-model="username"
+              label="Username"
               required
             ></v-text-field>
           </v-col>
   
-          <v-col
-            cols="12"
-            md="4"
-          >
+          <v-col>
             <v-text-field
-              v-model="lastname"
-              :rules="nameRules"
-              :counter="10"
-              label="Last name"
-              required
-            ></v-text-field>
-          </v-col>
-  
-          <v-col
-            cols="12"
-            md="4"
-          >
-            <v-text-field
-              v-model="email"
-              :rules="emailRules"
-              label="E-mail"
+              v-model="password"
+              label="Password"
               required
             ></v-text-field>
           </v-col>
         </v-row>
         </v-container>
+        <v-card-actions>
+          <v-btn @click="getToken"> Submit </v-btn>
+        </v-card-actions>
       </v-card>
     </v-dialog>
   </div>
@@ -59,14 +40,38 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
+import { JWT } from '~/scripts/jwt';
 
 @Component({})
 export default class LoginPopUp extends Vue {
 
-    dialog: boolean = false;
+    username: string = localStorage.getItem("editorName") || "";
+    password: string = "";
+    dialog: boolean = true;
 
     toggleDialog() {
     this.dialog = !this.dialog
-  }
+    console.log(this.dialog)
+    }
+
+    getToken(){
+      this.$axios
+      .post('Token/GetToken', {
+        username: this.username,
+        password: this.password,
+      })
+      .then((result) => {
+
+        if (result.status == 200){
+        JWT.setToken(result.data.token, this.$axios)
+        // console.log(JWT.tokenData)
+        // console.log(JWT.tokenData.roles)
+        localStorage.setItem("editorName" , this.username);
+        }
+      })
+    }
+
+       
 
 }
+</script>
