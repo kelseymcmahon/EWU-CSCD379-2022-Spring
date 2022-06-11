@@ -1,27 +1,59 @@
 <template>
   <v-container fluid fill-height class="pa-0">
-    <v-btn outlined absolute top right color="primary" @click="dialog = true">
+    <v-btn
+      v-if="!isMobile()"
+      outlined
+      absolute
+      top
+      right
+      color="primary"
+      @click="dialog = true"
+    >
       <v-icon primary> mdi-account </v-icon>
       {{ playerName }}
     </v-btn>
-    
+
     <v-dialog v-model="dialog" width="450" persistent>
       <v-card>
         <v-card-title>Enter Your Name!</v-card-title>
         <v-card-text>
           Add you name to our score board so you can save your game scores!
-          <v-text-field 
-            v-model="playerName"
-            type="text"
-            placeholder="Guest">
+          <v-text-field v-model="playerName" type="text" placeholder="Guest">
           </v-text-field>
         </v-card-text>
         <v-card-actions>
-          <v-btn @click=";(dialog = false), setUserName(playerName)"> Save </v-btn>
+          <v-btn @click=";(dialog = false), setUserName(playerName)">
+            Save
+          </v-btn>
           <v-btn @click="dialog = false"> I prefer to remain nameless </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
+    
+    <v-row>
+      <v-spacer />
+      <v-col cols="12" sm="8" md="6" 
+        justify="center" 
+        align="center" 
+        class="text-h6 font-weight-bold">
+        Daily Word Game
+      </v-col>
+      <v-spacer />
+    </v-row>
+
+    <v-row v-if="isMobile()">
+      <v-btn
+        block
+        small
+        tile
+        color="primary"
+        class="mt-2 mb-2"
+        @click="dialog = true"
+      >
+        <v-icon primary> mdi-account </v-icon>
+        {{ playerName }}
+      </v-btn>
+    </v-row>
 
     <v-row>
       <v-spacer />
@@ -35,17 +67,11 @@
 
     <keyboard :wordle-game="wordleGame" />
 
-    <v-overlay v-if="this.overlay">
-
-        <v-progress-circular
-          indeterminate
-          absolute
-          size="64">
-        </v-progress-circular>
-        <br>
-        <v-chip class="ma-2" outlined>
-          Getting Daily Word ...
-        </v-chip>
+    <v-overlay v-if="overlay">
+      <v-progress-circular indeterminate absolute size="64">
+      </v-progress-circular>
+      <br />
+      Getting Daily Word ...
     </v-overlay>
   </v-container>
 </template>
@@ -59,8 +85,9 @@ import { Word } from '~/scripts/word'
 
 @Component({ components: { KeyBoard, GameBoard } })
 export default class DailyWordGame extends Vue {
-  pageName = "Daily Words"
-  word: string = ""
+
+  pageName = 'Daily Words'
+  word: string = ''
   wordleGame = new WordleGame(this.word)
   playerName = ''
   dialog = false
@@ -69,15 +96,19 @@ export default class DailyWordGame extends Vue {
   startTime: number = 0
   endTime: number = 0
   intervalID: any
-  overlay = true;
+  overlay = true
   month = 0
   day = 0
   year = 0
 
+  isMobile() {
+    return this.$vuetify.breakpoint.xsOnly
+  }
+
   mounted() {
     setTimeout(() => this.startTimer(), 5000)
     this.retrieveUserName()
-    var currentDate = new Date()
+    const currentDate = new Date()
     this.month = currentDate.getMonth() + 1
     this.year = currentDate.getFullYear()
     this.day = currentDate.getDate()
@@ -85,15 +116,22 @@ export default class DailyWordGame extends Vue {
   }
 
   getDailyWord() {
-    var currentDate = new Date()
-    var date = (this.month).toString() + "/" + this.day.toString() + "/" + this.year.toString()
-    this.overlay = true;
-    this.$axios.get('/DateWord', { params: { date } }).then((response) => {
-      this.word = response.data  
-    }).finally(() => {
-      this.overlay = false
-      this.wordleGame = new WordleGame(this.word)
-    });
+    const date =
+      this.month.toString() +
+      '/' +
+      this.day.toString() +
+      '/' +
+      this.year.toString()
+    this.overlay = true
+    this.$axios
+      .get('/DateWord', { params: { date } })
+      .then((response) => {
+        this.word = response.data
+      })
+      .finally(() => {
+        this.overlay = false
+        this.wordleGame = new WordleGame(this.word)
+      })
   }
 
   get gameResult() {
@@ -169,7 +207,7 @@ export default class DailyWordGame extends Vue {
       year: this.year,
       number0fAttempts: this.wordleGame.words.length,
       seconds: this.timeInSeconds,
-      playerName: this.playerName
+      playerName: this.playerName,
     })
   }
 }

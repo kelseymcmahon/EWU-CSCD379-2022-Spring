@@ -37,7 +37,7 @@
 
           <v-list-item nuxt to="/DailyWord">
             <v-list-item-icon>
-              <v-icon>mdi-file-word-box </v-icon>
+              <v-icon>mdi-star-circle</v-icon>
             </v-list-item-icon>
             <v-list-item-title>Daily Word Game</v-list-item-title>
           </v-list-item>
@@ -51,7 +51,7 @@
 
           <v-list-item nuxt to="/DailyWordScores">
             <v-list-item-icon>
-              <v-icon>mdi-equalizer</v-icon>
+              <v-icon>mdi-crown</v-icon>
             </v-list-item-icon>
             <v-list-item-title>Daily Word Scores</v-list-item-title>
           </v-list-item>
@@ -63,13 +63,27 @@
             <v-list-item-title>About</v-list-item-title>
           </v-list-item>
 
+          <v-list-item nuxt to="/Instructions">
+            <v-list-item-icon>
+              <v-icon>mdi-help-circle</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>How To Play</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item nuxt to="/WordEditor">
+            <v-list-item-icon>
+              <v-icon>mdi-pencil</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Word Editor</v-list-item-title>
+          </v-list-item>
+
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
 
     <v-footer :absolute="!fixed" app>
       <v-spacer />
-      <span>&copy; Kelsey McMahon {{ new Date().getFullYear() }}</span>
+      <span>&copy; Kelsey McMahon &#38; Ray Tanner {{ new Date().getFullYear() }}</span>
       <v-spacer />
     </v-footer>
   </v-app>
