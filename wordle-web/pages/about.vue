@@ -1,42 +1,42 @@
 <template>
-<div>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <v-card class="pa-5"> 
-        <v-card-title class="headline"> About This Game </v-card-title>
-        <v-card-text>
-          <p>
-            This game was created as a class project at Eastern Washington
-            University. The creative concept for Generic Word Game was inspired
-            by my great instructor Meg! 
-          </p>
-        </v-card-text>
-      </v-card>
-    </v-col>
-  </v-row>
-  <v-row>
-    <v-spacer />
-    <v-col cols="12" sm="12" md="4">
-      <v-btn block color="primary" nuxt to="/Game">
-            <v-icon> mdi-cat </v-icon>
-            Play the Game 
-          </v-btn>
-    </v-col>
-    <v-col cols="12" sm="12" md="4">
-      <v-btn block color="secondary" nuxt to="/DailyWord">
-            <v-icon> mdi-file-word-box </v-icon>
-            Play the Daily Word
-          </v-btn>
-    </v-col>
-    <v-col cols="12" sm="12" md="4">
-      <v-btn block color="info" nuxt to="/PlayerScores">
-            <v-icon> mdi-equalizer </v-icon>
-            Player Scores
-          </v-btn>
-    </v-col>
-    <v-spacer />
-  </v-row>
-</div>
+  <div>
+    <v-row justify="center" align="center">
+      <v-col cols="12" sm="8" md="6">
+        <v-card class="pa-5">
+          <v-card-title class="headline"> About This Game </v-card-title>
+          <v-card-text>
+            <p>
+              This game was created as a class project at Eastern Washington
+              University. The creative concept for Generic Word Game was
+              inspired by my great instructor Meg!
+            </p>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-spacer />
+      <v-col cols="12" sm="12" md="4">
+        <v-btn block color="primary" nuxt to="/Game">
+          <v-icon> mdi-cat </v-icon>
+          Play the Game
+        </v-btn>
+      </v-col>
+      <v-col cols="12" sm="12" md="4">
+        <v-btn block color="secondary" nuxt to="/DailyWord">
+          <v-icon> mdi-file-word-box </v-icon>
+          Play the Daily Word
+        </v-btn>
+      </v-col>
+      <v-col cols="12" sm="12" md="4">
+        <v-btn block color="info" nuxt to="/PlayerScores">
+          <v-icon> mdi-equalizer </v-icon>
+          Player Scores
+        </v-btn>
+      </v-col>
+      <v-spacer />
+    </v-row>
+  </div>
 </template>
 
 <script lang="ts">

@@ -1,109 +1,120 @@
 <template>
   <v-container fluid class="pa-0">
-  <v-container fluid v-if="isMobile()" class="pa-0">
-    <v-row v-for="(charRow, i) in chars" :key="i" dense width="100%">
-      <v-spacer />
-      <v-col v-for="char in charRow" :key="char" cols="1" style="box-sizing: unset; flex-basis: 0; padding: 3px;">
-        <v-btn
-          height="25"
-          min-width="18"
-          light
-          :color="letterColor(char)"
-          style="background-color: lightgray"
-          :disabled="wordleGame.gameOver"
-          @click="setLetter(char)"
-          class="text-h6 font-weight-bold pa-1 ma-0"
-          v-if="char !== '?' && char !== 'enter' && char !== 'back'"
+    <v-container v-if="isMobile()" fluid class="pa-0">
+      <v-row v-for="(charRow, i) in chars" :key="i" dense width="100%">
+        <v-spacer />
+        <v-col
+          v-for="char in charRow"
+          :key="char"
+          cols="1"
+          style="box-sizing: unset; flex-basis: 0; padding: 3px"
         >
+          <v-btn
+            v-if="char !== '?' && char !== 'enter' && char !== 'back'"
+            height="25"
+            min-width="18"
+            light
+            :color="letterColor(char)"
+            style="background-color: lightgray"
+            :disabled="wordleGame.gameOver"
+            class="text-h6 font-weight-bold pa-1 ma-0"
+            @click="setLetter(char)"
+          >
             {{ char }}
-        </v-btn>
-        <v-btn
-          height="25"
-          min-width="18"
-          color="primary"
-          :disabled="wordleGame.gameOver"
-          class="text-h6 font-weight-bold pa-1 ma-0"
-          v-if="char === '?'"
-          @click="setLetter('?')">
+          </v-btn>
+          <v-btn
+            v-if="char === '?'"
+            height="25"
+            min-width="18"
+            color="primary"
+            :disabled="wordleGame.gameOver"
+            class="text-h6 font-weight-bold pa-1 ma-0"
+            @click="setLetter('?')"
+          >
             ?
-        </v-btn>
-      </v-col>
-    <v-spacer />
-    </v-row>
-    <v-row class="ma-1">
-    <v-col align="center" class="pa-2">
-      <valid-words :wordle-game="wordleGame" />
-    </v-col>
-    <v-col align="center" class="pa-2">
-      <v-btn
-        color="primary"
-        :disabled="wordleGame.gameOver"
-        @click="guessWord">
-          enter
-      </v-btn>
-    </v-col>
-    <v-col align="center" class="pa-2">
-        <v-btn
-          color="primary"
-          :disabled="wordleGame.gameOver"
-          @click="removeLetter">
+          </v-btn>
+        </v-col>
+        <v-spacer />
+      </v-row>
+      <v-row class="ma-1">
+        <v-col align="center" class="pa-2">
+          <valid-words :wordle-game="wordleGame" />
+        </v-col>
+        <v-col align="center" class="pa-2">
+          <v-btn
+            color="primary"
+            :disabled="wordleGame.gameOver"
+            @click="guessWord"
+          >
+            enter
+          </v-btn>
+        </v-col>
+        <v-col align="center" class="pa-2">
+          <v-btn
+            color="primary"
+            :disabled="wordleGame.gameOver"
+            @click="removeLetter"
+          >
             <v-icon small color="white">mdi-backspace</v-icon>
-        </v-btn>
-    </v-col>
-    </v-row>
-  </v-container>
-  <v-container v-if="!isMobile()">
-    <valid-words :wordle-game="wordleGame" />
-    <v-row v-for="(charRow, i) in chars" :key="i" class="keyboard">
-      <v-spacer />
-      <v-col v-for="char in charRow" :key="char" class="pa-1">
-        <v-btn
-          height="45"
-          min-width="35"
-          color="primary"
-          :disabled="wordleGame.gameOver"
-          class="font-weight-bold"
-          v-if="char === 'enter'"
-          @click="guessWord">
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
+    <v-container v-if="!isMobile()">
+      <valid-words :wordle-game="wordleGame" />
+      <v-row v-for="(charRow, i) in chars" :key="i" class="keyboard">
+        <v-spacer />
+        <v-col v-for="char in charRow" :key="char" class="pa-1">
+          <v-btn
+            v-if="char === 'enter'"
+            height="45"
+            min-width="35"
+            color="primary"
+            :disabled="wordleGame.gameOver"
+            class="font-weight-bold"
+            @click="guessWord"
+          >
             Enter
-        </v-btn>
-        <v-btn
-          height="45"
-          min-width="35"
-          light
-          :color="letterColor(char)"
-          style="background-color: lightgray"
-          :disabled="wordleGame.gameOver"
-          @click="setLetter(char)"
-          class="text-h6 font-weight-bold"
-          v-if="char !== '?' && char !== 'enter' && char !== 'back'"
-        >
+          </v-btn>
+          <v-btn
+            v-if="char !== '?' && char !== 'enter' && char !== 'back'"
+            height="45"
+            min-width="35"
+            light
+            :color="letterColor(char)"
+            style="background-color: lightgray"
+            :disabled="wordleGame.gameOver"
+            class="text-h6 font-weight-bold"
+            @click="setLetter(char)"
+          >
             {{ char }}
-        </v-btn>
-        <v-btn
-          height="45"
-          min-width="35"
-          color="primary"
-          :disabled="wordleGame.gameOver"
-          class="text-h6 font-weight-bold"
-          v-if="char === '?'"
-          @click="setLetter('?')">
+          </v-btn>
+          <v-btn
+            v-if="char === '?'"
+            height="45"
+            min-width="35"
+            color="primary"
+            :disabled="wordleGame.gameOver"
+            class="text-h6 font-weight-bold"
+            @click="setLetter('?')"
+          >
             ?
-        </v-btn>
-        <v-btn
-          height="45"
-          min-width="35"
-          color="primary"
-          :disabled="wordleGame.gameOver"
-          v-if="char === 'back'"
-          @click="removeLetter">
+          </v-btn>
+          <v-btn
+            v-if="char === 'back'"
+            height="45"
+            min-width="35"
+            color="primary"
+            :disabled="wordleGame.gameOver"
+            @click="removeLetter"
+          >
             <v-icon>mdi-backspace</v-icon>
-        </v-btn>
-      </v-col>
-      <v-spacer />
-    </v-row>
-  </v-container>
-<!-- 
+          </v-btn>
+        </v-col>
+        <v-spacer />
+      </v-row>
+    </v-container>
+    <!-- 
     <v-dialog v-model="dialog" width="450">
       <v-card color="error" dark>
         <v-container>
@@ -114,7 +125,6 @@
         </v-container>
       </v-card>
     </v-dialog> -->
-    
   </v-container>
 </template>
 
@@ -131,13 +141,13 @@ export default class KeyBoard extends Vue {
   dialog = false
 
   isMobile() {
-    return this.$vuetify.breakpoint.xsOnly;
+    return this.$vuetify.breakpoint.xsOnly
   }
 
   chars = [
     ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
     ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
-    ['enter','z', 'x', 'c', 'v', 'b', 'n', 'm', '?', 'back'],
+    ['enter', 'z', 'x', 'c', 'v', 'b', 'n', 'm', '?', 'back'],
   ]
 
   setLetter(char: string) {
@@ -151,8 +161,8 @@ export default class KeyBoard extends Vue {
   guessWord() {
     if (
       this.wordleGame.currentWord.length ===
-      this.wordleGame.currentWord.maxLetters) 
-    {
+      this.wordleGame.currentWord.maxLetters
+    ) {
       this.wordleGame.submitWord()
     }
   }
@@ -183,5 +193,4 @@ export default class KeyBoard extends Vue {
 .v-card__title {
   padding: 10px;
 }
-
 </style>

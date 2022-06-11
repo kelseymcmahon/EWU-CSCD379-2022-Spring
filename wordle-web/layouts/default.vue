@@ -1,26 +1,23 @@
-<template >
+<template>
   <v-app light>
-    <v-app-bar
-        dense
-        max-height="50"
-      >  
-        <router-link to="/">
-        <game-logo  />
-        </router-link>
-        <v-spacer />
-        <help />
-        <settings-dialog />
-        <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-      </v-app-bar>
+    <v-app-bar dense max-height="50">
+      <router-link to="/">
+        <game-logo />
+      </router-link>
+      <v-spacer />
+      <help />
+      <settings-dialog />
+      <v-app-bar-nav-icon @click="drawer = true" />
+    </v-app-bar>
     <v-main class="main-page">
       <v-container>
         <Nuxt />
       </v-container>
     </v-main>
 
-    <v-navigation-drawer v-model="drawer" absolute temporary right>
+    <v-navigation-drawer v-model="drawer" app temporary right>
       <v-list nav dense>
-        <v-list-item-group v-model="group" color="secondary">
+        <v-list-item-group color="secondary">
           <v-list-item nuxt to="/">
             <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
@@ -65,6 +62,7 @@
 
           <v-list-item nuxt to="/Instructions">
             <v-list-item-icon>
+<<<<<<< HEAD
               <v-icon>mdi-help-circle</v-icon>
             </v-list-item-icon>
             <v-list-item-title>How To Play</v-list-item-title>
@@ -77,11 +75,17 @@
             <v-list-item-title>Word Editor</v-list-item-title>
           </v-list-item>
 
+=======
+              <v-icon>mdi-cat</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Instructions</v-list-item-title>
+          </v-list-item>
+>>>>>>> f97a5a1a30f8e142b94295d0f8a45642156b296c
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
 
-    <v-footer :absolute="!fixed" app>
+    <v-footer app>
       <v-spacer />
       <span>&copy; Kelsey McMahon &#38; Ray Tanner {{ new Date().getFullYear() }}</span>
       <v-spacer />
@@ -107,9 +111,8 @@ export default class DefaultLayout extends Vue {
 }
 
 @media (max-width: 500px) {
-    .main-page {
-        background: url(static\wordle-bg-mobile.svg) bottom center no-repeat;
-    }
+  .main-page {
+    background: url(static\wordle-bg-mobile.svg) bottom center no-repeat;
+  }
 }
 </style>
-

@@ -71,7 +71,11 @@
       <v-progress-circular indeterminate absolute size="64">
       </v-progress-circular>
       <br />
+<<<<<<< HEAD
       Getting Daily Word ...
+=======
+      <v-chip class="ma-2" outlined> Getting Daily Word ... </v-chip>
+>>>>>>> f97a5a1a30f8e142b94295d0f8a45642156b296c
     </v-overlay>
   </v-container>
 </template>
@@ -85,7 +89,10 @@ import { Word } from '~/scripts/word'
 
 @Component({ components: { KeyBoard, GameBoard } })
 export default class DailyWordGame extends Vue {
+<<<<<<< HEAD
 
+=======
+>>>>>>> f97a5a1a30f8e142b94295d0f8a45642156b296c
   pageName = 'Daily Words'
   word: string = ''
   wordleGame = new WordleGame(this.word)

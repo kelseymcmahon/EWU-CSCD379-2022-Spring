@@ -1,67 +1,65 @@
 <template>
   <v-container fluid>
-
-  <v-container fluid v-if="isMobile()" class="pa-0 ma-0">
-    <v-row
-      v-for="row in wordleGame.maxGuesses"
-      :key="row"
-      dense
-      class="game-board"
-    >
-      <v-spacer />
-      <v-col v-for="index in wordleGame.currentWord.maxLetters" :key="index">
-        <v-card
-          flat
-          tile
-          height="50"
-          min-width="50"
-          :color="letterColor(getLetter(row, index))"
-          style="border: 2px solid lightgray"
+    <v-container v-if="isMobile()" fluid class="pa-0 ma-0">
+      <v-row
+        v-for="row in wordleGame.maxGuesses"
+        :key="row"
+        dense
+        class="game-board"
+      >
+        <v-spacer />
+        <v-col v-for="index in wordleGame.currentWord.maxLetters" :key="index">
+          <v-card
+            flat
+            tile
+            height="50"
+            min-width="50"
+            :color="letterColor(getLetter(row, index))"
+            style="border: 2px solid lightgray"
           >
             <v-card-text
               class="letter-card text-center text-h5 font-weight-bold"
             >
-              {{ char = getChar(getLetter(row, index)) }}
-          </v-card-text>
-        </v-card>
-      </v-col>
-      <v-spacer />
-    </v-row>
-  </v-container>
+              {{ (char = getChar(getLetter(row, index))) }}
+            </v-card-text>
+          </v-card>
+        </v-col>
+        <v-spacer />
+      </v-row>
+    </v-container>
 
-  <v-container fluid v-if="!isMobile()" class="pa-0">
-    <v-row
-      v-for="row in wordleGame.maxGuesses"
-      :key="row"
-      dense
-      class="game-board"
-    >
-      <v-spacer />
-      <v-col v-for="index in wordleGame.currentWord.maxLetters" :key="index">
-        <v-card
-          flat
-          tile
-          height="60"
-          width="60"
-          :color="letterColor(getLetter(row, index))"
-          style="border: 2px solid lightgray"
+    <v-container v-if="!isMobile()" fluid class="pa-0">
+      <v-row
+        v-for="row in wordleGame.maxGuesses"
+        :key="row"
+        dense
+        class="game-board"
+      >
+        <v-spacer />
+        <v-col v-for="index in wordleGame.currentWord.maxLetters" :key="index">
+          <v-card
+            flat
+            tile
+            height="60"
+            width="60"
+            :color="letterColor(getLetter(row, index))"
+            style="border: 2px solid lightgray"
           >
             <v-card-text
               class="letter-card text-center text-h4 font-weight-bold"
             >
-              {{ char = getChar(getLetter(row, index)) }}
-          </v-card-text>
-        </v-card>
-      </v-col>
-      <v-spacer />
-    </v-row>
+              {{ (char = getChar(getLetter(row, index))) }}
+            </v-card-text>
+          </v-card>
+        </v-col>
+        <v-spacer />
+      </v-row>
+    </v-container>
   </v-container>
-
-</v-container>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
+import { Component, Vue, Prop } from 'vue-property-decorator'
 import { WordleGame } from '~/scripts/wordleGame'
 import { Word } from '~/scripts/word'
 import { Letter } from '~/scripts/letter'
@@ -72,7 +70,7 @@ export default class GameBoard extends Vue {
   wordleGame!: WordleGame
 
   isMobile() {
-    return this.$vuetify.breakpoint.xsOnly;
+    return this.$vuetify.breakpoint.xsOnly
   }
 
   getLetter(row: number, index: number): Letter | null {
@@ -93,15 +91,14 @@ export default class GameBoard extends Vue {
     return letter.letterColor
   }
 
-  @Watch("wordleGame.currentWord.letters")
-  doSomething(){
-    console.log(this.wordleGame.currentWord.letters.length);
-  }
+  // @Watch('wordleGame.currentWord.letters')
+  // doSomething() {
+  //   console.log(this.wordleGame.currentWord.letters.length)
+  // }
 }
 </script>
 
 <style>
-
 .game-board .col {
   flex-grow: 0;
 }

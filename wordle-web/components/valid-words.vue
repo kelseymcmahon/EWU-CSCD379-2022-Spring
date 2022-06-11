@@ -4,19 +4,21 @@
       v-if="isMobile()"
       :disabled="wordleGame.gameOver"
       color="primary"
-      @click="toggleDialog">
-        {{ validWordCount }}
-        Hints
+      @click="toggleDialog"
+    >
+      {{ validWordCount }}
+      Hints
     </v-btn>
     <v-btn
       v-if="!isMobile()"
       class="absolute-bottom-right"
       :disabled="wordleGame.gameOver"
       color="primary"
-      @click="toggleDialog">
-        <v-icon>mdi-cat</v-icon>
-        {{ validWordCount }}
-        Hints
+      @click="toggleDialog"
+    >
+      <v-icon>mdi-cat</v-icon>
+      {{ validWordCount }}
+      Hints
     </v-btn>
     <v-dialog v-model="dialog" width="450">
       <v-card>
@@ -49,7 +51,7 @@ export default class ValidWords extends Vue {
   dialog = false
 
   isMobile() {
-    return this.$vuetify.breakpoint.xsOnly;
+    return this.$vuetify.breakpoint.xsOnly
   }
 
   toggleDialog() {

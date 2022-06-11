@@ -1,11 +1,15 @@
 <template>
   <v-container fluid fill-height justify-center>
+<<<<<<< HEAD
     <v-card class="pa-5" :loading=getData width="80%">
+=======
+    <v-card class="pa-5" :loading="getData">
+>>>>>>> f97a5a1a30f8e142b94295d0f8a45642156b296c
       <v-card-title>
         <h1 class="display-1">Daily Word Stats</h1>
       </v-card-title>
       <v-card-text>
-        <v-simple-table loading >
+        <v-simple-table loading>
           <thead>
             <tr>
               <th>Date</th>
@@ -20,6 +24,9 @@
               <td>{{ stat.averageSeconds }}</td>
               <td>{{ stat.averageAttempts }}</td>
               <td>{{ stat.gameCount }}</td>
+              <td style="text-align: center">
+                <v-checkbox v-model="stat.playedByPlayer" disabled />
+              </td>
             </tr>
           </tbody>
         </v-simple-table>
@@ -36,21 +43,30 @@ import { Component, Vue } from 'vue-property-decorator'
 @Component({})
 export default class DailyWordScores extends Vue {
   stats: any = []
-  getData = true;
+  getData = true
 
   mounted() {
-    this.$axios.get('/DateWord/GetLast10DateWords').then((response) => {
-      this.stats = response.data
-      this.getData = false;
-    })
+this.getStats();
   }
 
   refreshStats() {
-    this.getData = true;
-    this.$axios.get('/DateWord/GetLast10DateWords').then((response) => {
+    this.getData = true
+this.getStats();
+  }
+
+  getStats(){
+    this.$axios.get(`/DateWord/GetLast10DateWords`, { params: {playerName: this.userName}}).then((response) => {
       this.stats = response.data
-      this.getData = false;
+      this.getData = false
     })
   }
+
+    get userName() {
+      const userName = localStorage.getItem('userName')
+      if (userName == null || userName === '') {
+        return 'Guest'
+      }
+        return userName
+    }
 }
 </script>
