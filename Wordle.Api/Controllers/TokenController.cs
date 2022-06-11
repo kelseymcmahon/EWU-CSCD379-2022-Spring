@@ -88,9 +88,10 @@ public class TokenController : Controller
 
     [HttpGet("testmasteroftheuniverse")]
     [Authorize(Roles="Motu,Meg")]
-    public string TestRulerOfTheUniverseOrMeg()
+    public bool TestRulerOfTheUniverseOrMeg()
     {
-        return "Authorized as Master of the Universe or Meg";
+
+        return true;
     }
 
     [HttpGet("testrandomadmin")]
