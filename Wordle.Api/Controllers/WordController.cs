@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Wordle.Api.Data;
 using Wordle.Api.Dtos;
 using Wordle.Api.Services;
+using Wordle.Api.Identity;
 
 namespace Wordle.Api.Controllers;
 
@@ -14,6 +16,12 @@ public class WordController : ControllerBase
     public WordController(WordService service)
     {
         _service = service;
+    }
+
+    [HttpGet("GetRandomWord")]
+    public string Get()
+    {
+        return _service.GetRandomWord().Value;
     }
 
     [HttpGet("GetWordsPerPage")]
@@ -29,6 +37,7 @@ public class WordController : ControllerBase
     }
 
     [HttpPost("AddWord")]
+    [Authorize(Roles = "Motu")]
     public void AddWord(string newWord)
     {
         _service.AddWord(newWord);
@@ -41,6 +50,7 @@ public class WordController : ControllerBase
     }
 
     [HttpPost("DeleteWord")]
+    [Authorize(Roles = "Motu")]
     public void DeleteWord(string givenWord)
     {
         _service.DeleteWord(givenWord);

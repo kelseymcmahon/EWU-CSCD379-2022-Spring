@@ -20,6 +20,15 @@ public class DateWordController : Controller
         _gameService = gameService;
     }
 
+    [HttpGet]
+    public string Get(int Month, int Day, int Year)
+    {
+        DateTime wordDate = new(Year, Month, Day);
+        Word? dailyWord = _gameService.GetDailyWord(wordDate);
+        if(dailyWord is null) throw new ArgumentNullException(nameof(dailyWord));
+        return dailyWord.Value;
+    }
+
     [HttpPost]
     public GameDto CreateGame([FromBody] CreateGameDto newGame)
     {
@@ -31,6 +40,13 @@ public class DateWordController : Controller
     {
         public DateTime? Date { get; set; }
         public string PlayerGuid { get; set; } = null!;
+    }
+
+    public class CreateDateDTO
+    {
+        public int Month { get; set; }
+        public int Day { get; set; }
+        public int Year { get; set; }   
     }
 }
 

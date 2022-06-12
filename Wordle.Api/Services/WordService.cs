@@ -102,4 +102,17 @@ public class WordService
             _context.SaveChanges();
         }
     }
+
+    public Word GetRandomWord()
+    {
+        int wordCount = _context.Words.Count(f => f.Common);
+        int randomIndex = new Random().Next(0, wordCount);
+        Word chosenWord = _context.Words
+            .Where(f => f.Common)
+            .OrderBy(w => w.WordId)
+            .Skip(randomIndex)
+            .Take(1)
+            .First();
+        return chosenWord;
+    }
 }
