@@ -70,3 +70,15 @@ describe('Word Evaluation', () => {
     expect(word.letters[4].status).toBe(LetterStatus.Correct)
   })
 })
+
+describe('Check Get Text', () => {
+  test('Returns the word', () => {
+    const word = new Word()
+    word.addLetter('A')
+    word.addLetter('P')
+    word.addLetter('P')
+    word.addLetter('L')
+    word.addLetter('E')
+    expect(word.text).toBe('APPLE')
+  })
+})

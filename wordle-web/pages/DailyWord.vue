@@ -40,7 +40,7 @@
         align="center"
         class="text-h6 font-weight-bold"
       >
-        Endless Word Game
+        Daily Word Game
       </v-col>
       <v-spacer />
     </v-row>
@@ -63,7 +63,6 @@
       <v-spacer />
       <v-alert v-if="wordleGame.gameOver" :type="gameResult.type" width="450">
         {{ gameResult.text }}
-        <v-btn class="ml-2" @click="resetGame"> Play Again? </v-btn>
       </v-alert>
       <v-spacer />
     </v-row>
@@ -76,7 +75,7 @@
       <v-progress-circular indeterminate absolute size="64">
       </v-progress-circular>
       <br />
-      Getting Game Word ...
+      Getting Daily Word ...
     </v-overlay>
   </v-container>
 </template>
@@ -87,8 +86,10 @@ import { GameState, WordleGame } from '~/scripts/wordleGame'
 import KeyBoard from '@/components/keyboard.vue'
 import GameBoard from '@/components/game-board.vue'
 import { Word } from '~/scripts/word'
+
 @Component({ components: { KeyBoard, GameBoard } })
 export default class DailyWordGame extends Vue {
+  pageName = 'Daily Words'
   word: string = ''
   wordleGame = new WordleGame(this.word)
   playerName = ''
@@ -99,6 +100,10 @@ export default class DailyWordGame extends Vue {
   endTime: number = 0
   intervalID: any
   overlay = true
+  month = 0
+  day = 0
+  year = 0
+
   isMobile() {
     return this.$vuetify.breakpoint.xsOnly
   }
@@ -106,13 +111,23 @@ export default class DailyWordGame extends Vue {
   mounted() {
     setTimeout(() => this.startTimer(), 5000)
     this.retrieveUserName()
-    this.getRandomWord()
+    const currentDate = new Date()
+    this.month = currentDate.getMonth() + 1
+    this.year = currentDate.getFullYear()
+    this.day = currentDate.getDate()
+    this.getDailyWord()
   }
 
-  getRandomWord() {
+  getDailyWord() {
+    const date =
+      this.month.toString() +
+      '/' +
+      this.day.toString() +
+      '/' +
+      this.year.toString()
     this.overlay = true
     this.$axios
-      .get('/DateWord/GetRandomWord')
+      .get('/DateWord', { params: { date } })
       .then((response) => {
         this.word = response.data
       })
@@ -120,12 +135,6 @@ export default class DailyWordGame extends Vue {
         this.overlay = false
         this.wordleGame = new WordleGame(this.word)
       })
-  }
-
-  resetGame() {
-    this.getRandomWord()
-    this.timeInSeconds = 0
-    this.startTimer()
   }
 
   get gameResult() {
@@ -194,6 +203,14 @@ export default class DailyWordGame extends Vue {
       name: this.playerName,
       attempts: this.wordleGame.words.length,
       seconds: this.timeInSeconds,
+    })
+    this.$axios.post('/DateWord/CreateDateWord', {
+      month: this.month,
+      day: this.day,
+      year: this.year,
+      number0fAttempts: this.wordleGame.words.length,
+      seconds: this.timeInSeconds,
+      playerName: this.playerName,
     })
   }
 }

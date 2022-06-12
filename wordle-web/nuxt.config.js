@@ -9,8 +9,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - Not-Wordle',
-    title: 'Play',
+    titleTemplate: '%s - wordle-app',
+    title: 'wordle-app',
     htmlAttrs: {
       lang: 'en',
     },
@@ -27,7 +27,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: '~/plugins/vue-google-adsense', ssr: false }],
+  plugins: [],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -55,31 +55,28 @@ export default {
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
-    defaultAssets: {
-      font: {
-        family: 'Libre Baskerville',
-      },
-    },
     theme: {
-      dark: true,
+      light: true,
       themes: {
-        dark: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.grey.darken1,
-          warning: colors.amber.base,
-          error: colors.grey.darken4,
-          success: colors.green.accent3,
-        },
         light: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken2,
-          secondary: '#000000',
-          info: colors.grey.lighten1,
-          warning: colors.amber.base,
-          error: colors.grey.darken1,
-          success: colors.green.accent3,
+          primary: colors.cyan,
+          accent: colors.cyan.accent3,
+          secondary: colors.orange.darken2,
+          nav: colors.blueGrey.lighten5,
+          info: colors.blueGrey.lighten2,
+          warning: '#fa8b34',
+          error: colors.deepOrange.accent4,
+          success: '#17cee6',
+        },
+
+        dark: {
+          primary: colors.cyan,
+          accent: colors.cyan.accent3,
+          secondary: colors.orange.darken2,
+          info: colors.blueGrey.lighten2,
+          warning: '#fa8b34',
+          error: colors.deepOrange.accent4,
+          success: '#17cee6',
         },
       },
     },
