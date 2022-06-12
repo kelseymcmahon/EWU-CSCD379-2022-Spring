@@ -112,7 +112,7 @@ export default class DailyWordGame extends Vue {
   getRandomWord() {
     this.overlay = true
     this.$axios
-      .get('/DateWord/GetRandomWord')
+      .get('/api/Word/GetRandomWord')
       .then((response) => {
         this.word = response.data
       })

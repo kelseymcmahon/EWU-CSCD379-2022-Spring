@@ -1,8 +1,8 @@
 <template>
   <div class>
-    <v-btn @click="toggleDialog"> 
-        <v-icon> mdi-account </v-icon> 
-        {{ loginText }}
+    <v-btn @click="toggleDialog">
+      <v-icon> mdi-account </v-icon>
+      {{ loginText }}
     </v-btn>
 
     <v-dialog v-model="dialog" width="450">
@@ -24,16 +24,19 @@
                 label="Password"
                 :type="hidePassword ? 'text' : 'password'"
                 :append-icon="showIcon ? 'mdi-eye' : 'mdi-eye-off'"
-                @click:append="showIcon = !showIcon; hidePassword = !hidePassword"
                 required
+                @click:append="
+                  showIcon = !showIcon
+                  hidePassword = !hidePassword
+                "
               ></v-text-field>
             </v-col>
           </v-row>
           <v-row>
             <v-col>
-            <v-alert v-model="showError" type="error" text dense outlined>
+              <v-alert v-model="showError" type="error" text dense outlined>
                 Incorrect username or password
-            </v-alert>
+              </v-alert>
             </v-col>
           </v-row>
         </v-container>
@@ -54,7 +57,7 @@ export default class LoginPopUp extends Vue {
   password: string = ''
   dialog: boolean = true
   showError: boolean = false
-  loginText = "Login"
+  loginText = 'Login'
   showIcon = false
   hidePassword = false
 
@@ -68,7 +71,7 @@ export default class LoginPopUp extends Vue {
   }
 
   @Watch('dialog')
-    updateError2() {
+  updateError2() {
     this.showError = false
   }
 
@@ -84,13 +87,13 @@ export default class LoginPopUp extends Vue {
           localStorage.setItem('editorName', this.username)
           this.$emit('loginSuccess', true)
           this.dialog = false
-          this.loginText = "Logged in as " + this.username
+          this.loginText = 'Logged in as ' + this.username
         }
       })
       .catch((error) => {
         console.log(error)
         this.$emit('loginSuccess', false)
-        this.showError = true;
+        this.showError = true
       })
   }
 }

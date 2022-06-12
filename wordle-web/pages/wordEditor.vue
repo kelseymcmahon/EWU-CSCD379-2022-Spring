@@ -1,12 +1,13 @@
 <template>
   <v-container fluid fill-height justify-center>
     <v-card :loading="getData" width="80%" class="pa-2">
+
       <v-card-title>
         <v-col>
-            <h1 class="display-1">Game Words</h1>
+          <h1 class="display-1">Game Words</h1>
         </v-col>
         <v-col align="right">
-        <LoginPopUp @loginSuccess="loginSuccess" />
+          <LoginPopUp @loginSuccess="loginSuccess" />
         </v-col>
       </v-card-title>
 
@@ -25,6 +26,7 @@
             <v-text-field
               v-model="newWord"
               label="Add a new word"
+              maxlength="5"
             ></v-text-field>
           </v-col>
           <v-col>
@@ -42,6 +44,10 @@
             ></v-select>
           </v-col>
         </v-row>
+
+        <v-alert v-model="showError" type="error" text dense dismissible>
+            {{ errorText }}
+        </v-alert>
 
         <v-simple-table loading>
           <thead>
@@ -71,6 +77,7 @@
           </tbody>
         </v-simple-table>
       </v-card-text>
+
       <v-card-actions>
         <v-pagination
           v-model="pageNum"
@@ -79,6 +86,7 @@
           @input="accessPage"
         ></v-pagination>
       </v-card-actions>
+
     </v-card>
   </v-container>
 </template>
@@ -89,7 +97,6 @@ import LoginPopUp from '@/components/login.vue'
 
 @Component({ components: { LoginPopUp } })
 export default class WordEditor extends Vue {
-
   username: string = localStorage.getItem('editorName') || ''
   pageNum: number = 1
   words: any = []
@@ -101,6 +108,8 @@ export default class WordEditor extends Vue {
   wordFilter: string | null = ''
   newWord = ''
   items = [5, 10, 15, 20]
+  showError = false
+  errorText = "Please login to make changes"
 
   mounted() {
     this.getWords()
@@ -139,21 +148,22 @@ export default class WordEditor extends Vue {
   }
 
   addWord() {
-    this.$axios.get('/Token/testmasteroftheuniverse').then((response) => {
-      if (response.data as boolean) {
-        const newWord = this.newWord
-        this.$axios
-          .post('/api/Word/AddWord', null, {
-            params: { newWord },
-          })
-          .then((response) => {
-            this.getWords()
-            console.log(response)
-            console.log('Added word ' + this.newWord)
-            this.newWord = ''
-          })
-      }
-    })
+    const newWord = this.newWord
+    this.$axios.post('/api/Word/AddWord', null, {
+        params: { newWord },
+      })
+      .then((response) => {
+        this.getWords()
+        console.log(response)
+        console.log('Added word ' + this.newWord)
+        this.newWord = ''
+      })
+      .catch((error) => {
+        if(error.response.status == 403) {
+          this.errorText = "You are not authorized to make those changes. Please log into an authorized account."
+        }
+        this.showError = true
+      })
   }
 
   addPageNum() {
@@ -162,22 +172,21 @@ export default class WordEditor extends Vue {
   }
 
   deleteWord(word: string) {
-    this.$axios.get('/Token/testmasteroftheuniverse').then((response) => {
-      if (response.data as boolean) {
-        this.$axios
-          .post('/api/Word/DeleteWord', null, {
-            params: { givenWord: word },
-          })
-          .then((response) => {
-            this.getWords()
-            this.newWord = ''
-          })
-      }
-      else {
-        console.log("we got here!")
-      }
-    })
-  }
+    this.$axios.post('/api/Word/DeleteWord', null, {
+        params: { givenWord: word },
+      })
+      .then((response) => {
+        console.log(response)
+        this.getWords()
+        this.newWord = ''
+      })
+      .catch((error) => {
+        if(error.response.status == 403) {
+          this.errorText = "You are not authorized to make those changes. Please log into an authorized account."
+        }
+        this.showError = true
+      })
+    }
 
   changeCommon(word: string, common: boolean) {
     if (this.isUser) {
@@ -200,6 +209,7 @@ export default class WordEditor extends Vue {
   loginSuccess(success: boolean) {
     this.isUser = success
     console.log(this.isUser)
+    this.showError = false
   }
 }
 </script>

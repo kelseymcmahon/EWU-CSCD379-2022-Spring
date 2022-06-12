@@ -119,15 +119,9 @@ export default class DailyWordGame extends Vue {
   }
 
   getDailyWord() {
-    const date =
-      this.month.toString() +
-      '/' +
-      this.day.toString() +
-      '/' +
-      this.year.toString()
     this.overlay = true
     this.$axios
-      .get('/DateWord', { params: { date } })
+      .get('/DateWord', { params: { Month: this.month, Day: this.day, Year: this.year } })
       .then((response) => {
         this.word = response.data
       })
