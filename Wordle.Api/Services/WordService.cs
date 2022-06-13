@@ -22,6 +22,7 @@ public class WordService
         if (wordFilter.Equals("?????"))
         {
             var result = _context.Words
+                .Where(x => x.Active)
                 .Skip((pageNum - 1) * wordsPerPage)
                 .Take(wordsPerPage)
                 .OrderBy(x => x.Value);
